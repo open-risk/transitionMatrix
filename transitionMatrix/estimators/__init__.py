@@ -1,0 +1,94 @@
+# encoding: utf-8
+
+# (c) 2017 Open Risk, all rights reserved
+#
+# TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
+# in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
+# third-party software included in this distribution. You may not use this file except in
+# compliance with the License.
+#
+# Unless required by applicable law or agreed to in writing, software distributed under
+# the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+# either express or implied. See the License for the specific language governing permissions and
+# limitations under the License.
+
+from __future__ import print_function
+
+
+class BaseEstimator(object):
+    """ Base class for implementing any transition matrix estimator
+
+    Offers basic methods common to all estimators
+
+    """
+
+    def __init__(self):
+        self.states = None
+        self.matrix_set = []
+        self.count_set = []
+        self.count_normalization = []
+        self.ci_alpha = None
+        self.ci_method = None
+        self.confint_lower = None
+        self.confint_upper = None
+        self.counts = None
+        self.nans = None
+
+    def get_matrix_set(self):
+        return self.matrix_set
+
+    def print(self, select='Frequencies', period=None):
+        """
+        Pretty print the estimated matrices
+        :return:
+        """
+        if select == 'Counts':
+            if period is not None:
+                print("Period: ", period)
+                print("Starting Count: ", self.count_normalization[period])
+                print("Migration Counts: ", self.count_set[period][:, :])
+            else:
+                for k in range(len(self.count_set)):
+                    print("Period: ", k)
+                    print("Starting Count: ", self.count_normalization[k])
+                    print("Migration Counts: ", self.count_set[k][:, :])
+        elif select == 'Frequencies':
+            if period is not None:
+                print("Period: ", period)
+                print(self.matrix_set[period][:, :])
+            else:
+                for k in range(len(self.matrix_set)):
+                    print("Period: ", k)
+                    print(self.matrix_set[k][:, :])
+
+        return
+
+    def summary(self, k=0):
+        """
+        Pretty print a summary of estimation results (values and confidence intervals)
+        """
+        state_count = self.states.cardinality
+        print('                      Transition Matrix Estimation Results                    ')
+        print('==============================================================================')
+        print('Confidence Level: ', self.ci_alpha)
+        print('Confidence Level Method: ', self.ci_method)
+        print('------------------------------------------------------------------------------')
+        print('Row  Col  Lower Bound      Value   Upper Bound')
+        for s1 in range(state_count):
+            for s2 in range(state_count):
+                lv = self.confint_lower[s1, s2, k]
+                rv = self.confint_upper[s1, s2, k]
+                cv = self.matrix_set[k][s1, s2]
+                print('{0:3} {1:4} {2:12f} {3:10f} {4:12f}'.format(s1, s2, lv, cv, rv))
+            print('..............................................................................')
+        print('==============================================================================')
+        return
+
+
+class DurationEstimator(BaseEstimator):
+    """ Base class for implementing any duration based transition matrix estimator
+
+    Offers some basic methods common to all duration based estimators
+
+    """
+    pass
