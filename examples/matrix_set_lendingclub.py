@@ -21,7 +21,6 @@ Input data are in a special cohort format as the published datasets have some li
 
 
 import pandas as pd
-
 import transitionMatrix as tm
 from transitionMatrix.estimators import simple_estimator as es
 

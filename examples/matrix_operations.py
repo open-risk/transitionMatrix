@@ -38,11 +38,17 @@ print("-- Any numpy array can be used for initialization (but not all are valid 
 D = tm.TransitionMatrix(values=np.identity(5))
 print(D)
 
+print("-- Values can be loaded from json or csv files")
+F = tm.TransitionMatrix(json="JLT.json")
+print(F)
+
+
 print("-- Validate that a matrix satisfies probability matrix properties")
 print(A.validate())
 print(B.validate())
 print(C.validate())
 print(D.validate())
+print(F.validate())
 
 print("-- All numpy.matrix / ndarray functionality is available")
 E = tm.TransitionMatrix(values=[[0.75, 0.25], [0.0, 1.0]])
@@ -51,14 +57,14 @@ print(E.validate())
 # Getting matrix info (dimensions, shape)
 print(E.ndim)
 print(E.shape)
-# Transpose
+# Obtain the matrix transpose
 print(E.T)
-# Inverse
+# Obtain the matrix inverse
 print(E.I)
-# METHODS
-# Summation along columns
+# Summation methods:
+# - along columns
 print(E.sum(0))
-# Summation along rows
+# - along rows
 print(E.sum(1))
 
 print("-- Lets fix the invalid matrix C")
@@ -71,8 +77,8 @@ print(C.validate())
 
 print("-- Computing the generator of a transition matrix")
 # Generator of A
-print(A.generator())
-print(expm(A.generator()))
+G = A.generator()
+print(A, expm(G))
 
 print("-- Transition Matrix algebra is very intuitive")
 print(A*A)

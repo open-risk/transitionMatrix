@@ -19,6 +19,7 @@ import numpy as np
 import pandas as pd
 from scipy.linalg import logm
 import transitionMatrix as tm
+import json
 
 
 class TransitionMatrix(np.matrix):
@@ -26,8 +27,12 @@ class TransitionMatrix(np.matrix):
 
     """
     def __new__(cls, values=None, dimension=2, json=None, csv=None):
-        """ Create a new matrix using provided values (or a default identity 2x2 matrix)
-
+        """ Create a new matrix. Different options for initialization are
+        - using provided values as a list of list
+        - using provided values as a numpy array
+        - a default identity matrix
+        - loading from a csv or json file
+        NOTE: The initialization does not validate if the provided values form indeed a transition matrix
         """
         if values is not None:
             # Initialize with given values
@@ -246,8 +251,17 @@ class TransitionMatrixSet(object):
         for entry in self.entries:
             entry.print()
 
-    def to_json(self, file):
-        pass
+    def to_json(self, file=None):
+        hold = []
+        for k in range(len(self.entries)):
+            hold.append(self.entries[k].tolist())
+        serialized = json.dumps(hold, indent=2, separators=(',', ': '))
+        if file is not None:
+            file = open(file, 'w')
+            file.write(serialized)
+            file.close()
+
+        return serialized
 
     def to_csv(self, file):
         pass

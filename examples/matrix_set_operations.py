@@ -18,6 +18,7 @@
 """
 
 import transitionMatrix as tm
+from datasets import Generic as T1
 
 print("-- Lets seed the set with a 3x3 matrix")
 A = tm.TransitionMatrix(values=[[0.6, 0.2, 0.2], [0.2, 0.6, 0.2], [0.2, 0.2, 0.6]])
@@ -50,3 +51,8 @@ print("-- Convert back to Incremental")
 A_Set.incremental()
 print(A_Set.entries)
 A_Set.validate()
+
+print("-- Create a multiperiod matrix set and save to json file")
+T_Set = tm.TransitionMatrixSet(values=T1, periods=10, method='Power', temporal_type='Cumulative')
+T_Set.to_json('Tn.json')
+

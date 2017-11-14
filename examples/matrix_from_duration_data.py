@@ -24,7 +24,7 @@ import transitionMatrix as tm
 from transitionMatrix.estimators import cohort_estimator as es
 
 dataset_path = "../../transitionMatrix/datasets/"
-example = 1
+example = 2
 
 if example == 1:
 

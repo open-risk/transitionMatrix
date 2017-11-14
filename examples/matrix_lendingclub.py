@@ -21,7 +21,6 @@ Input data are in a special cohort format as the published datasets have some li
 
 
 import pandas as pd
-
 import transitionMatrix as tm
 from transitionMatrix.estimators import simple_estimator as es
 
@@ -71,6 +70,7 @@ myEstimator.summary()
 # Review numerical results
 print("Step 4")
 myMatrix = tm.TransitionMatrix(result)
+myMatrix.print()
 
 # In the LendingClub example we need to fix some matrix rows
 # because there are no state_IN observations besides initial grade assignment

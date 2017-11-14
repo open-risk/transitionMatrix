@@ -20,7 +20,9 @@ import transitionMatrix as tm
 from transitionMatrix.estimators import cohort_estimator as es
 
 dataset_path = "../../transitionMatrix/datasets/"
-example = 4
+example = 5
+
+# TODO visualization when states are not sampled (infrequent)
 
 if example == 1:
     #
@@ -51,7 +53,7 @@ elif example == 2:
     #
     #  Step Plot of individual observations
     #
-    data = pd.read_csv('../datasets/synthetic_data6.csv')
+    data = pd.read_csv('../datasets/synthetic_data4.csv')
 
     # State space constructed on the fly (grid lines)
     unique_states = data['State'].unique()
@@ -69,8 +71,8 @@ elif example == 2:
     for identity in sample_ids:
         summary += str(identity) + ' '
         entity_data = data[data['ID'] == identity]
-        entity_data = entity_data[['Time', 'State']]
-        sorted_data = entity_data.sort_values(['Time'], ascending=[True])
+        entity_data = entity_data[['Timestep', 'State']]
+        sorted_data = entity_data.sort_values(['Timestep'], ascending=[True])
         raw_data = sorted_data.as_matrix()
         viz_data.append(raw_data)
 
@@ -98,7 +100,7 @@ elif example == 3:
     #  Histogram Plots of transition frequencies
     #
     data = pd.read_csv('../datasets/synthetic_data5.csv', dtype={'State': str})
-    sorted_data = data.sort_values(['ID', 'Period'], ascending=[True, True])
+    sorted_data = data.sort_values(['ID', 'Timestep'], ascending=[True, True])
     description = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
     myState = tm.StateSpace(description)
     myState.describe()
@@ -170,5 +172,39 @@ elif example == 4:
     fig.suptitle('Entity Transitions Plot')
     plt.scatter(x, y, marker='o', c=my_colors)
     # plt.yticks(range(len(y)))
+    plt.margins(y=0.1, x=0.05)
+    plt.show()
+
+elif example == 5:
+    #
+    #  Marked Lines Plot of individual observations
+    #  Entity versus Time with Color Coded State Markers
+    #
+    data = pd.read_csv('../datasets/scenario_data.csv')
+    data = data.sort_values(['ID', 'State'], ascending=[True, True])
+    unique_states = data['State'].unique()
+    unique_ids = data['ID'].unique()
+
+    # group by id
+    x = []
+    y = []
+    colors = []
+    mymap = plt.get_cmap("seismic")
+    mymap = plt.get_cmap("RdYlGn")
+    # mymap = plt.get_cmap("magma")
+    for row in data.itertuples():
+        x.append(row[2])
+        y.append(row[1])
+        colors.append(1.1-row[3]/7)
+        # print(row[1], row[0], row[2]/len(unique_states) )
+    my_colors = mymap(colors)
+    print(colors)
+
+    fig = plt.figure()
+    plt.style.use(['ggplot'])
+    plt.ylabel('Entity')
+    plt.xlabel('Time')
+    fig.suptitle('Entity Transitions Plot')
+    plt.scatter(x, y, marker='o', c=my_colors)
     plt.margins(y=0.1, x=0.05)
     plt.show()

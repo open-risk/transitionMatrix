@@ -20,18 +20,14 @@ example workflow using transitionMatrix to estimate a matrix from data in cohort
 
 
 import pandas as pd
-
 import transitionMatrix as tm
 from transitionMatrix.estimators import cohort_estimator as es
 
 dataset_path = "../../transitionMatrix/datasets/"
-example = 3
+example = 1
 
 if example == 1:
     # Example: S&P Style Credit Rating Migration Matrix
-
-    data = pd.read_csv(dataset_path + 'synthetic_data4.csv', dtype={'State': str})
-    sorted_data = data.sort_values(['ID', 'Timestep'], ascending=[True, True])
 
     # S&P Ratings State Space
     description = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
@@ -39,12 +35,19 @@ if example == 1:
 
     myState = tm.StateSpace(description)
     myState.describe()
+    print(myState.get_states())
+    print(myState.get_state_labels())
+
+    data = pd.read_csv(dataset_path + 'synthetic_data4.csv', dtype={'State': str})
+    sorted_data = data.sort_values(['ID', 'Timestep'], ascending=[True, True])
     print(myState.validate_dataset(dataset=sorted_data))
 
     # compute confidence interval using goodman method at 95% confidence level
     myEstimator = es.CohortEstimator(states=myState, ci={'method': 'goodman', 'alpha': 0.05})
-    # myMatrix = matrix.CohortEstimator(states=myState)
     result = myEstimator.fit(sorted_data)
+
+    # Print confidence intervals
+    myEstimator.summary()
 
     # Print the estimated results
     myMatrixSet = tm.TransitionMatrixSet(values=result, temporal_type='Incremental')
