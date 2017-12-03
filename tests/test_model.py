@@ -42,7 +42,7 @@ class TestTransitionMatrix(unittest.TestCase):
     def test_csv_io(self):
         a = tm.TransitionMatrix()
         a.to_csv("test.csv")
-        b = tm.TransitionMatrix(csv="test.csv")
+        b = tm.TransitionMatrix(csv_file="test.csv")
         self.assertAlmostEqual(a[0, 0], b[0, 0], places=ACCURATE_DIGITS, msg=None, delta=None)
         self.assertAlmostEqual(a[0, 1], b[0, 1], places=ACCURATE_DIGITS, msg=None, delta=None)
         self.assertAlmostEqual(a[1, 0], b[1, 0], places=ACCURATE_DIGITS, msg=None, delta=None)
@@ -51,7 +51,7 @@ class TestTransitionMatrix(unittest.TestCase):
     def test_json_io(self):
         a = tm.TransitionMatrix()
         a.to_json("test.json")
-        b = tm.TransitionMatrix(json="test.json")
+        b = tm.TransitionMatrix(json_file="test.json")
         self.assertAlmostEqual(a[0, 0], b[0, 0], places=ACCURATE_DIGITS, msg=None, delta=None)
         self.assertAlmostEqual(a[0, 1], b[0, 1], places=ACCURATE_DIGITS, msg=None, delta=None)
         self.assertAlmostEqual(a[1, 0], b[1, 0], places=ACCURATE_DIGITS, msg=None, delta=None)

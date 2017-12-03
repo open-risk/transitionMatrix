@@ -4,7 +4,8 @@ transitionMatrix
 | Description: A Python powered library for statistical analysis and visualization of state transition phenomena
 | Author: Open Risk, http://www.openriskmanagement.com
 | License: Apache 2.0
-| Documentation: Open Risk Manual, http://www.openriskmanual.org
+| Documentation: Open Risk Manual, http://www.openriskmanual.org/wiki/Transition_Matrix
+| Training: Open Risk Academy, https://www.openriskacademy.com/login/index.php
 | Development website: https://github.com/open-risk/transitionMatrix
 
 
@@ -35,8 +36,10 @@ Download the sources and issue:
 
     python3 setup.py install
 
-It is a good idea to run the testsuite. Adjust the source directory path in transitionMatrix/__init__ and then issue
-the following in at the root of the distribution
+It is a good idea to run the testsuite. Before you get started:
+
+- Adjust the source directory path in transitionMatrix/__init__ and then issue the following in at the root of the distribution
+- Unzip the data files in the datasets directory
 
 .. code:: python
 
@@ -44,11 +47,17 @@ the following in at the root of the distribution
 
 Look at the examples directory for a variety of typical workflows
 
+Training
+=======================
+
+- Analysis of Credit Migration using Python TransitionMatrix: https://www.openriskacademy.com/course/view.php?id=38
+
+
 Dependencies
 =======================
 
 - TransitionMatrix is written in Python and depends on the key numerical and data processing Python libraries (Numpy, Scipy, Pandas)
-- The Visualization API depends on [Matplotlib]
+- The Visualization API depends on Matplotlib
 - The precise dependencies are listed in the requirements.txt file.
 - TransitionMatrix may work with earlier versions of these packages but this has not been tested.
 

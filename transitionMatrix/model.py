@@ -20,13 +20,15 @@ import pandas as pd
 from scipy.linalg import logm
 import transitionMatrix as tm
 import json
+import os
 
 
 class TransitionMatrix(np.matrix):
     """ The TransitionMatrix object inherits from numpy matrices and implements transition matrix properties
 
     """
-    def __new__(cls, values=None, dimension=2, json=None, csv=None):
+
+    def __new__(cls, values=None, dimension=2, json_file=None, csv_file=None):
         """ Create a new matrix. Different options for initialization are
         - using provided values as a list of list
         - using provided values as a numpy array
@@ -37,13 +39,13 @@ class TransitionMatrix(np.matrix):
         if values is not None:
             # Initialize with given values
             obj = np.asarray(values).view(cls)
-        elif json is not None:
+        elif json_file is not None:
             # Initialize from file in json format
-            q = pd.read_json(json)
+            q = pd.read_json(json_file)
             obj = np.asarray(q.values).view(cls)
-        elif csv is not None:
+        elif csv_file is not None:
             # Initialize from file in csv format
-            q = pd.read_csv(csv, index_col=None)
+            q = pd.read_csv(csv_file, index_col=None)
             obj = np.asarray(q.values).view(cls)
         else:
             # Default instance (2x2 identity matrix)
@@ -62,11 +64,40 @@ class TransitionMatrix(np.matrix):
         q = pd.DataFrame(self)
         q.to_csv(file, index=None)
 
+    def to_html(self, file):
+        # TODO write matrix to html table format
+        pass
+
+    def fix_rowsums(self):
+        # If the row sum is not identically unity, correct the diagonal element to enforce
+        matrix = self
+        matrix_size = matrix.shape[0]
+        for i in range(matrix_size):
+            diagonal = matrix[i, i]
+            rowsum = matrix[i].sum()
+            self[i, i] = diagonal + 1.0 - rowsum
+
+    def fix_negativerates(self):
+        # If a matrix entity is below zero, set to zero and correct the diagonal element to enforce
+        matrix = self
+        matrix_size = matrix.shape[0]
+        # For all rows
+        for i in range(matrix_size):
+            maxval_index = self[i].argmax()
+            row_adjust = 0.0
+            # Search all cols for negative entries
+            for j in range(matrix_size):
+                if matrix[i, j] < 0.0:
+                    row_adjust += matrix[i, j]
+                    self[i, j] = 0.0
+            # Add the adjustment to the diagonal
+            self[i, maxval_index] += row_adjust
+
     def validate(self, accuracy=1e-3):
         """ Validate transition matrix
         1) check squareness
-        2) check all values are probabilities (between 0 and 1)
-        3) check all rows sum to one
+        2) check that all values are probabilities (between 0 and 1)
+        3) check that all rows sum to one
         :returns List of tuples with validation messages
         """
         validation_messages = []
@@ -129,15 +160,39 @@ class TransitionMatrix(np.matrix):
     def generate_random_matrix(self, n):
         pass
 
-    def print(self):
+    def print(self, format='Standard', accuracy=2):
         """ Pretty print a matrix
 
         """
         for s_in in range(self.shape[0]):
             for s_out in range(self.shape[1]):
-                print("{0:.2f}%".format(self[s_in, s_out]) + ' ', end='')
+                if format is 'Standard':
+                    format_string = "{0:." + str(accuracy) + "f}"
+                    print(format_string.format(self[s_in, s_out]) + ' ', end='')
+                elif format is 'Percent':
+                    print("{0:.2f}%".format(100 * self[s_in, s_out]) + ' ', end='')
             print('')
         print('')
+
+    def remove(self, state, method):
+        """ remove a transition matrix state and distribute its probability to other states according
+        to prescribed method
+
+        """
+        new_matrix = tm.TransitionMatrix(dimension=self.shape[0]-1)
+        states = list(range(self.shape[0]))
+        del states[state]
+        # process all rows of the matrix except the state we remove
+        for i in states:
+            # probability to distribute
+            xp = self[i, state]
+            if 0.0 < xp < 1.0:
+                # process all columns of the matrix except the state we remove
+                w = xp / (1.0 - xp)
+                for j in states:
+                    # weight of state among remaining states
+                    new_matrix[i, j] = self[i, j] * (1.0 + w)
+        return new_matrix
 
 
 class TransitionMatrixSet(object):
@@ -146,11 +201,22 @@ class TransitionMatrixSet(object):
 
     """
 
-    def __init__(self, dimension=2, values=None, periods=None, temporal_type=None, method=None, json=None, csv=None):
+    def __init__(self, dimension=2, values=None, periods=1, temporal_type=None, method=None, json_file=None, csv_file=None):
         """ Create a new matrix using provided values (or a default identity matrix)
-        Temporal type
-        Incremental: Each period matrix reflects transitions for that period
-        Cumulative: Each period matrix reflects cumulative transitions from start to that period
+        Parameters
+        ----------
+        temporal_type : str
+            Incremental: Each period matrix reflects transitions for that period
+            Cumulative: Each period matrix reflects cumulative transitions from start to that period
+
+        Attributes
+        ----------
+        entries : str
+            Human readable string describing the exception.
+        temporal_type : str
+            The temporal type of the set
+        timesteps : list
+            The timesteps of matrix observations
 
         """
         if values is not None:
@@ -162,18 +228,20 @@ class TransitionMatrixSet(object):
                     val_set.append(a)
                 self.entries = val_set
                 self.temporal_type = 'Incremental'
+                self.timesteps = list(range(periods))
             # Create a multi-period matrix assuming Markov Chain
             elif method is 'Power':
                 val_set = []
                 a = tm.TransitionMatrix(values)
                 val_set.append(a)
                 an = a
-                for k in range(periods-1):
-                    an = an*a
+                for k in range(periods - 1):
+                    an = an * a
                     an = tm.TransitionMatrix(an)
                     val_set.append(an)
                 self.entries = val_set
                 self.temporal_type = 'Cumulative'
+                self.timesteps = list(range(periods))
             # Use provided matrices as-is
             elif method is None:
                 val_set = []
@@ -182,6 +250,45 @@ class TransitionMatrixSet(object):
                     val_set.append(a)
                 self.entries = val_set
                 self.temporal_type = temporal_type
+                self.timesteps = list(range(periods))
+        elif values is None and csv_file is not None:
+            # Initialize from file in csv format
+            # First row is meta data labels (From States, To States, Periods, Tenor List)
+            # Second row is meta data values (comma separated)
+            # Subsequent rows are Periods x Matrices in sequence
+            if not os.path.isfile(csv_file):
+                print("Input File Does not Exist")
+                exit()
+            f = open(csv_file)
+            header_dict = f.readline()
+            header_data = f.readline().split(',')
+            val_set = []
+            from_states = int(header_data.pop(0))
+            to_states = int(header_data.pop(0))
+            periods = int(header_data.pop(0))
+            tenors = [int(x) for x in header_data]
+            q = pd.read_csv(f, header=None, usecols=range(to_states))
+            for k in range(periods):
+                raw = q.iloc[k * from_states:(k + 1) * from_states]
+                a = tm.TransitionMatrix(raw.as_matrix())
+                val_set.append(a)
+            self.entries = val_set
+            self.temporal_type = temporal_type
+            self.timesteps = tenors
+        elif values is None and json_file is not None:
+            # Initialize from file in json format
+            if not os.path.isfile(json_file):
+                print("Input File Does not Exist")
+                exit()
+            val_set = []
+            q = json.load(open(json_file))
+            periods = len(q)
+            for k in range(periods):
+                a = tm.TransitionMatrix(q[k])
+                val_set.append(a)
+            self.entries = val_set
+            self.temporal_type = temporal_type
+            self.timesteps = list(range(periods))
         else:
             # Default instance (2x2 identity matrix)
             # default = np.identity(dimension)
@@ -191,18 +298,32 @@ class TransitionMatrixSet(object):
                 val_set.append(a)
             self.entries = val_set
             self.temporal_type = 'Incremental'
+            self.timesteps = list(range(periods))
 
         self.validated = False
         return
+
+    def __mul__(self, scale):
+        """ Scale all entries by a factor
+        """
+        scaled = self
+        val_set = []
+        for entry in self.entries:
+            a = entry * scale
+            val_set.append(a)
+        scaled.entries = val_set
+        return scaled
 
     def validate(self):
         """ Validate transition matrix set (validating individual entries)
         :returns List of tuples with validation messages
         """
         validation_messages = []
+        validation_status = []
         for entry in self.entries:
             validation_messages.append(entry.validate())
-        if all(validation_messages):
+            validation_status.append(entry.validated)
+        if all(validation_status):
             self.validated = True
             return self.validated
         else:
@@ -227,6 +348,19 @@ class TransitionMatrixSet(object):
             self.temporal_type = 'Cumulative'
         return
 
+    def remove(self, state, method):
+        """ remove a transition matrix state and distribute its probability to other states according
+        to prescribed method
+
+        """
+        updated = self
+        val_set = []
+        for entry in self.entries:
+            a = entry.remove(state, method)
+            val_set.append(a)
+        updated.entries = val_set
+        return updated
+
     def incremental(self):
         if self.temporal_type is 'Incremental':
             print("Transition Matrix Set is already incremental")
@@ -238,7 +372,7 @@ class TransitionMatrixSet(object):
             val_set.append(anm1)
             for k in range(1, periods):
                 an = self.entries[k]
-                anm1 = self.entries[k-1]
+                anm1 = self.entries[k - 1]
                 anm1i = anm1.I
                 a = anm1i * an
                 a = tm.TransitionMatrix(a)
@@ -247,14 +381,18 @@ class TransitionMatrixSet(object):
             self.temporal_type = 'Incremental'
         return
 
-    def print(self):
+    def print(self, format='Standard', accuracy=2):
+        k = 0
         for entry in self.entries:
-            entry.print()
+            print("Entry: ", k)
+            entry.print(format=format, accuracy=accuracy)
+            k +=1
 
-    def to_json(self, file=None):
+    def to_json(self, file=None, accuracy=5):
         hold = []
         for k in range(len(self.entries)):
-            hold.append(self.entries[k].tolist())
+            entry = np.around(self.entries[k], accuracy)
+            hold.append(entry.tolist())
         serialized = json.dumps(hold, indent=2, separators=(',', ': '))
         if file is not None:
             file = open(file, 'w')
@@ -272,6 +410,7 @@ class StateSpace(object):
 
     (value, description, optional, optional, ...)
     """
+
     # TODO approach to Absorbing States
 
     def __init__(self, description=[], sticky=False):

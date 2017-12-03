@@ -20,7 +20,7 @@ File structure
 
 | datasets/   Contains a variety of datasets useful for getting started with transitionMatrix
 | tests/       Testing suite
-| transitionMatrix/       The library
+| transitionMatrix/      The library
 |    model.py            Main data structures
 |    estimators/         Estimator methods
 |    utils/              Helper classes and methods

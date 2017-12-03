@@ -36,7 +36,7 @@ dataset_path = "../../transitionMatrix/datasets/"
 # Make sure state is read as a string and not as integer
 print("Step 1")
 data = pd.read_csv(dataset_path + 'LoanStats3a_Step2.csv')
-# Data is in pandas frame, all methods are available
+# Data is in pandas frame, all pandas methods are available
 print(data.describe())
 
 

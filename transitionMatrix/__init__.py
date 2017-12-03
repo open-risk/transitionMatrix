@@ -22,5 +22,8 @@ from .model import *
 from .estimators import *
 from .utils import *
 
-source_path = '/location/of/transitionMatrix/'
+# ADJUST THIS TO REFLECT YOUR OWN ENVIRONMENT!
+# Set the full path including trailing slash
+
+source_path = '/home/philippos/Desktop/Dev_OpenSource/transitionMatrix/'
 

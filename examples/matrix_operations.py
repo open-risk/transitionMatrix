@@ -39,7 +39,7 @@ D = tm.TransitionMatrix(values=np.identity(5))
 print(D)
 
 print("-- Values can be loaded from json or csv files")
-F = tm.TransitionMatrix(json="JLT.json")
+F = tm.TransitionMatrix(json_file="JLT.json")
 print(F)
 
 
@@ -92,8 +92,8 @@ print("-- Lets look at a realistic example from the JLT paper")
 # Reproduce JLT Generator
 # We load it using different sources
 E = tm.TransitionMatrix(values=JLT)
-E_2 = tm.TransitionMatrix(json="JLT.json")
-E_3 = tm.TransitionMatrix(csv="JLT.csv")
+E_2 = tm.TransitionMatrix(json_file="JLT.json")
+E_3 = tm.TransitionMatrix(csv_file="JLT.csv")
 # Lets check there are no errors
 Error = E - E_3
 print(np.linalg.norm(Error))
