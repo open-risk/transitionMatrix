@@ -6,6 +6,7 @@ Statistical
 -----------
 
 - Further validation and characterisation of transition matrices
+- Fixing common problems encountered by empirically estimated transition matrices
 - Generate random matrices subject to constraints
 - Duration based methods
 - Bootstrap based confidence intervals

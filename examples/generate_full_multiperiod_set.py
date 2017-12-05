@@ -21,7 +21,8 @@ Input data are processed Standard and Poor's matrices for a selection of cumulat
 import transitionMatrix as tm
 from scipy.linalg import expm
 import numpy as np
-dataset_path = "../../transitionMatrix/datasets/"
+from transitionMatrix import source_path
+dataset_path = source_path + "datasets/"
 
 print("-- Loading multi-period transitional matrices (cumulative mode) from json file")
 SnP_Set0 = tm.TransitionMatrixSet(json_file=dataset_path + "sp_NR_adjusted.json", temporal_type='Cumulative')
@@ -82,5 +83,7 @@ for k in t_list:
 
 SnP.timesteps = t_list
 SnP.temporal_type = 'Cumulative'
-SnP.print(accuracy=5)
-
+SnP.print(accuracy=10)
+# TODO Handle strictly zero transition probabilities
+# TODO Handle non-monotonic transition probabilities
+SnP.to_json(dataset_path + "sp_multiperiod.json", accuracy=8)

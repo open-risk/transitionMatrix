@@ -22,6 +22,9 @@ import numpy as np
 from scipy.linalg import expm
 from datasets import JLT
 
+from transitionMatrix import source_path
+dataset_path = source_path + "datasets/"
+
 print("-- Initialize a 3x3 matrix with values")
 A = tm.TransitionMatrix(values=[[0.6, 0.2, 0.2], [0.2, 0.6, 0.2], [0.2, 0.2, 0.6]])
 print(A)
@@ -39,7 +42,7 @@ D = tm.TransitionMatrix(values=np.identity(5))
 print(D)
 
 print("-- Values can be loaded from json or csv files")
-F = tm.TransitionMatrix(json_file="JLT.json")
+F = tm.TransitionMatrix(json_file=dataset_path + "JLT.json")
 print(F)
 
 
@@ -92,8 +95,8 @@ print("-- Lets look at a realistic example from the JLT paper")
 # Reproduce JLT Generator
 # We load it using different sources
 E = tm.TransitionMatrix(values=JLT)
-E_2 = tm.TransitionMatrix(json_file="JLT.json")
-E_3 = tm.TransitionMatrix(csv_file="JLT.csv")
+E_2 = tm.TransitionMatrix(json_file=dataset_path + "JLT.json")
+E_3 = tm.TransitionMatrix(csv_file=dataset_path + "JLT.csv")
 # Lets check there are no errors
 Error = E - E_3
 print(np.linalg.norm(Error))

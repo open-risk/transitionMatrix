@@ -19,8 +19,11 @@ Input data are the Standard and Poor's historical data (1981 - 2016) for corpora
 """
 
 import transitionMatrix as tm
+from transitionMatrix import source_path
+dataset_path = source_path + "datasets/"
+
 import numpy as np
-dataset_path = "../../transitionMatrix/datasets/"
+
 
 print("-- Loading multi-period transitional matrices (cumulative mode) from json file")
 SnP_Set0 = tm.TransitionMatrixSet(json_file=dataset_path + "sp_1981-2016.json", temporal_type='Cumulative')

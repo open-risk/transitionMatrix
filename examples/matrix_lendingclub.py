@@ -24,7 +24,8 @@ import pandas as pd
 import transitionMatrix as tm
 from transitionMatrix.estimators import simple_estimator as es
 
-dataset_path = "../../transitionMatrix/datasets/"
+from transitionMatrix import source_path
+dataset_path = source_path + "datasets/"
 
 # Example: LendingClub Style Migration Matrix
 # Load historical data into pandas frame

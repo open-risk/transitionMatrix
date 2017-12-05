@@ -29,7 +29,8 @@ import transitionMatrix as tm
 from transitionMatrix.utils import dataset_generators
 from datasets import Generic
 
-dataset_path = "../../transitionMatrix/datasets/"
+from transitionMatrix import source_path
+dataset_path = source_path + "datasets/"
 dataset = 6
 
 #

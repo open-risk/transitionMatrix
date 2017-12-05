@@ -27,23 +27,45 @@ you can use transitionMatrix to
 - Provide standardized data sets for testing
 
 
-Usage
+Installation
 =======================
+These instructions are for linux systems only. With small adaptations the library can be used in all platforms
+supporting python.
 
-Download the sources and issue:
+Download the sources in your preferred directory:
 
-.. code:: python
+.. code:: bash
 
+    git clone https://github.com/open-risk/transitionMatrix
+
+It is advisable to install the package via virtualenv
+
+.. code:: bash
+
+    virtualenv tm_test
+    source tm_test/bin/activate
+
+Make sure you have numpy installed in the virtual environment
+
+.. code:: bash
+
+    pip3 install numpy
     python3 setup.py install
+
+Testing
+=======================
 
 It is a good idea to run the testsuite. Before you get started:
 
 - Adjust the source directory path in transitionMatrix/__init__ and then issue the following in at the root of the distribution
 - Unzip the data files in the datasets directory
 
-.. code:: python
+.. code:: bash
 
     python3 test.py
+
+Usage
+=======================
 
 Look at the examples directory for a variety of typical workflows
 
@@ -56,7 +78,7 @@ Training
 Dependencies
 =======================
 
-- TransitionMatrix is written in Python and depends on the key numerical and data processing Python libraries (Numpy, Scipy, Pandas)
+- TransitionMatrix is written in Python and depends on numerical and data processing Python libraries (Numpy, Scipy, Pandas)
 - The Visualization API depends on Matplotlib
 - The precise dependencies are listed in the requirements.txt file.
 - TransitionMatrix may work with earlier versions of these packages but this has not been tested.
@@ -64,6 +86,7 @@ Dependencies
 Relationship with other open source projects
 ============================================
 
-- transitionMatrix does not aim to provide reference estimators or simulators of Markov Chain models (limited facilities might be included for convenience) but is focusing instead on relatively assumption free analysis
-- transitionMatrix is somewhat similar to etm, an R package for estimating empirical transition matrices
-- there is some conceptual overlap with survival models like lifelines, but in general the dimensionality of state space requires a different set of tools
+- The package does not provide reference implementations of Markov Chain models for which various packages already exist
+- The package is focusing instead on "model free" analysis (limited facilities might be included for convenience)
+- It is somewhat similar to etm, an R package for estimating empirical transition matrices
+- There is some conceptual overlap with survival models like lifelines, but in general the dimensionality of state space requires a different set of tools

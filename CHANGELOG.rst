@@ -17,3 +17,9 @@ v0.1.1 (03-12-2017)
     * fixing multiperiod matrices (completing State Space)
     * adjusting matrices for withdrawn entries
     * generating full  multi-period sets from limited observations
+
+v0.1.2 (05-12-2017)
+===================
+* Refactoring dataset paths
+* Correcting requirement dependencies (missing matplotlib)
+* More detailed instructions
