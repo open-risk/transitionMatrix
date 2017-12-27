@@ -25,6 +25,6 @@ from .utils import *
 # ADJUST THIS TO REFLECT YOUR OWN ENVIRONMENT!
 # Set the full path including trailing slash
 
-source_path = '/home/philippos/Desktop/Dev_OpenSource/transitionMatrix/'
+source_path = '/path_to_transition_matrix_package/transitionMatrix/'
 
 
