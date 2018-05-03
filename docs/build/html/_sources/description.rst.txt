@@ -19,19 +19,19 @@ Examples
 
 Ploting individual transition trajectories
 
-.. image:: ./examples/single_entity.png
+.. image:: ../../examples/single_entity.png
 
 Sampling transition data
 
-.. image:: ./examples/sampled_histories.png
+.. image:: ../../examples/sampled_histories.png
 
 Estimation of transition matrix
 
-.. image:: ./examples/estimation.png
+.. image:: ../../examples/estimation.png
 
 Visualization of transition matrix
 
-.. image:: ./examples/TransitionMatrix.png
+.. image:: ../../examples/TransitionMatrix.png
 
 Details
 =========================

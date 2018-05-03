@@ -1,5 +1,5 @@
-transitionMatrix
-=================
+Intro and Getting Started
+================================
 
 | Description: A Python powered library for statistical analysis and visualization of state transition phenomena
 | Author: Open Risk, http://www.openriskmanagement.com
@@ -7,6 +7,7 @@ transitionMatrix
 | Documentation: Open Risk Manual, http://www.openriskmanual.org/wiki/Transition_Matrix
 | Training: Open Risk Academy, https://www.openriskacademy.com/login/index.php
 | Development website: https://github.com/open-risk/transitionMatrix
+| Production examples: https://www.opencpm.com
 
 
 Purpose of the project
@@ -19,7 +20,7 @@ Use cases include credit rating transitions, system state event logs etc.
 Functionality 
 ====================
 
-you can use transitionMatrix to
+You can use transitionMatrix to
 
 - Estimate transition matrices from historical event data using a variety of estimators
 - Visualize event data and transition matrices
@@ -45,12 +46,22 @@ It is advisable to install the package via virtualenv
     virtualenv tm_test
     source tm_test/bin/activate
 
-Make sure you have numpy installed in the virtual environment
+Make sure first you have numpy installed in the virtual environment
 
 .. code:: bash
 
     pip3 install numpy
     python3 setup.py install
+
+File structure
+==============
+
+| datasets/   Contains a variety of datasets useful for getting started with transitionMatrix
+| tests/       Testing suite
+| transitionMatrix/      The library
+|    model.py            Main data structures
+|    estimators/         Estimator methods
+|    utils/              Helper classes and methods
 
 Testing
 =======================
@@ -68,10 +79,13 @@ Usage
 =======================
 
 Look at the examples directory for a variety of typical workflows
+- Generating transition matrices from data
+- Manipulating transition matrices
 
 Training
 =======================
 
+The Open Risk Academy has courses elaborating on the use of the libary
 - Analysis of Credit Migration using Python TransitionMatrix: https://www.openriskacademy.com/course/view.php?id=38
 
 

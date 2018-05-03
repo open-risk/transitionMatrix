@@ -1,10 +1,18 @@
-TransitionMatrix Change Log
+transitionMatrix Change Log
 ===========================
 
-v0.1.0 (11-11-2017)
+v0.1.3 (04-05-2018)
 ===================
 
-* First release of the package
+* Sphinx based documentation
+* Additional visualization examples
+
+v0.1.2 (05-12-2017)
+===================
+
+* Refactoring dataset paths
+* Correcting requirement dependencies (missing matplotlib)
+* More detailed instructions
 
 v0.1.1 (03-12-2017)
 ===================
@@ -18,8 +26,7 @@ v0.1.1 (03-12-2017)
     * adjusting matrices for withdrawn entries
     * generating full  multi-period sets from limited observations
 
-v0.1.2 (05-12-2017)
+v0.1.0 (11-11-2017)
 ===================
-* Refactoring dataset paths
-* Correcting requirement dependencies (missing matplotlib)
-* More detailed instructions
+
+* First release of the package

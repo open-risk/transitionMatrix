@@ -12,7 +12,11 @@
 # either express or implied. See the License for the specific language governing permissions and
 # limitations under the License.
 
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+from matplotlib.ticker import FormatStrFormatter
+
 import numpy as np
 import pandas as pd
 
@@ -21,7 +25,7 @@ from transitionMatrix.estimators import cohort_estimator as es
 
 from transitionMatrix import source_path
 dataset_path = source_path + "datasets/"
-example = 5
+example = 6
 
 # TODO visualization when states are not sampled (infrequent)
 
@@ -209,3 +213,61 @@ elif example == 5:
     plt.scatter(x, y, marker='o', c=my_colors)
     plt.margins(y=0.1, x=0.05)
     plt.show()
+
+elif example == 6:
+    filename = dataset_path + 'JLT.json'
+    print(filename)
+    myMatrix = tm.TransitionMatrix(json_file=filename)
+    myMatrix.print()
+    print(myMatrix.shape)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, aspect='equal')
+
+    plt.style.use(['ggplot'])
+    plt.ylabel('From State')
+    plt.xlabel('To State')
+    mymap = plt.get_cmap("RdYlGn")
+    mymap = plt.get_cmap("Reds")
+    # mymap = plt.get_cmap("Greys")
+    normalize = mpl.colors.LogNorm(vmin=0.0001, vmax=1)
+
+    matrix_size = myMatrix.shape[0]
+    square_size = 1.0 / matrix_size
+
+    diagonal = myMatrix.diagonal()
+    # colors = []
+
+    ax.set_xticklabels(range(0, matrix_size))
+    ax.set_yticklabels(range(0, matrix_size))
+    ax.xaxis.set_ticks(np.arange(0 + 0.5 * square_size, 1 + 0.5 * square_size, square_size))
+    ax.yaxis.set_ticks(np.arange(0 + 0.5 * square_size, 1 + 0.5 * square_size, square_size))
+
+    # iterate over all elements of the matrix
+
+    for i in range(0, matrix_size):
+        for j in range(0, matrix_size):
+            if myMatrix[i, j] > 0:
+                rect_size = np.sqrt(myMatrix[i, j]) * square_size
+            else:
+                rect_size = 0
+
+            dx = 0.5 * (square_size - rect_size)
+            dy = 0.5 * (square_size - rect_size)
+            p = patches.Rectangle(
+                (i * square_size + dx, j * square_size + dy),
+                rect_size,
+                rect_size,
+                fill=True,
+                color=mymap(normalize(myMatrix[i, j]))
+            )
+            ax.add_patch(p)
+
+    cbax = fig.add_axes([0.85, 0.12, 0.05, 0.78])
+    cb = mpl.colorbar.ColorbarBase(cbax, cmap=mymap, norm=normalize, orientation='vertical')
+    cb.set_label("Transition Prabability", rotation=270, labelpad=15)
+
+    # ax.yaxis.set_major_formatter(FormatStrFormatter('%.0f'))
+    plt.show(block=True)
+    plt.interactive(False)
+    # fig4.savefig('rect4.png', dpi=90, bbox_inches='tight')
