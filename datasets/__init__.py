@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017 Open Risk, all rights reserved
+# (c) 2017-2018 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -11,9 +11,6 @@
 # the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
 # either express or implied. See the License for the specific language governing permissions and
 # limitations under the License.
-
-import pandas as pd
-from pkg_resources import resource_filename
 
 # Matrix used in the seminal JLT Paper
 # Jarrow, Lando, Turnbull A Markov Model for the Term Structure of Credit Spread
@@ -61,3 +58,13 @@ Generic = [
     [0.0001, 0.0004, 0.0057, 0.0134, 0.0539, 0.8114, 0.0492, 0.0659],
     [1e-05, 0.0002, 0.0029, 0.0058, 0.0155, 0.1054, 0.52879, 0.3414],
     [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]]
+
+# A Minimal matrix with an absorbing state
+# In credit context it emulates Investement Grade / Subinvestment Grade / Default states
+# or IFRS 9 Stage 1 / Stage 2 / Stage 3 states
+
+Minimal = [
+    [0.8, 0.15, 0.05],
+    [0.15, 0.7, 0.15],
+    [0.0, 0.0, 1.0]
+]

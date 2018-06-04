@@ -111,6 +111,6 @@ print(np.linalg.norm(Error))
 # L1 norm
 print(np.linalg.norm(Error, 1))
 
-print("-- Use to pandas style API for saving to files")
+print("-- Use pandas style API for saving to files")
 E.to_csv("JLT.csv")
 E.to_json("JLT.json")

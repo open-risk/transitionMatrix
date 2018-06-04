@@ -12,6 +12,7 @@ Overview
 * it has a powerful API for handling event data (based on pandas)
 * provides intuitive objects for handling transition matrices individually and as sets (based on numpy)
 * supports visualization using matplotlib
+* provides algorithms for deriving threshold autoregressive processes to match multi-period transition matrices
 
 
 Examples

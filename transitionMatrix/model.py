@@ -71,7 +71,10 @@ class TransitionMatrix(np.matrix):
             # Default instance (2x2 identity matrix)
             default = np.identity(dimension)
             obj = np.asarray(default).view(cls)
+        # validation flag is set to False at initialization
         obj.validated = False
+        # temporary dimension assignment (must validated for squareness)
+        obj.dimension = obj.shape[0]
         return obj
 
     def to_json(self, file):
@@ -94,15 +97,13 @@ class TransitionMatrix(np.matrix):
         q = pd.DataFrame(self)
         q.to_csv(file, index=None)
 
-    def to_html(self, file):
-        """
-        Write transition matrix to file in html format
-
-        :param file: html filename
-
-        .. Todo:: Not Implemented
-        """
-        pass
+    def to_html(self, file=None):
+        html_table = pd.DataFrame(self).to_html()
+        if file is not None:
+            file = open(file, 'w')
+            file.write(html_table)
+            file.close()
+        return html_table
 
     def fix_rowsums(self):
         """
@@ -172,6 +173,7 @@ class TransitionMatrix(np.matrix):
 
         if len(validation_messages) == 0:
             self.validated = True
+            self.dimension = matrix.shape[0]
             return self.validated
         else:
             self.validated = False
@@ -322,7 +324,7 @@ class TransitionMatrixSet(object):
                     val_set.append(a)
                 self.entries = val_set
                 self.temporal_type = 'Incremental'
-                self.timesteps = list(range(periods))
+                self.periods = list(range(periods))
             # Create a multi-period matrix assuming Markov Chain
             elif method is 'Power':
                 val_set = []
@@ -335,7 +337,7 @@ class TransitionMatrixSet(object):
                     val_set.append(an)
                 self.entries = val_set
                 self.temporal_type = 'Cumulative'
-                self.timesteps = list(range(periods))
+                self.periods = list(range(periods))
             # Use provided matrices as-is
             elif method is None:
                 val_set = []
@@ -344,7 +346,7 @@ class TransitionMatrixSet(object):
                     val_set.append(a)
                 self.entries = val_set
                 self.temporal_type = temporal_type
-                self.timesteps = list(range(periods))
+                self.periods = list(range(periods))
         elif values is None and csv_file is not None:
             # Initialize from file in csv format
             # First row is meta data labels (From States, To States, Periods, Tenor List)
@@ -368,7 +370,8 @@ class TransitionMatrixSet(object):
                 val_set.append(a)
             self.entries = val_set
             self.temporal_type = temporal_type
-            self.timesteps = tenors
+            self.periods = tenors
+            f.close()
         elif values is None and json_file is not None:
             # Initialize from file in json format
             if not os.path.isfile(json_file):
@@ -382,7 +385,7 @@ class TransitionMatrixSet(object):
                 val_set.append(a)
             self.entries = val_set
             self.temporal_type = temporal_type
-            self.timesteps = list(range(periods))
+            self.periods = list(range(periods))
         else:
             # Default instance (2x2 identity matrix)
             # default = np.identity(dimension)
@@ -391,8 +394,11 @@ class TransitionMatrixSet(object):
                 a = tm.TransitionMatrix(dimension=dimension)
                 val_set.append(a)
             self.entries = val_set
-            self.temporal_type = 'Incremental'
-            self.timesteps = list(range(periods))
+            if temporal_type is not None:
+                self.temporal_type = temporal_type
+            else:
+                self.temporal_type = 'Incremental'
+            self.periods = list(range(periods))
 
         self.validated = False
         return
@@ -491,7 +497,7 @@ class TransitionMatrixSet(object):
         k = 0
         for entry in self.entries:
             print("Entry: ", k)
-            entry.print(format=format_type, accuracy=accuracy)
+            entry.print(format_type=format_type, accuracy=accuracy)
             k += 1
 
     def to_json(self, file=None, accuracy=5):
@@ -509,6 +515,45 @@ class TransitionMatrixSet(object):
 
     def to_csv(self, file):
         pass
+
+    def to_html(self, file=None):
+        table_set = ''
+        for table in self.entries:
+            html_table = pd.DataFrame(table).to_html()
+            table_set += html_table
+        if file is not None:
+            file = open(file, 'w')
+            file.write(table_set)
+            file.close()
+        return table_set
+
+    def default_curves(self, rating):
+        """ Calculate the incremental probability of crossing the absorbing barrier,
+        and the corresponding cumulative probabilities, hazard rates and survival rates
+
+        """
+
+        # TODO Make absorbing state an attribute of Matrix and MatrixSet
+        # Default state hardwired to be highest matrix element
+        Default = self.entries[0].dimension - 1
+        Periods = len(self.periods)
+
+        iPD = np.zeros(Periods)
+        cPD = np.zeros(Periods)
+        hR = np.zeros(Periods)
+        sR = np.zeros(Periods)
+        if self.temporal_type is 'Cumulative':
+            for k in range(0, Periods):
+                cPD[k] = self.entries[k][rating, Default]
+                sR[k] = 1.0 - cPD[k]
+            iPD[0] = cPD[0]
+            hR[0] = cPD[0]
+            for k in range(1, Periods):
+                iPD[k] = cPD[k] - cPD[k-1]
+                hR[k] = iPD[k] / (1.0 - cPD[k-1])
+        elif self.temporal_type is 'Incremental':
+            pass
+        return iPD, cPD, hR, sR
 
 
 class StateSpace(object):

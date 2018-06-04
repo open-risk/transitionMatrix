@@ -62,6 +62,7 @@ File structure
 |    model.py            Main data structures
 |    estimators/         Estimator methods
 |    utils/              Helper classes and methods
+|    thresholds/         Algorithms for calibrating AR(n) process thresholds to input transition rates
 
 Testing
 =======================
@@ -81,6 +82,7 @@ Usage
 Look at the examples directory for a variety of typical workflows
 - Generating transition matrices from data
 - Manipulating transition matrices
+- Estimate thresholds given a multi-period transition matrix set
 
 Training
 =======================

@@ -1,6 +1,10 @@
 transitionMatrix Change Log
 ===========================
 
+v0.2 (05-06-208)
+
+* Addition of threshold generation algorithms
+
 v0.1.3 (04-05-2018)
 ===================
 

@@ -13,19 +13,30 @@
 # limitations under the License.
 
 
-"""
-transitionMatrix - a Python package for the statistical analysis and visualization of state space transition events
+import unittest
 
-"""
+import transitionMatrix as tm
+from datasets import Minimal
+from transitionMatrix import dataset_path
 
-from .model import *
-from .estimators import *
-from .utils import *
+ACCURATE_DIGITS = 7
 
-# ADJUST THIS TO REFLECT YOUR OWN ENVIRONMENT!
-# Set the full path including trailing slash
 
-source_path = '/path_to_transition_matrix_package/transitionMatrix/'
-source_path = '/home/philippos/Desktop/Dev_OpenSource/transitionMatrix/'
-dataset_path = source_path + "datasets/"
+class TestDatasets(unittest.TestCase):
+    '''
+    Load in-memory matrices
+    '''
 
+    def test_minimal_matrix(self):
+        a = tm.TransitionMatrix(values=Minimal)
+        a.validate()
+        self.assertEqual(a.dimension, 3)
+
+    def test_matrix_set_load_csv(self):
+        a = tm.TransitionMatrixSet(csv_file=dataset_path + "sp_1981-2016.csv", temporal_type='Cumulative')
+        a.validate()
+        self.assertEqual(a.periods, [1, 2, 3, 5, 7, 10, 15, 20])
+
+
+if __name__ == "__main__":
+    unittest.main()
