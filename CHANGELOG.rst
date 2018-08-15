@@ -1,7 +1,14 @@
 transitionMatrix Change Log
 ===========================
 
-v0.2 (05-06-208)
+v0.3 (##-##-###)
+===================
+
+* Addition of portfolio models (formerly portfolio_analytics_library) for data generation and testing
+* Added examples in jupyter notebook format
+
+v0.2 (05-06-2018)
+===================
 
 * Addition of threshold generation algorithms
 
@@ -23,7 +30,7 @@ v0.1.1 (03-12-2017)
 
 * TransitionMatrix model: new methods to merge States, fix problematic probability matrices, I/O API's
 * TransitionMatrixSet mode: json and csv readers, methods for set-wise manipulations
-* Additional multiperiod datasets (Standard and Poors historical corporating rating transition rates)
+* Additional multiperiod datasets (Standard and Poors historical corporate rating transition rates)
 * Enhanced matrix comparison functionality
 * Three additional example workflows
     * fixing multiperiod matrices (completing State Space)

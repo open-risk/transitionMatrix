@@ -21,6 +21,7 @@ import statsmodels.stats.proportion as st
 
 
 class CohortEstimator(BaseEstimator):
+
     """
     Class for implementing a Cohort estimator for the transition matrix
     under the assumption of time homogeneity
@@ -116,16 +117,14 @@ class CohortEstimator(BaseEstimator):
                 if event_id[i + 1] == event_id[i]:
                     tm_count[(event_state[i], event_time[i])] += 1
                     tmn_count[(event_state[i], event_state[i + 1], event_time[i])] += 1
-                # # last data point from entity data
+                # last data point from entity data
                 # elif event_id[i + 1] != event_id[i] and event_id[i] == event_id[i - 1]:
                 #     tm_count[(event_state[i], event_time[i])] += 1
                 #     tmn_count[(event_state[i - 1], event_state[i], event_time[i])] += 1
                 # elif event_id[i + 1] != event_id[i] and event_id[i] != event_id[i - 1]:
                 #     sys.exit("Isolated observation in data")
 
-
-
-        # # boundary cases
+        # boundary cases
         #
         i = 0
         if event_exists[i] == 1:
@@ -169,4 +168,3 @@ class CohortEstimator(BaseEstimator):
             self.count_normalization.append(tm_count[:, k])
 
         return self.matrix_set
-

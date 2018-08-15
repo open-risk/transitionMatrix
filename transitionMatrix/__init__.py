@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017 Open Risk, all rights reserved
+# (c) 2017-2018 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -13,10 +13,7 @@
 # limitations under the License.
 
 
-"""
-transitionMatrix - a Python package for the statistical analysis and visualization of state space transition events
-
-"""
+""" transitionMatrix - Python package for statistical analysis and visualization of state space transition events """
 
 from .model import *
 from .estimators import *
@@ -28,4 +25,3 @@ from .utils import *
 source_path = '/path_to_transition_matrix_package/transitionMatrix/'
 source_path = '/home/philippos/Desktop/Dev_OpenSource/transitionMatrix/'
 dataset_path = source_path + "datasets/"
-

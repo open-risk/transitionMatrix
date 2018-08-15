@@ -16,6 +16,7 @@ from __future__ import print_function
 
 
 class BaseEstimator(object):
+
     """ Base class for implementing any transition matrix estimator
 
     Offers basic methods common to all estimators
@@ -86,6 +87,7 @@ class BaseEstimator(object):
 
 
 class DurationEstimator(BaseEstimator):
+
     """ Base class for implementing any duration based transition matrix estimator
 
     Offers some basic methods common to all duration based estimators

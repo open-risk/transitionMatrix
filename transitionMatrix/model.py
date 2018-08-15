@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2018 Open Risk, all rights reserved
+# (c) 2017-2018 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -27,6 +27,7 @@ import transitionMatrix as tm
 
 
 class TransitionMatrix(np.matrix):
+
     """ The TransitionMatrix object inherits from numpy matrices and implements additional transition matrix properties
 
     """
@@ -269,6 +270,7 @@ class TransitionMatrix(np.matrix):
 
 
 class TransitionMatrixSet(object):
+
     """  The TransitionMatrices object stores a family of transition matrices as a list
 
 
@@ -549,14 +551,15 @@ class TransitionMatrixSet(object):
             iPD[0] = cPD[0]
             hR[0] = cPD[0]
             for k in range(1, Periods):
-                iPD[k] = cPD[k] - cPD[k-1]
-                hR[k] = iPD[k] / (1.0 - cPD[k-1])
+                iPD[k] = cPD[k] - cPD[k - 1]
+                hR[k] = iPD[k] / (1.0 - cPD[k - 1])
         elif self.temporal_type is 'Incremental':
             pass
         return iPD, cPD, hR, sR
 
 
 class StateSpace(object):
+
     """  The StateSpace object stores a state space structure as a List of tuples
 
     (value, description, optional, optional, ...)
@@ -564,9 +567,8 @@ class StateSpace(object):
     .. Todo:: Implement Absorbing States
 
     .. Todo:: Implement in estimators
+
     """
-
-
 
     def __init__(self, description=[], sticky=False):
         """

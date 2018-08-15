@@ -76,15 +76,15 @@ def bin_timestamps(data, cohorts):
                 event_list = event_dict[(i, k)]
                 # Assign state using last observation in interval
                 # TODO Generalize to user specified function
-                cohort_assigned_state[event_id, event_cohort] = event_list[len(event_list)-1][1]
+                cohort_assigned_state[event_id, event_cohort] = event_list[len(event_list) - 1][1]
                 cohort_event[event_id, event_cohort] = event_list[len(event_list) - 1][0]
                 cohort_count[event_id, event_cohort] = int(len(event_list))
                 # print('A', cohort_count[event_id, event_cohort])
             elif event_key not in event_dict.keys() and event_cohort > 0:
                 # Assign previous state if there are not events and previous state is available
-                cohort_assigned_state[event_id, event_cohort] = cohort_assigned_state[event_id, event_cohort-1]
-                cohort_event[event_id, event_cohort] = cohort_event[event_id, event_cohort-1]
-                cohort_count[event_id, event_cohort] = cohort_count[event_id, event_cohort-1]
+                cohort_assigned_state[event_id, event_cohort] = cohort_assigned_state[event_id, event_cohort - 1]
+                cohort_event[event_id, event_cohort] = cohort_event[event_id, event_cohort - 1]
+                cohort_count[event_id, event_cohort] = cohort_count[event_id, event_cohort - 1]
                 # print('B', cohort_count[event_id, event_cohort])
             elif event_key not in event_dict.keys() and event_cohort == 0:
                 # If we don't have observation in first interval assign NaN state

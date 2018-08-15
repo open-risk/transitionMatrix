@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2018 Open Risk, all rights reserved
+# (c) 2017-2018 Open Risk
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -12,14 +12,14 @@
 # either express or implied. See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
+
 import numpy as np
 import numpy.ma as ma
+from scipy.stats import norm
+
 import transitionMatrix as tm
 from transitionMatrix.thresholds import settings
-from scipy.stats import norm
-import json
-import matplotlib.pyplot as plt
-
 
 """ This module is part of the transitionMatrix package.
 
@@ -50,6 +50,7 @@ def integrate_f(ff, x, an, dx, dt, mu, phi_1):
 
 
 class ThresholdSet(object):
+
     """  The Threshold set object stores a multiperiod structure as a numpy array
 
     .. Todo:: Separate integration method from transition data
@@ -244,7 +245,7 @@ class ThresholdSet(object):
                 for i in range(0, self.grid_size):
                     F = np.exp(
                         -(self.grid[i, k, ri] - offset) * (
-                                self.grid[i, k, ri] - offset) / 2. / dt) / sqrt_two_pi / dt_root
+                            self.grid[i, k, ri] - offset) / 2. / dt) / sqrt_two_pi / dt_root
                     integrant = np.multiply(self.f[:, k - 1, ri], F)
                     self.f[i, k, ri] = np.trapz(integrant, self.grid[:, k - 1, ri], self.grid_step[k - 1, ri])
 
@@ -313,35 +314,35 @@ class ThresholdSet(object):
             # Initial period k = 0
             #
 
-            # # Survival Probability Accumulation Test (Integrate on First Period Grid)
+            # Survival Probability Accumulation Test (Integrate on First Period Grid)
             # integral = np.trapz(self.f[:, 0, ri], self.grid[:, 0, ri], self.grid_step[0, ri])
             #
-            # # Default probability is defined as the complementary to the integral
+            # Default probability is defined as the complementary to the integral
             # Q.entries[0][ri, Default] = 1 - integral
             #
-            # # Calculate Transitions to highest (ri>0, rf=0) rating
-            # # If starting from a rating below 0
+            # Calculate Transitions to highest (ri>0, rf=0) rating
+            # If starting from a rating below 0
             # if ri > 0:
             #     p_grid = ma.masked_less(self.grid[:, 0, ri], self.A[ri, 0, 0])
             #     p_f = ma.masked_array(self.f[:, 0, ri], p_grid.mask)
             #     integral = np.trapz(p_f, p_grid, self.grid_step[0, ri])
             #     Q.entries[0][ri, 0] = integral
-            # # If starting at rating 0 (ri=0, rf=0)
+            # If starting at rating 0 (ri=0, rf=0)
             # else:
             #     p_grid = ma.masked_less(self.grid[:, 0, ri], self.A[0, 1, 0])
             #     p_f = ma.masked_array(self.f[:, 0, ri], p_grid.mask)
             #     integral = np.trapz(p_f, p_grid, self.grid_step[0, ri])
             #     Q.entries[0][0, 0] = integral
             #
-            # # Calculating other transitions
+            # Calculating other transitions
             # for rf in range(1, self.ratings - 1):
-            #     # Staying in same rating
+            # Staying in same rating
             #     if rf == ri:
             #         p_grid = ma.masked_outside(self.grid[:, 0, ri], self.A[ri, rf - 1, 0], self.A[ri, rf + 1, 0])
-            #     # Upgrade
+            # Upgrade
             #     elif rf < ri:
             #         p_grid = ma.masked_outside(self.grid[:, 0, ri], self.A[ri, rf, 0], self.A[ri, rf - 1, 0])
-            #     # Downgrade
+            # Downgrade
             #     elif rf > ri:
             #         p_grid = ma.masked_outside(self.grid[:, 0, ri], self.A[ri, rf, 0], self.A[ri, rf + 1, 0])
             #

@@ -1,3 +1,17 @@
+transitionMatrix Features
+=========================
+
+TransitionMatrix is an Apache 2.0-licensed `Python <http://www.python.org>`_ 
+package aimed at becoming the most intuitive and versatile tool to analyse discrete transition data
+
+Overview
+=========================
+
+* transitioMatrix supports file input/output in json and csv formats
+* it has a powerful API for handling event data (based on pandas)
+* provides intuitive objects for handling transition matrices individually and as sets (based on numpy)
+* supports visualization using matplotlib
+
 Intro and Getting Started
 ================================
 
@@ -16,8 +30,7 @@ transitionMatrix is a Python powered library for the statistical analysis and vi
 It can be used to analyze any dataset that captures timestamped transitions in a discrete state space.
 Use cases include credit rating transitions, system state event logs etc.
 
-
-Functionality 
+Functionality
 ====================
 
 You can use transitionMatrix to
@@ -58,11 +71,13 @@ File structure
 
 | datasets/   Contains a variety of datasets useful for getting started with transitionMatrix
 | tests/       Testing suite
-| transitionMatrix/      The library
-|    model.py            Main data structures
-|    estimators/         Estimator methods
-|    utils/              Helper classes and methods
-|    thresholds/         Algorithms for calibrating AR(n) process thresholds to input transition rates
+| transitionMatrix/        The library
+|    model.py              Main data structures
+|    estimators/           Estimator methods
+|    utils/                Helper classes and methods
+|    thresholds/           Algorithms for calibrating AR(n) process thresholds to input transition rates
+|    portfolio_analytics/  Collection of portfolio analytic solutions
+|    examples/             Usage examples
 
 Testing
 =======================
@@ -82,12 +97,13 @@ Usage
 Look at the examples directory for a variety of typical workflows
 - Generating transition matrices from data
 - Manipulating transition matrices
-- Estimate thresholds given a multi-period transition matrix set
+- Estimating thresholds given a multi-period transition matrix set
+- Generating loss distributions analytically
 
 Training
 =======================
 
-The Open Risk Academy has courses elaborating on the use of the libary
+The Open Risk Academy has courses elaborating on the use of the library
 - Analysis of Credit Migration using Python TransitionMatrix: https://www.openriskacademy.com/course/view.php?id=38
 
 
@@ -106,3 +122,6 @@ Relationship with other open source projects
 - The package is focusing instead on "model free" analysis (limited facilities might be included for convenience)
 - It is somewhat similar to etm, an R package for estimating empirical transition matrices
 - There is some conceptual overlap with survival models like lifelines, but in general the dimensionality of state space requires a different set of tools
+
+
+

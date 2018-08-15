@@ -20,6 +20,7 @@ import statsmodels.stats.proportion as st
 
 
 class SimpleEstimator(BaseEstimator):
+
     """
     Class for implementing a simple estimator suitable for single period transitions
 
