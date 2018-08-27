@@ -1,29 +1,30 @@
-Intro and Getting Started
+Intro
 =========================
-
-Description: A Python powered library for statistical analysis and visualization of state transition phenomena
-
-* Author: Open Risk, <http://www.openriskmanagement.com>
-* License: Apache 2.0
-* Documentation: Open Risk Manual, <http://www.openriskmanual.org/wiki/Transition_Matrix>
-* Training: Open Risk Academy, <https://www.openriskacademy.com/login/index.php>
-* Development website: <https://github.com/open-risk/transitionMatrix>
-* Production instance (API): <https://www.opencpm.com>
-
-Purpose of the project
-======================
-
-transitionMatrix is a Python powered library for the statistical analysis and visualization of state transition phenomena. It can be used to analyze any dataset that captures timestamped transitions in a discrete state space. Use cases include credit rating transitions, system state event logs etc.
-
-Functionality
-=============
-
-You can use transitionMatrix to
+transitionMatrix is a Python powered library for the statistical analysis and visualization of state transition 
+phenomena. It can be used to analyze any dataset that captures timestamped transitions in a discrete state space. 
+Use cases include credit rating transitions, system state event logs etc. For example you can use transitionMatrix to
 
 -   Estimate transition matrices from historical event data using a variety of estimators
 -   Visualize event data and transition matrices
 -   Manipulate transition matrices (generators, comparisons etc.)
 -   Provide standardized data sets for testing
+
+Key Information
+================
+
+* Author: Open Risk, <http://www.openriskmanagement.com>
+* License: Apache 2.0
+* Documentation: Open Risk Manual, <http://www.openriskmanual.org/wiki/Transition_Matrix>
+* Development website: <https://github.com/open-risk/transitionMatrix>
+* Production instance (API): <https://www.opencpm.com>
+
+Support and Training
+=========================
+
+* The Open Risk Academy has free courses demonstrating the use of the library. The current list is: 
+    * Analysis of Credit Migration using Python TransitionMatrix: <https://www.openriskacademy.com/course/view.php?id=38>
+* The Academy also offers chat functionality - must create a free account first: <https://www.openriskacademy.com/login/index.php>
+
 
 Installation
 ============
@@ -66,7 +67,7 @@ transitionMatrix/ The library
 Testing
 =======
 
-It is a good idea to run the testsuite. Before you get started:
+It is a good idea to run the test suite. Before you get started:
 
 -   Adjust the source directory path in transitionMatrix/\_\_init\_\_ and then issue the following in at the root of the distribution
 -   Unzip the data files in the datasets directory
@@ -80,10 +81,6 @@ Usage
 
 Look at the examples directory for a variety of typical workflows - Generating transition matrices from data - Manipulating transition matrices - Estimating thresholds given a multi-period transition matrix set - Generating loss distributions analytically
 
-Training
-========
-
-The Open Risk Academy has courses elaborating on the use of the library - Analysis of Credit Migration using Python TransitionMatrix: <https://www.openriskacademy.com/course/view.php?id=38>
 
 Dependencies
 ============

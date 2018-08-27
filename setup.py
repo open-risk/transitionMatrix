@@ -31,7 +31,7 @@ setup(name='transitionMatrix',
       author='Open Risk',
       author_email='info@openrisk.eu',
       packages=['transitionMatrix', 'transitionMatrix.estimators', 'transitionMatrix.utils',
-                'transitionMatrix.thresholds', 'transitionMatrix.portfolio_models'],
+                'transitionMatrix.thresholds', 'transitionMatrix.portfolio_model_lib'],
       url='https://github.com/open-risk/transitionMatrix',
       install_requires=[
           'pandas',

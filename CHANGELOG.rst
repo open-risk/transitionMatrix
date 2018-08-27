@@ -1,7 +1,7 @@
 transitionMatrix Change Log
 ===========================
 
-v0.3 (##-##-###)
+v0.3 (27-08-2018)
 ===================
 
 * Addition of portfolio models (formerly portfolio_analytics_library) for data generation and testing

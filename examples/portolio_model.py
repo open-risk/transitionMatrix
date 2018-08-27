@@ -3,7 +3,7 @@
 # Finite portfolio with N credits - Calculate probability of k losses
 
 
-import transitionMatrix.portfolio_models.model as vs
+import transitionMatrix.portfolio_model_lib.model as vs
 
 # Calculate the probability of four losses in a portfolio of ten credits when the PD is 0.1 and correlation is 20%
 
