@@ -14,7 +14,8 @@ Key Information
 
 * Author: Open Risk, <http://www.openriskmanagement.com>
 * License: Apache 2.0
-* Documentation: Open Risk Manual, <http://www.openriskmanual.org/wiki/Transition_Matrix>
+* Code Documentation: Read The Docs, <https://transitionmatrix.readthedocs.io/en/latest/index.html>
+* Mathematical Documentation: Open Risk Manual, <https://www.openriskmanual.org/wiki/Transition_Matrix>
 * Development website: <https://github.com/open-risk/transitionMatrix>
 * Production instance (API): <https://www.opencpm.com>
 
@@ -23,7 +24,7 @@ Support and Training
 
 * The Open Risk Academy has free courses demonstrating the use of the library. The current list is: 
     * Analysis of Credit Migration using Python TransitionMatrix: <https://www.openriskacademy.com/course/view.php?id=38>
-* The Academy also offers chat functionality - must create a free account first: <https://www.openriskacademy.com/login/index.php>
+* The Academy also offers chat functionality - you must create a free account first to join the platform: <https://www.openriskacademy.com/login/index.php>
 
 
 Installation
@@ -120,4 +121,8 @@ Visualization of transition matrix
 Generating stochastic process transition thresholds
 
 ![image](examples/Thresholds.png)
+
+Computation and Visualization of Credit Curves
+
+![image](examples/credit_curves.png)
 

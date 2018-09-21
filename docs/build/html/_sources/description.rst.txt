@@ -82,7 +82,7 @@ File structure
 Testing
 =======================
 
-It is a good idea to run the testsuite. Before you get started:
+It is a good idea to run the test-suite. Before you get started:
 
 - Adjust the source directory path in transitionMatrix/__init__ and then issue the following in at the root of the distribution
 - Unzip the data files in the datasets directory
@@ -95,8 +95,10 @@ Usage
 =======================
 
 Look at the examples directory for a variety of typical workflows
+
 - Generating transition matrices from data
 - Manipulating transition matrices
+- Computing and visualizing credit curves corresponding to a set of transition matrices
 - Estimating thresholds given a multi-period transition matrix set
 - Generating loss distributions analytically
 

@@ -23,5 +23,4 @@ from .utils import *
 # Set the full path including trailing slash
 
 source_path = '/path_to_transition_matrix_package/transitionMatrix/'
-source_path = '/home/philippos/Desktop/Dev_OpenSource/transitionMatrix/'
 dataset_path = source_path + "datasets/"

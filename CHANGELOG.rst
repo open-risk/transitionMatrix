@@ -1,6 +1,13 @@
 transitionMatrix Change Log
 ===========================
 
+v0.3.1 (21-09-2018)
+===================
+
+* Expanded functionality to visualize credit curves
+*
+
+
 v0.3 (27-08-2018)
 ===================
 
