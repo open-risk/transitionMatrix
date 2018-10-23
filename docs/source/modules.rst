@@ -1,5 +1,5 @@
-transitionMatrix
-================
+API
+==============================
 
 .. toctree::
    :maxdepth: 4

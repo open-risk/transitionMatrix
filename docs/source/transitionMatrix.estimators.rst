@@ -1,5 +1,5 @@
-transitionMatrix.estimators package
-===================================
+transitionMatrix.estimators subpackage
+======================================
 
 Submodules
 ----------

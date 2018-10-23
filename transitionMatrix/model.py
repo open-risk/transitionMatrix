@@ -12,7 +12,12 @@
 # either express or implied. See the License for the specific language governing permissions and
 # limitations under the License.
 
-""" This module is part of the transitionMatrix package.
+""" This module provides the key transition matrix objects
+
+* TransitionMatrix_ implements the functionality of single period transition matrix
+* TransitionMatrixSet_ provides a container for a multiperiod transition matrix collection
+* StateSpace holds information about the stochastic system state space
+* EmpiricalTransitionMatrix implements the functionality of a continuously observed transition matrix
 
 """
 
@@ -28,12 +33,14 @@ import transitionMatrix as tm
 
 class TransitionMatrix(np.matrix):
 
-    """ The TransitionMatrix object inherits from numpy matrices and implements additional transition matrix properties
+    """ The _`TransitionMatrix` object implements a typical (one period) `transition matrix <https://www.openriskmanual.org/wiki/Transition_Matrix>`_.
+    The classs inherits from numpy matrices and implements additional properties specific transition matrices. It form the building block of the
+    TransitionMatrixSet_ which holds a collection of matrices in increasing temporal order
 
     """
 
     def __new__(cls, values=None, dimension=2, json_file=None, csv_file=None):
-        """ Create a new matrix. Different options for initialization are:
+        """ Create a new transition matrix. Different options for initialization are:
 
         * providing values as a list of list
         * providing values as a numpy array
@@ -48,14 +55,17 @@ class TransitionMatrix(np.matrix):
         :param csv_file: a csv file containing transition matrix data
         :type values: list of lists or numpy array
         :type dimension: int
-        :returns: returns a TranstionMatrix object
+        :returns: returns a TransitionMatrix object
         :rtype: object
 
         .. note:: The initialization in itself does not validate if the provided values form indeed a transition matrix
 
         :Example:
 
-        A = tm.TransitionMatrix(values=[[0.6, 0.2, 0.2], [0.2, 0.6, 0.2], [0.2, 0.2, 0.6]])
+        .. code-block:: python
+
+            A = tm.TransitionMatrix(values=[[0.6, 0.2, 0.2], [0.2, 0.6, 0.2], [0.2, 0.2, 0.6]])
+
         """
         if values is not None:
             # Initialize with given values
@@ -227,7 +237,7 @@ class TransitionMatrix(np.matrix):
     def print(self, format_type='Standard', accuracy=2):
         """ Pretty print a transition matrix
 
-        :param format_type: formating options (Standard, Percent)
+        :param format_type: formatting options (Standard, Percent)
         :type format_type: str
         :param accuracy: number of decimals to display
         :type accuracy: int
@@ -271,7 +281,8 @@ class TransitionMatrix(np.matrix):
 
 class TransitionMatrixSet(object):
 
-    """  The TransitionMatrices object stores a family of transition matrices as a list
+    """  The _`TransitionMatrixSet` object stores a family of TransitionMatrix_ objects as a time ordered list. Besides
+    storate it allows a variety of simultaneous operations on the collection of matrices
 
 
     """
@@ -302,6 +313,8 @@ class TransitionMatrixSet(object):
         :type values: list of lists or numpy array
         :type dimension: int
         :type temporal_type: str
+        :type json_file: str
+        :type csv_file: str
 
         :returns: returns a TranstionMatrix object
         :rtype: object
@@ -312,9 +325,12 @@ class TransitionMatrixSet(object):
 
         Instantiate a transition matrix set directly using a list of matrices
 
-        C_Vals = [[[0.75, 0.25], [0.0, 1.0]],  [[0.75, 0.25], [0.0, 1.0]]]
+        .. code-block:: python
 
-        C_Set = tm.TransitionMatrixSet(values=C_Vals, temporal_type='Incremental')
+            C_Vals = [[[0.75, 0.25], [0.0, 1.0]],  [[0.75, 0.25], [0.0, 1.0]]]
+
+            C_Set = tm.TransitionMatrixSet(values=C_Vals, temporal_type='Incremental')
+
         """
 
         if values is not None:
@@ -613,30 +629,41 @@ class StateSpace(object):
         self.description = description
 
     def validate_dataset(self, dataset, labels=None):
-        """  Check that dataset is consistend with a given state space. The following tests are implemented
+        """  Check that a dataset column is consistent with a given state space. The following tests are implemented
 
-        1: all states in dataset exist in state space description (error otherwise)
-        2: all states in state space exist in dataset (warning otherwise)
-        3: successive states for the same entity are different, unless Sticky flag is True
+        1: all the states in dataset exist in state space description (error otherwise)
+        2: all the states in state space exist in dataset (warning otherwise)
+        3: successive states for the same entity are different, unless the Sticky flag is True
 
         :param dataset: the dataset to test
+        :param labels: the labels of the state space
 
         :returns: a list of validation messages
 
         """
+
+        # Select the appropriate State label
+        # This covers for case of relabeling or multiple columns with state data
         if labels is not None:
             state_label = labels['State']
         else:
             state_label = 'State'
 
+        # The unique states in the data set
         dataset_states = dataset[state_label].unique()
+        state_list = dataset_states.tolist()
+        state_list_stringified = [str(s) for s in state_list]
+        print(state_list_stringified)
+        ds = set(state_list_stringified)
+        # The expected states according to the state space
         expected_states = []
         for state in self.description:
             expected_states.append(state[0])
-        ds = set(dataset_states.tolist())
         es = set(expected_states)
         if ds.difference(es):
             validation_outcome = ds.difference(es)
+            print('Found ', ds)
+            print('Expected', es)
             validation_message = "Dataset contains more states than expected. Check the following: "
         elif es.difference(ds):
             validation_outcome = es.difference(ds)
@@ -654,3 +681,58 @@ class StateSpace(object):
         """
         for state in self.description:
             print("State Index/Label: ", state[0], " , ", state[1])
+
+
+class EmpiricalTransitionMatrix(object):
+
+    """  The EmpiricalTransitionMatrix object stores a continuously observed Transition Matrix. It stores matrices
+    estimated using duration methods
+
+    The EmpiricalTransitionMatrix object is different from the TransitionMatrixSet in that it stores detailed event time
+    of observations and the transition densities in addition to the transition probabilities
+
+    An EmpiricalTransitionMatrix can be converted into a TransitionMatrixSet by sampling on a temporal grid (but not
+    vice-versa)
+
+
+    """
+
+    def __init__(self, dimension=2, values=None, observation_times=None, json_file=None,
+                 csv_file=None):
+        """ Create a new probability matrix. Different options for initialization are:
+
+        * providing values as a 3D numpy array of signature (S, S, T) and observation times as a list or numpy array of length T
+        * loading from a csv file
+        * loading from a json file
+
+        Without data, a default identity matrix is generated with user specified dimension
+
+        :param values: initialization values
+        :param dimension: matrix dimensionality (default is 2)
+        :param observation_times: List with the timesteps (support) of transition observations
+        :param json_file: a json file containing transition matrix data
+        :param csv_file: a csv file containing transition matrix data
+
+        :type values: 3D numpy array
+        :type dimension: int
+        :type observations: int
+        :type json_file: str
+        :type csv_file: str
+
+        :returns: returns a EmpiricalTransitionMatrix object
+        :rtype: object
+
+        .. note:: The initialization in itself does not validate if the provided values form indeed a transition matrix set
+
+        :Example:
+
+        Instantiate a transition probability matrix
+
+        .. code-block:: python
+
+        """
+
+        self.values = values
+        self.observation_times = observation_times
+
+        return

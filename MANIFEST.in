@@ -1,0 +1,8 @@
+recursive-include examples *
+recursive-include datasets *
+recursive-include tests *
+include datasets/*.csv
+include datasets/*.json
+include MANIFEST.in
+include LICENSE.txt
+include description.rst

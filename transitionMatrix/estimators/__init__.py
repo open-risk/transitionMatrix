@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017 Open Risk, all rights reserved
+# (c) 2017-2018 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -66,7 +66,7 @@ class BaseEstimator(object):
 
     def summary(self, k=0):
         """
-        Pretty print a summary of estimation results (values and confidence intervals)
+        Pretty-print a summary of estimation results (values and confidence intervals)
         """
         state_count = self.states.cardinality
         print('                      Transition Matrix Estimation Results                    ')
@@ -90,7 +90,24 @@ class DurationEstimator(BaseEstimator):
 
     """ Base class for implementing any duration based transition matrix estimator
 
-    Offers some basic methods common to all duration based estimators
+    Offers methods common to all duration based estimators
+    Two subclasses:
+    - Time homogeneous estimator (constant transition rates)
+    - Time inhomogeneous estimator (variable transition probabilities) Aalen-Johansen
+
+    T(s, t) = T(0, t)  (transition from start=0)
+    Compute
+    transition_times(k)
+    T^ij(t) numpy(i,j,k)
+
+    Transitions at cohort intervals
+    Approximate numpy(i,j, k_index : largest k-value that is less than t(boundary))
 
     """
-    pass
+
+    def __init__(self, cohort_intervals=None, states=None):
+        BaseEstimator.__init__(self)
+        self.cohort_intervals = cohort_intervals
+        if states is not None:
+            self.states = states
+        self.timepoint_count = None

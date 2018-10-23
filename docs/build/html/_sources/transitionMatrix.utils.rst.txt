@@ -1,5 +1,5 @@
-transitionMatrix.utils package
-==============================
+transitionMatrix.utils subpackage
+=================================
 
 Submodules
 ----------
@@ -19,7 +19,6 @@ transitionMatrix.utils.preprocessing module
     :members:
     :undoc-members:
     :show-inheritance:
-
 
 Module contents
 ---------------

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017 Open Risk, all rights reserved
+# (c) 2017-2018 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -18,19 +18,51 @@ module transitionMatrix.utils - helper classes and functions
 '''
 
 from __future__ import print_function, division
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+
+
+# def initial_states(data):
+#     """
+#     Identify the initial state for each entity in the dataframe
+#
+#     :param data: dataframe.
+#
+#     :returns: returns a numpy array
+#
+#     """
+#     unique_timestamps = data['Time'].unique()
+#     return unique_timestamps
+
+
+def unique_timestamps(data):
+    """
+    Identify unique timestamps in a dataframe
+
+    :param data: dataframe. The 'Time' column is used by default
+
+    :returns: returns a numpy array
+
+    """
+    unique_timestamps = data['Time'].unique()
+    return unique_timestamps
 
 
 def bin_timestamps(data, cohorts):
     """
-    Bin timestamped data so as to have ingoing and outgoing states per cohort interval
-    Note: This is a lossy operation: Timestamps are discretised and intermediate state
+    Bin timestamped data in a dataframe so as to have ingoing and outgoing states per cohort interval
+
+    The 'Time' column is used by default
+
+    .. note:: This is a lossy operation: Timestamps are discretised and intermediate state \
     transitions are lost
+
     """
     # Find the range of observed event times
     t_min = data['Time'].min()
     t_max = data['Time'].max()
+
     # Divide the range into equal intervals
     dt = (t_max - t_min) / cohorts
     cohort_intervals = [t_min + dt * i for i in range(0, cohorts + 1)]

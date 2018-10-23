@@ -18,9 +18,12 @@
 from .model import *
 from .estimators import *
 from .utils import *
+from .thresholds import *
+from .portfolio_model_lib import *
 
-# ADJUST THIS TO REFLECT YOUR OWN ENVIRONMENT!
-# Set the full path including trailing slash
+__version__ = '0.4.0'
 
-source_path = '/path_to_transition_matrix_package/transitionMatrix/'
-dataset_path = source_path + "datasets/"
+package_name = 'transitionMatrix'
+module_path = os.path.dirname(__file__)
+source_path = module_path[:-len(package_name)]
+dataset_path = os.path.join(source_path, '/datasets/')

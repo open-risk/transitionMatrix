@@ -1,6 +1,8 @@
-transitionMatrix package
-========================
+transitionMatrix
+================
 
+.. automodule:: transitionMatrix.model
+    :noindex:
 
 transitionMatrix.model Classes
 ------------------------------
@@ -33,13 +35,14 @@ StateSpace
    .. automethod:: __init__
 
 
-Module contents
----------------
+EmpiricalTransitionMatrix
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: transitionMatrix
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. autoclass:: transitionMatrix.model.EmpiricalTransitionMatrix
+   :members:
+
+   .. automethod:: __init__
+
 
 Subpackages
 -----------
@@ -47,4 +50,6 @@ Subpackages
 .. toctree::
 
     transitionMatrix.estimators
+    transitionMatrix.thresholds
+    transitionMatrix.portfolio_model_lib
     transitionMatrix.utils

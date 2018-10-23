@@ -17,12 +17,11 @@ from codecs import open
 
 from setuptools import setup
 
-# import re
+__version__ = '0.4.0'
 
+ver = __version__
 
-ver = '0.3.0'
-
-long_descr = open('DESCRIPTION.rst', 'r', encoding='utf8').read()
+long_descr = open('description.rst', 'r', encoding='utf8').read()
 
 setup(name='transitionMatrix',
       version=ver,
@@ -30,16 +29,19 @@ setup(name='transitionMatrix',
       long_description=long_descr,
       author='Open Risk',
       author_email='info@openrisk.eu',
-      packages=['transitionMatrix', 'transitionMatrix.estimators', 'transitionMatrix.utils',
-                'transitionMatrix.thresholds', 'transitionMatrix.portfolio_model_lib'],
+      packages=['transitionMatrix', 'transitionMatrix.estimators', 'transitionMatrix.utils', 'tests',
+                'transitionMatrix.thresholds', 'transitionMatrix.portfolio_model_lib', 'datasets', 'examples.python'],
+      include_package_data=True,
       url='https://github.com/open-risk/transitionMatrix',
       install_requires=[
           'pandas',
           'numpy',
           'scipy',
-          'statsmodels'
+          'statsmodels',
+          'sympy',
+          'matplotlib'
       ],
-      zip_safe=True,
+      zip_safe=False,
       provides=['transitionMatrix'],
       classifiers=[
           'Intended Audience :: Developers',
@@ -48,8 +50,7 @@ setup(name='transitionMatrix',
           'Development Status :: 3 - Alpha',
           'License :: OSI Approved :: Apache Software License',
           'Operating System :: OS Independent',
-          'Programming Language :: Python',
-          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3 :: Only',
           'Programming Language :: Python :: 3.3',
           'Programming Language :: Python :: 3.4',
           'Programming Language :: Python :: 3.5',

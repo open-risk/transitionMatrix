@@ -80,6 +80,7 @@ class ThresholdSet(object):
         Instantiate a threshold set directly using an existing transition matrix set
 
         A = tm.thresholds.ThresholdSet(TMSet=T)
+
         """
         if (ratings and periods) is not None and TMSet is None:
             self.A = np.zeros((ratings, ratings, periods))
@@ -112,8 +113,7 @@ class ThresholdSet(object):
     def fit(self, AR_Model, ri):
         """ Fit Thresholds given autoregressive model and transition matrix given the initial state ri
 
-        .. note:: The threshold corresponding to the starting rating is set by convention to zero. The
-        threshold corresponding to an initially defaulted state is inf
+        .. note:: The threshold corresponding to the starting rating is set by convention to zero. The threshold corresponding to an initially defaulted state is inf
 
         """
 

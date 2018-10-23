@@ -68,3 +68,5 @@ Minimal = [
     [0.15, 0.7, 0.15],
     [0.0, 0.0, 1.0]
 ]
+
+# TODO Additional credit migration matrices

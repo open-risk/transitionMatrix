@@ -3,16 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to transitionMatrix's documentation!
-============================================
+transitionMatrix Documentation
+==============================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    description
-   changelog
+   usage
    modules
+   changelog
+   roadmap
 
 Indices and tables
 ==================

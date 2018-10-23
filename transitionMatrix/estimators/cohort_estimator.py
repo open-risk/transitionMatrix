@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# (c) 2017 Open Risk, all rights reserved
+# (c) 2017-2018 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -13,11 +13,11 @@
 # limitations under the License.
 
 from __future__ import print_function
+
 import numpy as np
-import sys
+import statsmodels.stats.proportion as st
 
 from transitionMatrix.estimators import BaseEstimator
-import statsmodels.stats.proportion as st
 
 
 class CohortEstimator(BaseEstimator):
@@ -87,6 +87,7 @@ class CohortEstimator(BaseEstimator):
         event_time = np.empty(event_count, int)
         nan_count = 0
         i = 0
+        # TODO read data by labels, not column location
         for row in data.itertuples():
             try:
                 event_state[i] = int(row[3])
