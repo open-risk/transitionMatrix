@@ -108,21 +108,21 @@ class TestTransitionMatrixSet(unittest.TestCase):
 class TestStateSpace(unittest.TestCase):
 
     def test_instantiate_state(self):
-        description = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+        definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
                        ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
-        s = tm.StateSpace(description)
-        self.assertEqual(s.description[0][1], 'AAA')
+        s = tm.StateSpace(definition)
+        self.assertEqual(s.definition[0][1], 'AAA')
 
     def test_get_states(self):
-        description = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+        definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
                        ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
-        s = tm.StateSpace(description)
+        s = tm.StateSpace(definition)
         self.assertEqual(s.get_states()[0], '0')
 
     def test_get_state_labels(self):
-        description = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+        definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
                        ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
-        s = tm.StateSpace(description)
+        s = tm.StateSpace(definition)
         self.assertEqual(s.get_state_labels()[0], 'AAA')
 
     def test_generic(self):
@@ -134,8 +134,8 @@ class TestStateSpace(unittest.TestCase):
     def test_validate_dataset(self):
         dataset_path = source_path + "datasets/"
         data = pd.read_csv(dataset_path + 'test.csv', dtype={'State': str})
-        description = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
-        s = tm.StateSpace(description)
+        definition = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
+        s = tm.StateSpace(definition)
         self.assertEqual(s.validate_dataset(dataset=data)[0], "Dataset contains the expected states.")
 
 

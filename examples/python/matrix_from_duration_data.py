@@ -90,7 +90,7 @@ elif example == 2:
     print("> Step 5: Display results")
     myMatrixSet = tm.TransitionMatrixSet(values=result, temporal_type='Incremental')
     print(myMatrixSet.temporal_type)
-    myMatrixSet.print()
+    myMatrixSet.print_matrix()
 
 
 elif example == 3:
@@ -104,4 +104,4 @@ elif example == 3:
     labels = {'Timestamp': 'Cohort', 'State': 'State', 'ID': 'ID'}
     result = myEstimator.fit(cohort_data, labels=labels)
     myMatrixSet = tm.TransitionMatrixSet(values=result, temporal_type='Incremental')
-    myMatrixSet.print()
+    myMatrixSet.print_matrix()

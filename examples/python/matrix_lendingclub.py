@@ -43,11 +43,11 @@ print(data.describe())
 # Step 2
 # Describe and validate the State Space against the data
 print("Step 2")
-description = [('A', "Grade A"), ('B', "Grade B"), ('C', "Grade C"),
+definition = [('A', "Grade A"), ('B', "Grade B"), ('C', "Grade C"),
                ('D', "Grade D"), ('E', "Grade E"), ('F', "Grade F"),
                ('G', "Grade G"), ('H', "Delinquent"), ('I', "Charged Off"),
                ('J', "Repaid")]
-myState = tm.StateSpace(description)
+myState = tm.StateSpace(definition)
 myState.describe()
 labels = {'State': 'State_IN'}
 print(myState.validate_dataset(dataset=data, labels=labels))

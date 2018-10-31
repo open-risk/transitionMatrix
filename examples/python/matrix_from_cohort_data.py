@@ -38,10 +38,10 @@ if example == 1:
     # Example: S&P Style Credit Rating Migration Matrix
 
     # S&P Ratings State Space
-    description = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+    definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
                    ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
 
-    myState = tm.StateSpace(description)
+    myState = tm.StateSpace(definition)
     print("> Describe state space")
     myState.describe()
     print("> List of states")
@@ -66,7 +66,7 @@ if example == 1:
     myMatrixSet = tm.TransitionMatrixSet(values=result, temporal_type='Incremental')
     # print(myMatrixSet.temporal_type)
     print("> Print Estimated Matrix Set")
-    myMatrixSet.print()
+    myMatrixSet.print_matrix()
 
 elif example == 2:
     # Example: IFRS 9 Style Migration Matrix
@@ -87,8 +87,8 @@ elif example == 2:
     # Step 2
     # Describe and validate the State Space against the data
     print(">>> Step 2")
-    description = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
-    myState = tm.StateSpace(description)
+    definition = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
+    myState = tm.StateSpace(definition)
     myState.describe()
     print(myState.validate_dataset(dataset=sorted_data))
 
@@ -106,7 +106,7 @@ elif example == 2:
     print(">>> Step 4")
     myMatrixSet = tm.TransitionMatrixSet(values=result, temporal_type='Incremental')
     print(myMatrixSet.temporal_type)
-    myMatrixSet.print()
+    myMatrixSet.print_matrix()
 
 elif example == 3:
     # Example: Simplest Absorbing Case for validation

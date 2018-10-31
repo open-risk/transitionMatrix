@@ -32,11 +32,11 @@ dataset_path = source_path + "datasets/"
 # Format:
 # Expected Data Format is (ID, State_IN, State_OUT)
 
-description = [('A', "Grade A"), ('B', "Grade B"), ('C', "Grade C"),
+definition = [('A', "Grade A"), ('B', "Grade B"), ('C', "Grade C"),
                ('D', "Grade D"), ('E', "Grade E"), ('F', "Grade F"),
                ('G', "Grade G"), ('H', "Delinquent"), ('I', "Charged Off"),
                ('J', "Repaid")]
-myState = tm.StateSpace(description)
+myState = tm.StateSpace(definition)
 
 # Load the data sets into a pandas frame in sequence
 # Check matrix_lendingclub.py for comments
@@ -56,4 +56,4 @@ for letter in ['a', 'b', 'c', 'd']:
 
 # collect all matrices in a matrix set
 LC_Set = tm.TransitionMatrixSet(values=matrix_set, temporal_type='Incremental')
-LC_Set.print()
+LC_Set.print_matrix()

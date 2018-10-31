@@ -26,7 +26,6 @@ from datasets import Generic
 # Generic is a Typical Credit Rating Transition Matrix with sever rating states and one absorbing (Default) state
 
 print("> Load the generic transition matrix")
-M = tm.TransitionMatrix(values=Generic)
 
 # The size of the rating scale
 Ratings = M.dimension
@@ -42,7 +41,7 @@ T = tm.TransitionMatrixSet(values=M, periods=Periods, method='Power', temporal_t
 
 # Lets take a look at what we have created
 print("> Display the calculated transition matrix set")
-T.print()
+T.print_matrix()
 
 # Now lets compute the default curves
 # We do this one initial rating state at a time

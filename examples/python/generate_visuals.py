@@ -109,8 +109,8 @@ elif example == 3:
     #
     data = pd.read_csv(dataset_path + 'synthetic_data5.csv', dtype={'State': str})
     sorted_data = data.sort_values(['ID', 'Timestep'], ascending=[True, True])
-    description = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
-    myState = tm.StateSpace(description)
+    definition = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
+    myState = tm.StateSpace(definition)
     myState.describe()
     myEstimator = es.CohortEstimator(states=myState, ci={'method': 'goodman', 'alpha': 0.05})
     result = myEstimator.fit(sorted_data)

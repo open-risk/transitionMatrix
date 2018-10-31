@@ -51,7 +51,7 @@ dataset = 7
 #
 if dataset == 1:
     # This dataset simulates single entity transitions
-    # State Space description
+    # State Space definition
     myState = tm.StateSpace([('0', "A"), ('1', "B"), ('2', "C"), ('3', "D")])
     # myState.describe()
     # n: number of entities
@@ -80,11 +80,11 @@ elif dataset == 3:
 elif dataset == 4:
     # Fourth example: S&P Credit Rating Migration Matrix
     # S&P Ratings State Space
-    description = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+    definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
                    ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
 
     matrix = Generic
-    myState = tm.StateSpace(description)
+    myState = tm.StateSpace(definition)
     # Fourth example: Single entity observed over discrete short time interval
     data = dataset_generators.markov_chain(myState, matrix, n=1000, timesteps=10)
     sorted_data = data.sort_values(['ID', 'Timestep'], ascending=[True, True])
@@ -92,13 +92,13 @@ elif dataset == 4:
 
 elif dataset == 5:
     # Fifth example: An IFRS 9 style Migration Matrix for migrations between Stages
-    description = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
+    definition = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
 
     matrix = [[0.8, 0.15, 0.05],
               [0.1, 0.7, 0.2],
               [0.0, 0.0, 1.0]]
 
-    myState = tm.StateSpace(description)
+    myState = tm.StateSpace(definition)
     data = dataset_generators.markov_chain(myState, transitionmatrix=matrix, n=10000, timesteps=5)
     sorted_data = data.sort_values(['ID', 'Timestep'], ascending=[True, True])
     sorted_data.to_csv(dataset_path + 'synthetic_data5.csv', index=False)
@@ -120,9 +120,9 @@ elif dataset == 6:
 
 elif dataset == 7:
     # Seventh example: Credit Rating Migrations in Long Format
-    description = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+    definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
                    ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
-    myState = tm.StateSpace(description)
+    myState = tm.StateSpace(definition)
     matrix = Generic
     # Timesteps are the interval periods over which to repeatedly simulate the single period migration matrix
     data = dataset_generators.long_format(myState, transitionmatrix=matrix, n=1000, timesteps=10)
@@ -132,7 +132,7 @@ elif dataset == 7:
 elif dataset == 8:
     # Simplest absorbing state case for validation purposes (Duration estimator)
     # Single timestep
-    description = [('0', "G"), ('1', "B")]
+    definition = [('0', "G"), ('1', "B")]
     myState = tm.StateSpace()
     myState.generic(2)
     myState.describe()

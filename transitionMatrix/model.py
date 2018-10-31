@@ -32,7 +32,6 @@ import transitionMatrix as tm
 
 
 class TransitionMatrix(np.matrix):
-
     """ The _`TransitionMatrix` object implements a typical (one period) `transition matrix <https://www.openriskmanual.org/wiki/Transition_Matrix>`_.
     The classs inherits from numpy matrices and implements additional properties specific transition matrices. It form the building block of the
     TransitionMatrixSet_ which holds a collection of matrices in increasing temporal order
@@ -280,9 +279,8 @@ class TransitionMatrix(np.matrix):
 
 
 class TransitionMatrixSet(object):
-
     """  The _`TransitionMatrixSet` object stores a family of TransitionMatrix_ objects as a time ordered list. Besides
-    storate it allows a variety of simultaneous operations on the collection of matrices
+    storage it allows a variety of simultaneous operations on the collection of matrices
 
 
     """
@@ -343,7 +341,8 @@ class TransitionMatrixSet(object):
                 self.entries = val_set
                 self.temporal_type = 'Incremental'
                 self.periods = list(range(periods))
-            # Create a multi-period matrix assuming Markov Chain
+                self.dimension = val_set[0].shape[0]
+            # Create a multi-period matrix assuming a Markov Chain
             elif method is 'Power':
                 val_set = []
                 a = tm.TransitionMatrix(values)
@@ -356,6 +355,7 @@ class TransitionMatrixSet(object):
                 self.entries = val_set
                 self.temporal_type = 'Cumulative'
                 self.periods = list(range(periods))
+                self.dimension = val_set[0].shape[0]
             # Use provided matrices as-is
             elif method is None:
                 val_set = []
@@ -365,6 +365,7 @@ class TransitionMatrixSet(object):
                 self.entries = val_set
                 self.temporal_type = temporal_type
                 self.periods = list(range(periods))
+                self.dimension = val_set[0].shape[0]
         elif values is None and csv_file is not None:
             # Initialize from file in csv format
             # First row is meta data labels (From States, To States, Periods, Tenor List)
@@ -389,6 +390,7 @@ class TransitionMatrixSet(object):
             self.entries = val_set
             self.temporal_type = temporal_type
             self.periods = tenors
+            self.dimension = val_set[0].shape[0]
             f.close()
         elif values is None and json_file is not None:
             # Initialize from file in json format
@@ -404,6 +406,7 @@ class TransitionMatrixSet(object):
             self.entries = val_set
             self.temporal_type = temporal_type
             self.periods = list(range(periods))
+            self.dimension = val_set[0].shape[0]
         else:
             # Default instance (2x2 identity matrix)
             # default = np.identity(dimension)
@@ -417,6 +420,7 @@ class TransitionMatrixSet(object):
             else:
                 self.temporal_type = 'Incremental'
             self.periods = list(range(periods))
+            self.dimension = 2
 
         self.validated = False
         return
@@ -508,7 +512,7 @@ class TransitionMatrixSet(object):
             self.temporal_type = 'Incremental'
         return
 
-    def print(self, format_type='Standard', accuracy=2):
+    def print_matrix(self, format_type='Standard', accuracy=2):
         """ Pretty Print a Transition Matrix Set
 
         """
@@ -575,10 +579,14 @@ class TransitionMatrixSet(object):
 
 
 class StateSpace(object):
-
     """  The StateSpace object stores a state space structure as a List of tuples
+    The first two elements of each tuple contain the index (base-0) and label of the
+    state space respectively.
 
-    (value, description, optional, optional, ...)
+    Additional fields reserved for further characterisation
+
+    [(index 1, label 1, optional, optional, ...),
+     (index 2, label 2, optional, optional, ...)]
 
     .. Todo:: Implement Absorbing States
 
@@ -586,26 +594,35 @@ class StateSpace(object):
 
     """
 
-    def __init__(self, description=[], sticky=False):
+    def __init__(self, definition=[], sticky=False, absorbing=None, originator=None, full_name=None, cqs_mapping=None):
         """
 
-        :param description: List of tuples describing the state space
+        :param definition: List of tuples describing the state space
         :param sticky: Sticky = True, measurement data contain unchanged states. The default is False, only state changes are recorded
+        :param absorbing: List of states that are absorbing
+        :param originator: Name of entity defining the State Space (e.g. A Credit Rating Agency)
+        :param full_name: Full (formal) name for the State Space (e.g. Concrete Credit Rating Scale)
+        :param cqs_mapping: For credit ratings that have a mapping to the simplified EU CQS Scale
 
         """
         # Description:
-        self.description = description
+        self.definition = definition
         # The cardinality (size, number of states) of the state space
-        self.cardinality = len(description)
+        self.cardinality = len(definition)
 
         self.sticky = sticky
+        self.absorbing = absorbing
+
+        self.originator = originator
+        self.full_name = full_name
+        self.cqs_mapping = cqs_mapping
 
     def get_states(self):
         """ Return a list with the set of states
 
         """
         states = []
-        for s in self.description:
+        for s in self.definition:
             states.append(s[0])
         return states
 
@@ -614,7 +631,7 @@ class StateSpace(object):
 
         """
         states = []
-        for state in self.description:
+        for state in self.definition:
             states.append(state[1])
         return states
 
@@ -626,7 +643,7 @@ class StateSpace(object):
         description = []
         for s in range(n):
             description.append((str(s), str(s)))
-        self.description = description
+        self.definition = description
 
     def validate_dataset(self, dataset, labels=None):
         """  Check that a dataset column is consistent with a given state space. The following tests are implemented
@@ -657,7 +674,7 @@ class StateSpace(object):
         ds = set(state_list_stringified)
         # The expected states according to the state space
         expected_states = []
-        for state in self.description:
+        for state in self.definition:
             expected_states.append(state[0])
         es = set(expected_states)
         if ds.difference(es):
@@ -679,12 +696,11 @@ class StateSpace(object):
         Print the State Space description
 
         """
-        for state in self.description:
+        for state in self.definition:
             print("State Index/Label: ", state[0], " , ", state[1])
 
 
 class EmpiricalTransitionMatrix(object):
-
     """  The EmpiricalTransitionMatrix object stores a continuously observed Transition Matrix. It stores matrices
     estimated using duration methods
 

@@ -13,30 +13,20 @@
 # limitations under the License.
 
 
-import unittest
+"""
+Examples using transitionMatrix to perform various state space operations
+
+"""
+
+import numpy as np
+
 
 import transitionMatrix as tm
-from datasets import Minimal
-from transitionMatrix import source_path, dataset_path
+from datasets import JLT
+from transitionMatrix import dataset_path
 
-ACCURATE_DIGITS = 7
+myState = tm.SnP_SS
+print(myState.get_states())
+print(myState.get_state_labels())
+print(myState.definition)
 
-
-class TestDatasets(unittest.TestCase):
-    '''
-    Load in-memory matrices
-    '''
-
-    def test_minimal_matrix(self):
-        a = tm.TransitionMatrix(values=Minimal)
-        a.validate()
-        self.assertEqual(a.dimension, 3)
-
-    def test_matrix_set_load_csv(self):
-        a = tm.TransitionMatrixSet(csv_file=dataset_path + "sp_1981-2016.csv", temporal_type='Cumulative')
-        a.validate()
-        self.assertEqual(a.periods, [1, 2, 3, 5, 7, 10, 15, 20])
-
-
-if __name__ == "__main__":
-    unittest.main()

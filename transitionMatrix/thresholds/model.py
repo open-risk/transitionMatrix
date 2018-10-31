@@ -14,12 +14,16 @@
 
 import json
 
+import matplotlib.pyplot as plt
+from matplotlib import collections as mc
+
 import numpy as np
 import numpy.ma as ma
 from scipy.stats import norm
 
 import transitionMatrix as tm
 from transitionMatrix.thresholds import settings
+from transitionMatrix.model import TransitionMatrixSet
 
 """ This module is part of the transitionMatrix package.
 
@@ -50,17 +54,17 @@ def integrate_f(ff, x, an, dx, dt, mu, phi_1):
 
 
 class ThresholdSet(object):
-
-    """  The Threshold set object stores a multiperiod structure as a numpy array
+    """  The Threshold set object stores a multiperiod migration/default threshold structure as a numpy array
 
     .. Todo:: Separate integration method from transition data
     """
 
-    def __init__(self, ratings=None, periods=None, TMSet=None):
+    def __init__(self, ratings=None, periods=None, TMSet=None, json_file=None):
         """ Create a new threshold set. Different options for initialization are:
 
         * providing shape values (Ratings, Periods)
         * providing a transition matrix set
+        * providing a file URL
 
         :param ratings: size of the transition matrix
         :param periods: number of periods (equally spaced)
@@ -82,10 +86,10 @@ class ThresholdSet(object):
         A = tm.thresholds.ThresholdSet(TMSet=T)
 
         """
-        if (ratings and periods) is not None and TMSet is None:
+        if (ratings and periods) is not None:
             self.A = np.zeros((ratings, ratings, periods))
             self.T = tm.TransitionMatrixSet(dimension=ratings, periods=periods, temporal_type='Cumulative')
-        elif (ratings and periods) is None and TMSet is not None:
+        elif TMSet is not None:
             self.ratings = TMSet.entries[0].dimension
             self.periods = len(TMSet.periods)
 
@@ -106,14 +110,18 @@ class ThresholdSet(object):
             self.grid_step = np.zeros(shape=(self.periods, self.ratings), dtype='double')
             # Set the max grid value using the scale parameter (heuristic rule)
             self.grid_max = np.zeros(shape=(self.periods,), dtype='double')
-
+        elif json_file is not None:
+            self.from_json(json_file)
         else:
             raise ValueError
 
     def fit(self, AR_Model, ri):
         """ Fit Thresholds given autoregressive model and transition matrix given the initial state ri
 
-        .. note:: The threshold corresponding to the starting rating is set by convention to zero. The threshold corresponding to an initially defaulted state is inf
+        .. note:: The threshold corresponding to the starting rating is set by convention to NaN.
+        The threshold corresponding to a defaulted state is set by convention to - Infinity
+        These values are stored in memory as numpy NaN and Infinity value respectively
+        They are serialized as strings "nan" and "-inf" respectively
 
         """
 
@@ -245,7 +253,7 @@ class ThresholdSet(object):
                 for i in range(0, self.grid_size):
                     F = np.exp(
                         -(self.grid[i, k, ri] - offset) * (
-                            self.grid[i, k, ri] - offset) / 2. / dt) / sqrt_two_pi / dt_root
+                                self.grid[i, k, ri] - offset) / 2. / dt) / sqrt_two_pi / dt_root
                     integrant = np.multiply(self.f[:, k - 1, ri], F)
                     self.f[i, k, ri] = np.trapz(integrant, self.grid[:, k - 1, ri], self.grid_step[k - 1, ri])
 
@@ -294,61 +302,23 @@ class ThresholdSet(object):
         The comparison is accomplished by producing the implied transition matrix and setting against
         the input set
 
-        .. Todo:: Automate the comparison
+        .. Todo:: Automate the comparison when a new set is produced
 
         """
 
+        # Initialize a transition Matrix set container to hold the results
         Q = tm.TransitionMatrixSet(dimension=self.ratings, periods=self.periods, temporal_type='Cumulative')
 
         # The Default (absorbing state)
         Default = self.ratings - 1
 
-        # Process parameters
+        # AR Process parameters
         mu = AR_Model['Mu']
         phi_1 = AR_Model['Phi'][0]
         x_0 = AR_Model['Initial Conditions'][0]
 
+        # Validate the transition rates for all initial ratings
         for ri in range(0, Default):
-
-            #
-            # Initial period k = 0
-            #
-
-            # Survival Probability Accumulation Test (Integrate on First Period Grid)
-            # integral = np.trapz(self.f[:, 0, ri], self.grid[:, 0, ri], self.grid_step[0, ri])
-            #
-            # Default probability is defined as the complementary to the integral
-            # Q.entries[0][ri, Default] = 1 - integral
-            #
-            # Calculate Transitions to highest (ri>0, rf=0) rating
-            # If starting from a rating below 0
-            # if ri > 0:
-            #     p_grid = ma.masked_less(self.grid[:, 0, ri], self.A[ri, 0, 0])
-            #     p_f = ma.masked_array(self.f[:, 0, ri], p_grid.mask)
-            #     integral = np.trapz(p_f, p_grid, self.grid_step[0, ri])
-            #     Q.entries[0][ri, 0] = integral
-            # If starting at rating 0 (ri=0, rf=0)
-            # else:
-            #     p_grid = ma.masked_less(self.grid[:, 0, ri], self.A[0, 1, 0])
-            #     p_f = ma.masked_array(self.f[:, 0, ri], p_grid.mask)
-            #     integral = np.trapz(p_f, p_grid, self.grid_step[0, ri])
-            #     Q.entries[0][0, 0] = integral
-            #
-            # Calculating other transitions
-            # for rf in range(1, self.ratings - 1):
-            # Staying in same rating
-            #     if rf == ri:
-            #         p_grid = ma.masked_outside(self.grid[:, 0, ri], self.A[ri, rf - 1, 0], self.A[ri, rf + 1, 0])
-            # Upgrade
-            #     elif rf < ri:
-            #         p_grid = ma.masked_outside(self.grid[:, 0, ri], self.A[ri, rf, 0], self.A[ri, rf - 1, 0])
-            # Downgrade
-            #     elif rf > ri:
-            #         p_grid = ma.masked_outside(self.grid[:, 0, ri], self.A[ri, rf, 0], self.A[ri, rf + 1, 0])
-            #
-            #     p_f = ma.masked_array(self.f[:, 0, ri], p_grid.mask)
-            #     integral = np.trapz(p_f, p_grid, self.grid_step[0, ri])
-            #     Q.entries[0][ri, rf] = integral
 
             # ========== PERIOD LOOP =========
             for k in range(0, self.periods):
@@ -428,17 +398,34 @@ class ThresholdSet(object):
 
         return Q
 
-    def to_json(self, file=None, accuracy=5):
+    def to_json(self, json_file=None, accuracy=5):
         hold = []
         for k in range(self.A.shape[2]):
+            # Matrix of k-th period
+            # Round values to desired accuracy
+            # Convert NaN and Infinity to values (JSON Requirement)
             entry = np.around(self.A[:, :, k], accuracy)
-            hold.append(entry.tolist())
+            strict_json = np.nan_to_num(entry)
+            hold.append(strict_json.tolist())
         serialized = json.dumps(hold, indent=2, separators=(',', ': '))
-        if file is not None:
-            file = open(file, 'w')
-            file.write(serialized)
-            file.close()
+        if json_file is not None:
+            json_file = open(json_file, 'w')
+            json_file.write(serialized)
+            json_file.close()
         return serialized
+
+    def from_json(self, json_file):
+        values = json.load(open(json_file))
+        # Infer number of periods
+        self.periods = len(values)
+        # Infer number of rating states
+        entry = values[0]
+        self.ratings = len(entry)
+        A = np.zeros(shape=(self.ratings, self.ratings, self.periods), dtype='double')
+        for k in range(0, self.periods):
+            entry = values[k]
+            A[:, :, k] = np.array(entry, dtype=np.float64)
+        self.A = A
 
     def print(self, format_type='Standard', accuracy=2):
         """ Pretty print a threshold matrix set
@@ -461,3 +448,233 @@ class ThresholdSet(object):
                         print("{0:.2f}%".format(100 * entry[s_in, s_out]) + ' ', end='')
                 print('')
             print('')
+
+    def plot(self, rating):
+        lines = []
+        ri = rating
+        for rf in range(0, self.ratings):
+            for k in range(0, self.periods):
+                if rf != ri:
+                    value = self.A[ri, rf, k]
+                    line = [(k, value), (k + 1.0, value)]
+                    lines.append(line)
+
+        lc = mc.LineCollection(lines, linewidths=2)
+        fig, ax = plt.subplots()
+        ax.add_collection(lc)
+        ax.autoscale()
+        ax.margins(0.1)
+        ax.set_xlabel("Periods")
+        ax.set_ylabel("Normalized Z Level")
+        plt.title("Transition Thresholds from Initial " + str(ri) + " State")
+        plt.show()
+
+
+class ConditionalTransitionMatrix(TransitionMatrixSet):
+    """  The _`ConditionalTransitionMatrix` object stores a family of TransitionMatrix_ objects as a time ordered list.
+    Its main functionality is to allow conditioning (stressing) the values in accordance with a predefined model
+
+
+    """
+
+    def __init__(self, thresholds=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.A = thresholds.A
+        self.dimension = thresholds.A[:, :, 0].shape[0]
+        self.entries = []
+        self.temporal_type = 'Cumulative'
+        self.periods = thresholds.A.shape[2]
+        self.dimension = thresholds.A.shape[0]
+        self.T = np.zeros(shape=(self.dimension, self.dimension, self.periods), dtype=np.float)
+
+    # Override the print method
+    def print_matrix(self, format_type='Standard', accuracy=2, state=None):
+        """ Pretty print a threshold matrix set
+
+        :param format_type: formating options (Standard, Percent)
+        :type format_type: str
+        :param accuracy: number of decimals to display
+        :type accuracy: int
+
+        """
+
+        print("State ", state)
+        if state == None:
+            for k in range(self.T.shape[2]):
+                entry = np.around(self.T[:, :, k], accuracy)
+                for s_in in range(entry.shape[0]):
+                    for s_out in range(entry.shape[1]):
+                        if format_type is 'Standard':
+                            format_string = "{0:." + str(accuracy) + "f}"
+                            print(format_string.format(entry[s_in, s_out]) + ' ', end='')
+                        elif format_type is 'Percent':
+                            print("{0:.2f}%".format(100 * entry[s_in, s_out]) + ' ', end='')
+                    print('')
+                print('')
+        else:
+            for k in range(self.T.shape[2]):
+                entry = np.around(self.T[:, :, k], accuracy)
+                # print(entry)
+                for s_out in range(entry.shape[1]):
+                    if format_type is 'Standard':
+                        format_string = "{0:." + str(accuracy) + "f}"
+                        print(format_string.format(entry[state, s_out]) + ' ', end='')
+                    elif format_type is 'Percent':
+                        print("{0:.2f}%".format(100 * entry[state, s_out]) + ' ', end='')
+                print('')
+
+    def fit(self, AR_Model, Scenario, rho, ri):
+        """ Calculate conditional transition rates given thresholds and stochastic model
+
+        """
+
+        # Grid and accuracy settings
+        self.grid_size = settings.GRID_POINTS
+        self.precision = settings.PRECISION
+        self.scale = settings.SCALE
+
+        # Process parameters
+        mu = AR_Model['Mu']
+        phi_1 = AR_Model['Phi'][0]
+        x_0 = AR_Model['Initial Conditions'][0]
+
+        # Temporal scale
+        # TODO validate arbitrary timestep
+        # dt = 1.0
+        dt2 = 1.0 - rho * rho
+        dt_root = np.sqrt(dt2)
+        pi = 4.0 * np.arctan(1.0)
+        sqrt_two_pi = np.sqrt(2. * pi)
+
+        self.grid_max = mu + self.scale * dt_root * np.sqrt(np.arange(1, self.periods + 1))
+        # Process Survival Density per period
+        self.f = np.zeros(shape=(self.grid_size, self.periods, self.dimension), dtype='double')
+        # Solution Grid
+        self.grid = np.zeros(shape=(self.grid_size, self.periods, self.dimension), dtype='double')
+        self.grid_step = np.zeros(shape=(self.periods, self.dimension), dtype='double')
+
+        # The Default (absorbing state)
+        Default = self.dimension - 1
+
+        if ri == Default:
+            # Absorbing states don't have different stressed transitions
+            for rf in range(Default, -1, -1):  # for all final ratings
+                for k in range(0, self.periods):
+                    # Likelihood of remaining in default
+                    if rf == ri:
+                        self.T[ri, rf, k] = 1.0
+                    # Likelihood of moving away from default
+                    else:
+                        self.T[ri, rf, k] = 0.0
+
+        else:
+
+            # ========== PERIOD LOOP =========
+            for k in range(0, self.periods):
+
+                # New Grid Step / Grid (depends on grid max and default threshold
+                self.grid_step[k, ri] = (self.grid_max[k] - self.A[ri, Default, k]) / (self.grid_size - 1)
+                offset = mu + phi_1 * x_0 + rho * Scenario[k]
+
+                # Compute the cumulative transition probability from ri -> rf
+                # Conditional on survival till k-1
+
+                if k == 0:
+                    # Integration Grid for the First Period
+                    # Starts at lower absorbing state level
+
+                    arg = np.zeros_like(self.grid[:, k, ri])
+                    for i in range(0, self.grid_size):
+                        self.grid[i, k, ri] = self.A[ri, Default, k] + self.grid_step[k, ri] * i
+                        arg[i] = (self.grid[i, k, ri] - offset) / dt_root
+
+                    # Survival Density for the First Period
+                    self.f[:, k, ri] = norm.pdf(arg) / dt_root
+
+                else:
+
+                    i = np.arange(0, self.grid_size)
+                    self.grid[:, k, ri] = self.A[ri, Default, k] + i * self.grid_step[k, ri]
+
+                    # Propagate the survival density to the next step by integrating with the transition density
+                    # Each new grid point on next period is obtained via an integral over previous period grid
+                    # i iterates over new grid (k)
+                    # j iterates over old grid (k-1)
+                    # Survival Density for Period k
+                    # Interior point contributions starting from the k-1 default threshold
+                    offset = mu + phi_1 * self.grid[:, k - 1, ri] + rho * Scenario[k]
+
+                    for i in range(0, self.grid_size):
+                        F = np.exp(
+                            -(self.grid[i, k, ri] - offset) * (
+                                    self.grid[i, k, ri] - offset) / 2. / dt_root) / sqrt_two_pi / dt_root
+                        integrant = np.multiply(self.f[:, k - 1, ri], F)
+                        self.f[i, k, ri] = np.trapz(integrant, self.grid[:, k - 1, ri], self.grid_step[k - 1, ri])
+
+                # rf = Default is separate case
+                rf = Default
+                # stressed survival (non-default) probability during k
+                integral = np.trapz(self.f[:, k, ri], self.grid[:, k, ri], self.grid_step[k, ri])
+                self.T[ri, rf, k] = 1.0 - integral
+
+                for rf in range(Default - 1, -1, -1):
+                    # Stressed transitions to top (rf = 0) rating
+                    # If starting from a rating below 0
+                    if ri > 0:
+                        p_grid = ma.masked_less(self.grid[:, k, ri], self.A[ri, 0, k])
+                        p_f = ma.masked_array(self.f[:, k, ri], p_grid.mask)
+                        integral = np.trapz(p_f, p_grid, self.grid_step[k, ri])
+                        self.T[ri, 0, k] = integral
+                    # If starting at rating 0
+                    else:
+                        p_grid = ma.masked_less(self.grid[:, k, ri], self.A[0, 1, k])
+                        p_f = ma.masked_array(self.f[:, k, ri], p_grid.mask)
+                        integral = np.trapz(p_f, p_grid, self.grid_step[k, ri])
+                        self.T[0, 0, k] = integral
+
+                    # Stressed probabilities for other transitions
+                    for rf in range(1, self.dimension - 1):
+                        # Staying in same rating
+                        if rf == ri:
+                            p_grid = ma.masked_outside(self.grid[:, k, ri], self.A[ri, rf - 1, k],
+                                                       self.A[ri, rf + 1, k])
+                        # Upgrade
+                        elif rf < ri:
+                            p_grid = ma.masked_outside(self.grid[:, k, ri], self.A[ri, rf, k], self.A[ri, rf - 1, k])
+                        # Downgrade
+                        elif rf > ri:
+                            p_grid = ma.masked_outside(self.grid[:, k, ri], self.A[ri, rf, k], self.A[ri, rf + 1, k])
+
+                        p_f = ma.masked_array(self.f[:, k, ri], p_grid.mask)
+                        integral = np.trapz(p_f, p_grid, self.grid_step[k, ri])
+                        self.T[ri, rf, k] = integral
+
+    def plot_densities(self, period=None, state=0):
+        if period is not None:
+            k = period
+            ri = state
+            Default = self.dimension - 1
+            plt.plot(self.grid[:, k, ri], self.f[:, k, ri])
+            for rf in range(0, Default):
+                plt.plot([self.A[ri, rf, k], self.A[ri, rf, k]], [0, 1])
+            plt.title("Density")
+            plt.show()
+        else:
+            plt.style.use(['ggplot'])
+            m = self.periods
+            ri = state
+            Default = self.dimension - 1
+            f, axarr = plt.subplots(m, 1, sharex=True)
+            # f, axarr = plt.subplots(m, 1)
+
+            y_max = 1.2 * np.max(self.f)
+            for k in range(m):
+                axarr[k].set_xlim([-3, 6])
+                axarr[k].set_ylim([0, y_max])
+                axarr[k].plot(self.grid[:, k, ri], self.f[:, k, ri])
+                for rf in range(0, Default):
+                    axarr[k].plot([self.A[ri, rf, k], self.A[ri, rf, k]], [0, y_max])
+                axarr[k].set_title('Period: ' + str(k+1), fontsize=10)
+
+            plt.show()
+

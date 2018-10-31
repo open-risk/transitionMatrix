@@ -52,11 +52,11 @@ print(sorted_data.describe())
 print("> Step 2: Describe and validate the State Space against the data")
 # We insert the expected labels of the state space
 if example == 1:
-    description = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+    definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
                    ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
 elif example == 2:
-    description = [('0', "G"), ('1', "B")]
-myState = tm.StateSpace(description)
+    definition = [('0', "G"), ('1', "B")]
+myState = tm.StateSpace(definition)
 myState.describe()
 # We validate that indeed the data set conforms to our expectations
 labels = {'State': 'From'}

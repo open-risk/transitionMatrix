@@ -60,7 +60,7 @@ Generic = [
     [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]]
 
 # A Minimal matrix with an absorbing state
-# In credit context it emulates Investement Grade / Subinvestment Grade / Default states
+# In credit context it emulates Investment Grade / Subinvestment Grade / Default states
 # or IFRS 9 Stage 1 / Stage 2 / Stage 3 states
 
 Minimal = [

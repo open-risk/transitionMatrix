@@ -34,8 +34,8 @@ class TestCohortEstimator(unittest.TestCase):
         dataset_path = source_path + "datasets/"
         data = pd.read_csv(dataset_path + 'synthetic_data5.csv')
         event_count = data[data['Timestep'] < 4]['ID'].count()
-        description = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
-        myState = tm.StateSpace(description)
+        definition = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
+        myState = tm.StateSpace(definition)
         sorted_data = data.sort_values(['ID', 'Timestep'], ascending=[True, True])
         myEstimator = es.CohortEstimator(states=myState, ci={'method': 'goodman', 'alpha': 0.05})
         result = myEstimator.fit(sorted_data)
@@ -54,11 +54,11 @@ class TestAalenJohansenEstimator(unittest.TestCase):
         dataset_path = source_path + "datasets/"
         data = pd.read_csv(dataset_path + 'synthetic_data8.csv')
         sorted_data = data.sort_values(['Time', 'ID'], ascending=[True, True])
-        description = [('0', "G"), ('1', "B")]
-        myState = tm.StateSpace(description)
+        definition = [('0', "G"), ('1', "B")]
+        myState = tm.StateSpace(definition)
         myEstimator = aj.AalenJohansenEstimator(states=myState)
         labels = {'Timestamp': 'Time', 'From_State': 'From', 'To_State': 'To', 'ID': 'ID'}
-        result = myEstimator.fit(sorted_data, labels=labels)
+        result, times = myEstimator.fit(sorted_data, labels=labels)
         self.assertAlmostEqual(result[0, 0, -1], 0.5, places=ACCURATE_DIGITS, msg=None, delta=None)
         self.assertAlmostEqual(result[0, 1, -1], 0.5, places=ACCURATE_DIGITS, msg=None, delta=None)
         self.assertEqual(result[1, 0, -1], 0.0)

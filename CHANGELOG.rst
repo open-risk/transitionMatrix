@@ -3,6 +3,14 @@ ChangeLog
 
 PLEASE NOTE THAT THE API IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+v0.4.1 (31-10-2018)
+-------------------
+
+* Feature: Added functionality for conditioning multi-period transition matrices
+* Training: Example calculation and visualization of conditional matrices
+* Datasets: State space description and CGS mappings for top-6 credit rating agencies
+
+
 v0.4.0 (23-10-2018)
 -------------------
 

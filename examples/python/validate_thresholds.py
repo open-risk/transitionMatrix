@@ -21,6 +21,8 @@ import transitionMatrix as tm
 from datasets import Generic
 from transitionMatrix.thresholds.model import ThresholdSet
 from transitionMatrix.thresholds.settings import AR_Model
+from transitionMatrix import source_path
+dataset_path = source_path + "datasets/"
 
 # Initialize a single period transition matrix
 # Example 1: Generic -> Typical Credit Rating Transition Matrix
@@ -44,8 +46,13 @@ T = tm.TransitionMatrixSet(values=M, periods=Periods, method='Power', temporal_t
 # Initialize a threshold set
 As = ThresholdSet(TMSet=T)
 
+print("> Fit Multiperiod Thresholds")
 for ri in range(0, Ratings):
     print("RI: ", ri)
     As.fit(AR_Model, ri)
 
+print("> Validate Multiperiod Thresholds against Input Transition Matrix Set")
 Q = As.validate(AR_Model)
+
+print("> Save Multiperiod Thresholds in JSON Format")
+As.to_json('generic_thresholds.json')

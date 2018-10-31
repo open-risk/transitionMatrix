@@ -85,7 +85,7 @@ for k in t_list:
 
 SnP.timesteps = t_list
 SnP.temporal_type = 'Cumulative'
-SnP.print(accuracy=4)
+SnP.print_matrix(accuracy=4)
 # TODO Handle strictly zero transition probabilities
 # TODO Handle non-monotonic transition probabilities
 SnP.to_json(dataset_path + "sp_multiperiod.json", accuracy=8)
