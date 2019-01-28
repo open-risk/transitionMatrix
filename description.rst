@@ -12,8 +12,6 @@ Use cases include credit rating transitions, system state event logs and more.
 * Training: `Open Risk Academy <https://www.openriskacademy.com/login/index.php>`_
 * Development Website: `Github <https://github.com/open-risk/transitionMatrix>`_
 * Discussion: `Gitter <https://gitter.im/open-risk/transitionMatrix>`_
-* Production Instance: `OpenCPM <https://www.opencpm.com>`_
-
 
 Functionality
 -------------

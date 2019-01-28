@@ -12,9 +12,13 @@
 # either express or implied. See the License for the specific language governing permissions and
 # limitations under the License.
 
-""" module transitionMatrix.utils - helper classes and functions """
+""" This module contains various helper classes and functions that do not fit
+into any of the main modules of the library
+
+"""
 
 from __future__ import print_function, division
 
 from .preprocessing import *
 from .dataset_generators import *
+from .converters import *

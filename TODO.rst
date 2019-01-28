@@ -1,6 +1,11 @@
 ToDO List
 ==================
-transitionMatrix is an ongoing project. Several significant extensions are already in the pipeline.
+transitionMatrix is an ongoing project. Several significant extensions are already in the pipeline. You are welcome
+to contribute to the development of transitionMatrix by creating Issues or Pull Requests on the github repository
+
+Preprocessing
+-------------
+- Native handling of Wide Data Format
 
 Statistical
 -----------

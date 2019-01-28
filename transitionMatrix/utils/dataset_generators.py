@@ -26,7 +26,7 @@ def exponential_transitions(statespace, n, sample, rate, data_format='Compact'):
     Generate continuous time events from exponential distribution and uniform sampling from state space. Suitable
     for testing cohorting algorithms and duration based estimators.
 
-    The data are sorted by entity ID, then by time of occurence T. The first entry per entity indicates the state up
+    The data are sorted by entity ID, then by time of occurrence T. The first entry per entity indicates the state up
     to that timepoint. The format is a sequence of triples (ID, Time, State)
 
     :param statespace: The state space to use for the simulation
@@ -106,7 +106,7 @@ def long_format(statespace, transitionmatrix, n, timesteps):
     data = []
     # loop over all entities
     for i in range(n):
-        # calculate the initial entity state
+        # calculate a random initial entity state
         from_state = np.random.choice(len(states))
 
         # flag to keep track of migration event

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2018 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2019 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -14,4 +14,24 @@
 
 """ Converter utilities to help switch between various formats """
 
-# TODO
+import pandas as pd
+
+
+def datetime_to_float(dataframe):
+    """
+    .. _Datetime_to_float:
+
+    Converts dates from string format to the canonical float format
+
+    :param dataframe: Pandas dataframe with dates in string format
+    :return: Pandas dataframe with dates in float format
+    :rtype: object
+
+    .. note:: The date string must be recognizable by the pandas to_datetime function.
+
+    """
+    start_date = dataframe['Time'].min()
+    end_date = dataframe['Time'].max()
+    total_days = (pd.to_datetime(end_date) - pd.to_datetime(start_date)).days
+    dataframe['Time'] = dataframe['Time'].apply(lambda x: (pd.to_datetime(x) - pd.to_datetime(start_date)).days / total_days)
+    return [start_date, end_date, total_days], dataframe

@@ -24,6 +24,7 @@ The subsequent three examples product cohort type data using markov chain simula
 
 """
 
+import pandas as pd
 import transitionMatrix as tm
 from datasets import Generic
 from transitionMatrix import source_path
@@ -43,8 +44,10 @@ dataset_path = source_path + "datasets/"
 
 # DURATION TYPE DATASETS (Long format)
 # 7-> S&P Credit Rating Migration Matrix
+# 8-> Simplest absorbing state case for validation purposes (Duration estimator)
+# 9-> Example with dates in string formats
 
-dataset = 7
+dataset = 9
 
 #
 # Duration type datasets in Compact Format
@@ -141,5 +144,31 @@ elif dataset == 8:
     data = dataset_generators.long_format(myState, transitionmatrix=matrix, n=10000, timesteps=2)
     sorted_data = data.sort_values(['Time', 'ID', 'From'], ascending=[True, True, True])
     data.to_csv(dataset_path + 'synthetic_data8.csv', index=False)
+
+elif dataset == 9:
+    # Ninth example: Credit Rating Migrations in Long Format with Monthly Observations
+    # Inputs are:
+    # - the State Space (Entries in the From and To columns)
+    # - the Annual Transition Matrix (probabilities)
+    # - the number of entities to simulate
+    # - the start date of the Observation Window in DD-MM-YY format
+
+    definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+                   ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
+    myState = tm.StateSpace(definition)
+    matrix = Generic
+    origin = '2006-01-01'
+    # Timesteps are the interval periods over which to repeatedly simulate the single period migration matrix
+    # The transition times are decimals in the range [0, N-1]
+    data = dataset_generators.long_format(myState, transitionmatrix=matrix, n=1000, timesteps=10)
+    # Convert to daily units
+    data['Time'] *= 365
+    sorted_data = data.sort_values(['Time', 'ID', 'From'], ascending=[True, True, True])
+    # Convert decimals to datetime format
+    sorted_data['Time'] = pd.to_datetime(sorted_data['Time'], unit='D', origin=origin, errors='coerce')
+    # Remove intra-day information
+    sorted_data['Time'] = sorted_data['Time'].apply(lambda x: x.date())
+
+    sorted_data.to_csv(dataset_path + 'synthetic_data9.csv', index=False)
 
 print("> Synthetic Dataset:", dataset, " has been created and stored in the filesystem.")

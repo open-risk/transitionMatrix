@@ -12,8 +12,8 @@ The library provides support for the Monte Carlo testing framework
 
 Dependencies: scipy, sympy
 
-Examples
----------
+Portfolio Model Examples
+-------------------------
 
 Check the jupyter notebooks and python scripts
 

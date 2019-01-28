@@ -80,12 +80,12 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="description.html">transitionMatrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="description.html">The transitionMatrix Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="description.html#installation">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="description.html#getting-started">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="transitionMatrix.html">transitionMatrix</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="transitionMatrix.html">transitionMatrix Package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="transitionMatrix.html#transitionmatrix-model-classes">transitionMatrix.model Classes</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="transitionMatrix.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="transitionMatrix.estimators.html">transitionMatrix.estimators subpackage</a></li>
@@ -147,7 +147,7 @@
         
           <li><a href="modules.html">API</a> &raquo;</li>
         
-          <li><a href="transitionMatrix.html">transitionMatrix</a> &raquo;</li>
+          <li><a href="transitionMatrix.html">transitionMatrix Package</a> &raquo;</li>
         
       <li>transitionMatrix.utils subpackage</li>
     
@@ -170,17 +170,47 @@
             
   <div class="section" id="transitionmatrix-utils-subpackage">
 <h1>transitionMatrix.utils subpackage<a class="headerlink" href="#transitionmatrix-utils-subpackage" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-transitionMatrix.utils">
+<span id="transitionmatrix-utils-contents"></span><h2>transitionMatrix.utils contents<a class="headerlink" href="#module-transitionMatrix.utils" title="Permalink to this headline">¶</a></h2>
+<p>This module contains various helper classes and functions that do not fit
+into any of the main modules of the library</p>
+</div>
+<div class="section" id="transitionmatrix-utils-submodules">
+<h2>transitionMatrix.utils Submodules<a class="headerlink" href="#transitionmatrix-utils-submodules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-transitionMatrix.utils.converters">
+<span id="transitionmatrix-utils-converters-module"></span><h3>transitionMatrix.utils.converters module<a class="headerlink" href="#module-transitionMatrix.utils.converters" title="Permalink to this headline">¶</a></h3>
+<p>Converter utilities to help switch between various formats</p>
+<dl class="function">
+<dt id="transitionMatrix.utils.converters.datetime_to_float">
+<code class="descclassname">transitionMatrix.utils.converters.</code><code class="descname">datetime_to_float</code><span class="sig-paren">(</span><em>dataframe</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.utils.converters.datetime_to_float" title="Permalink to this definition">¶</a></dt>
+<dd><p id="datetime-to-float">Converts dates from string format to the canonical float format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dataframe</strong> – Pandas dataframe with dates in string format</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Pandas dataframe with dates in float format</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">object</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The date string must be recognizable by the pandas to_datetime function.</p>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="module-transitionMatrix.utils.dataset_generators">
-<span id="transitionmatrix-utils-dataset-generators-module"></span><h2>transitionMatrix.utils.dataset_generators module<a class="headerlink" href="#module-transitionMatrix.utils.dataset_generators" title="Permalink to this headline">¶</a></h2>
+<span id="transitionmatrix-utils-dataset-generators-module"></span><h3>transitionMatrix.utils.dataset_generators module<a class="headerlink" href="#module-transitionMatrix.utils.dataset_generators" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="transitionMatrix.utils.dataset_generators.exponential_transitions">
 <code class="descclassname">transitionMatrix.utils.dataset_generators.</code><code class="descname">exponential_transitions</code><span class="sig-paren">(</span><em>statespace</em>, <em>n</em>, <em>sample</em>, <em>rate</em>, <em>data_format='Compact'</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.utils.dataset_generators.exponential_transitions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate continuous time events from exponential distribution and uniform sampling from state space. Suitable
 for testing cohorting algorithms and duration based estimators.</p>
-<p>The data are sorted by entity ID, then by time of occurence T. The first entry per entity indicates the state up
+<p>The data are sorted by entity ID, then by time of occurrence T. The first entry per entity indicates the state up
 to that timepoint. The format is a sequence of triples (ID, Time, State)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -260,7 +290,7 @@ Suitable for testing cohort based estimators</p>
 
 </div>
 <div class="section" id="module-transitionMatrix.utils.preprocessing">
-<span id="transitionmatrix-utils-preprocessing-module"></span><h2>transitionMatrix.utils.preprocessing module<a class="headerlink" href="#module-transitionMatrix.utils.preprocessing" title="Permalink to this headline">¶</a></h2>
+<span id="transitionmatrix-utils-preprocessing-module"></span><h3>transitionMatrix.utils.preprocessing module<a class="headerlink" href="#module-transitionMatrix.utils.preprocessing" title="Permalink to this headline">¶</a></h3>
 <p>module transitionMatrix.utils - helper classes and functions</p>
 <dl class="function">
 <dt id="transitionMatrix.utils.preprocessing.bin_timestamps">
@@ -290,9 +320,6 @@ Suitable for testing cohort based estimators</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-transitionMatrix.utils">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-transitionMatrix.utils" title="Permalink to this headline">¶</a></h2>
-<p>module transitionMatrix.utils - helper classes and functions</p>
 </div>
 </div>
 

@@ -471,7 +471,7 @@ class ThresholdSet(object):
 
 
 class ConditionalTransitionMatrix(TransitionMatrixSet):
-    """  The _`ConditionalTransitionMatrix` object stores a family of TransitionMatrix_ objects as a time ordered list.
+    """  The _`ConditionalTransitionMatrix` object stores a family of `TransitionMatrix`_ objects as a time ordered list.
     Its main functionality is to allow conditioning (stressing) the values in accordance with a predefined model
 
 
@@ -524,7 +524,9 @@ class ConditionalTransitionMatrix(TransitionMatrixSet):
                 print('')
 
     def fit(self, AR_Model, Scenario, rho, ri):
-        """ Calculate conditional transition rates given thresholds and stochastic model
+        """
+        Calculate conditional transition rates given thresholds and stochastic model
+
 
         """
 
@@ -674,7 +676,6 @@ class ConditionalTransitionMatrix(TransitionMatrixSet):
                 axarr[k].plot(self.grid[:, k, ri], self.f[:, k, ri])
                 for rf in range(0, Default):
                     axarr[k].plot([self.A[ri, rf, k], self.A[ri, rf, k]], [0, y_max])
-                axarr[k].set_title('Period: ' + str(k+1), fontsize=10)
+                axarr[k].set_title('Period: ' + str(k + 1), fontsize=10)
 
             plt.show()
-

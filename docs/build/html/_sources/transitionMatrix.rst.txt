@@ -1,5 +1,5 @@
-transitionMatrix
-================
+transitionMatrix Package
+============================
 
 .. automodule:: transitionMatrix.model
     :noindex:

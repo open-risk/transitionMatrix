@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>transitionMatrix &mdash; transitionMatrix 0.4.0 documentation</title>
+  <title>transitionMatrix Package &mdash; transitionMatrix 0.4.0 documentation</title>
   
 
   
@@ -80,14 +80,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="description.html">transitionMatrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="description.html">The transitionMatrix Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="description.html#installation">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="description.html#getting-started">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">transitionMatrix</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">transitionMatrix Package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#transitionmatrix-model-classes">transitionMatrix.model Classes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">TransitionMatrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transitionmatrix">TransitionMatrix</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitionmatrixset">TransitionMatrixSet</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#statespace">StateSpace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#empiricaltransitionmatrix">EmpiricalTransitionMatrix</a></li>
@@ -153,7 +153,7 @@
         
           <li><a href="modules.html">API</a> &raquo;</li>
         
-      <li>transitionMatrix</li>
+      <li>transitionMatrix Package</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,25 +172,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="transitionmatrix">
-<h1>transitionMatrix<a class="headerlink" href="#transitionmatrix" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="transitionmatrix-package">
+<h1>transitionMatrix Package<a class="headerlink" href="#transitionmatrix-package" title="Permalink to this headline">¶</a></h1>
 <p>This module provides the key transition matrix objects</p>
 <ul class="simple">
-<li><a class="reference internal" href="#id2">TransitionMatrix</a> implements the functionality of single period transition matrix</li>
-<li><a class="reference internal" href="#id3">TransitionMatrixSet</a> provides a container for a multiperiod transition matrix collection</li>
+<li><a class="reference internal" href="#id1">TransitionMatrix</a> implements the functionality of single period transition matrix</li>
+<li><a class="reference internal" href="#id2">TransitionMatrixSet</a> provides a container for a multiperiod transition matrix collection</li>
 <li>StateSpace holds information about the stochastic system state space</li>
 <li>EmpiricalTransitionMatrix implements the functionality of a continuously observed transition matrix</li>
 </ul>
 <div class="section" id="transitionmatrix-model-classes">
 <h2>transitionMatrix.model Classes<a class="headerlink" href="#transitionmatrix-model-classes" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>TransitionMatrix<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="transitionmatrix">
+<h3>TransitionMatrix<a class="headerlink" href="#transitionmatrix" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="transitionMatrix.model.TransitionMatrix">
 <em class="property">class </em><code class="descclassname">transitionMatrix.model.</code><code class="descname">TransitionMatrix</code><a class="headerlink" href="#transitionMatrix.model.TransitionMatrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <span class="target" id="id2">TransitionMatrix</span> object implements a typical (one period) <a class="reference external" href="https://www.openriskmanual.org/wiki/Transition_Matrix">transition matrix</a>.
+<dd><p>The <span class="target" id="id1">TransitionMatrix</span> object implements a typical (one period) <a class="reference external" href="https://www.openriskmanual.org/wiki/Transition_Matrix">transition matrix</a>.
 The classs inherits from numpy matrices and implements additional properties specific transition matrices. It form the building block of the
-<a class="reference internal" href="#id3">TransitionMatrixSet</a> which holds a collection of matrices in increasing temporal order</p>
+<a class="reference internal" href="#id2">TransitionMatrixSet</a> which holds a collection of matrices in increasing temporal order</p>
 <dl class="staticmethod">
 <dt id="transitionMatrix.model.TransitionMatrix.__new__">
 <em class="property">static </em><code class="descname">__new__</code><span class="sig-paren">(</span><em>cls</em>, <em>values=None</em>, <em>dimension=2</em>, <em>json_file=None</em>, <em>csv_file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.model.TransitionMatrix.__new__" title="Permalink to this definition">¶</a></dt>
@@ -382,8 +382,8 @@ to prescribed method</p>
 <dl class="class">
 <dt id="transitionMatrix.model.TransitionMatrixSet">
 <em class="property">class </em><code class="descclassname">transitionMatrix.model.</code><code class="descname">TransitionMatrixSet</code><span class="sig-paren">(</span><em>dimension=2</em>, <em>values=None</em>, <em>periods=1</em>, <em>temporal_type=None</em>, <em>method=None</em>, <em>json_file=None</em>, <em>csv_file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.model.TransitionMatrixSet" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <span class="target" id="id3">TransitionMatrixSet</span> object stores a family of <a class="reference internal" href="#id2">TransitionMatrix</a> objects as a time ordered list. Besides
-storate it allows a variety of simultaneous operations on the collection of matrices</p>
+<dd><p>The <span class="target" id="id2">TransitionMatrixSet</span> object stores a family of <a class="reference internal" href="#id1">TransitionMatrix</a> objects as a time ordered list. Besides
+storage it allows a variety of simultaneous operations on the collection of matrices</p>
 <dl class="method">
 <dt id="transitionMatrix.model.TransitionMatrixSet.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>dimension=2</em>, <em>values=None</em>, <em>periods=1</em>, <em>temporal_type=None</em>, <em>method=None</em>, <em>json_file=None</em>, <em>csv_file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.model.TransitionMatrixSet.__init__" title="Permalink to this definition">¶</a></dt>
@@ -478,8 +478,8 @@ and the corresponding cumulative probabilities, hazard rates and survival rates<
 </dd></dl>
 
 <dl class="method">
-<dt id="transitionMatrix.model.TransitionMatrixSet.print">
-<code class="descname">print</code><span class="sig-paren">(</span><em>format_type='Standard'</em>, <em>accuracy=2</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.model.TransitionMatrixSet.print" title="Permalink to this definition">¶</a></dt>
+<dt id="transitionMatrix.model.TransitionMatrixSet.print_matrix">
+<code class="descname">print_matrix</code><span class="sig-paren">(</span><em>format_type='Standard'</em>, <em>accuracy=2</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.model.TransitionMatrixSet.print_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pretty Print a Transition Matrix Set</p>
 </dd></dl>
 
@@ -511,9 +511,15 @@ to prescribed method</p>
 <h3>StateSpace<a class="headerlink" href="#statespace" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="transitionMatrix.model.StateSpace">
-<em class="property">class </em><code class="descclassname">transitionMatrix.model.</code><code class="descname">StateSpace</code><span class="sig-paren">(</span><em>description=[]</em>, <em>sticky=False</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.model.StateSpace" title="Permalink to this definition">¶</a></dt>
-<dd><p>The StateSpace object stores a state space structure as a List of tuples</p>
-<p>(value, description, optional, optional, …)</p>
+<em class="property">class </em><code class="descclassname">transitionMatrix.model.</code><code class="descname">StateSpace</code><span class="sig-paren">(</span><em>definition=[]</em>, <em>sticky=False</em>, <em>absorbing=None</em>, <em>originator=None</em>, <em>full_name=None</em>, <em>cqs_mapping=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.model.StateSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>The StateSpace object stores a state space structure as a List of tuples
+The first two elements of each tuple contain the index (base-0) and label of the
+state space respectively.</p>
+<p>Additional fields reserved for further characterisation</p>
+<dl class="docutils">
+<dt>[(index 1, label 1, optional, optional, …),</dt>
+<dd>(index 2, label 2, optional, optional, …)]</dd>
+</dl>
 <div class="admonition-todo admonition" id="index-2">
 <p class="first admonition-title">Todo</p>
 <p class="last">Implement Absorbing States</p>
@@ -524,14 +530,18 @@ to prescribed method</p>
 </div>
 <dl class="method">
 <dt id="transitionMatrix.model.StateSpace.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>description=[]</em>, <em>sticky=False</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.model.StateSpace.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>definition=[]</em>, <em>sticky=False</em>, <em>absorbing=None</em>, <em>originator=None</em>, <em>full_name=None</em>, <em>cqs_mapping=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.model.StateSpace.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>description</strong> – List of tuples describing the state space</li>
+<li><strong>definition</strong> – List of tuples describing the state space</li>
 <li><strong>sticky</strong> – Sticky = True, measurement data contain unchanged states. The default is False, only state changes are recorded</li>
+<li><strong>absorbing</strong> – List of states that are absorbing</li>
+<li><strong>originator</strong> – Name of entity defining the State Space (e.g. A Credit Rating Agency)</li>
+<li><strong>full_name</strong> – Full (formal) name for the State Space (e.g. Concrete Credit Rating Scale)</li>
+<li><strong>cqs_mapping</strong> – For credit ratings that have a mapping to the simplified EU CQS Scale</li>
 </ul>
 </td>
 </tr>
@@ -673,7 +683,7 @@ vice-versa)</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html">transitionMatrix.portfolio_model_lib subpackage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#portfolio-models-library">Portfolio Models Library</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#portfolio-model-examples">Portfolio Model Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#current-functions">Current Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#todo-list">Todo List</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#provide-additional-functions">Provide additional functions</a></li>
@@ -683,10 +693,13 @@ vice-versa)</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="transitionMatrix.utils.html">transitionMatrix.utils subpackage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="transitionMatrix.utils.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transitionMatrix.utils.html#module-transitionMatrix.utils.dataset_generators">transitionMatrix.utils.dataset_generators module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transitionMatrix.utils.html#module-transitionMatrix.utils.preprocessing">transitionMatrix.utils.preprocessing module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transitionMatrix.utils.html#module-transitionMatrix.utils">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transitionMatrix.utils.html#module-transitionMatrix.utils">transitionMatrix.utils contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transitionMatrix.utils.html#transitionmatrix-utils-submodules">transitionMatrix.utils Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transitionMatrix.utils.html#module-transitionMatrix.utils.converters">transitionMatrix.utils.converters module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transitionMatrix.utils.html#module-transitionMatrix.utils.dataset_generators">transitionMatrix.utils.dataset_generators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transitionMatrix.utils.html#module-transitionMatrix.utils.preprocessing">transitionMatrix.utils.preprocessing module</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

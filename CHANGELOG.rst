@@ -3,6 +3,16 @@ ChangeLog
 
 PLEASE NOTE THAT THE API IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+v0.4.2 (29-01-2019)
+-------------------
+
+* Feature: converter function in transitionMatrix.utils.converters to convert long form dataframes into canonical float form
+* Datasets: synthetic_data9.csv (datetime in string format)
+* Training: new data generator in examples/generate_synthetic_data.py to generate long format with string dates
+* Training: Additional example (=3) in examples/empirical_transition_matrix.py to process long format with string dates
+* Documentation: More detailed explanation of Long Data Formats with links to Open Risk Manual
+* Documentation: Enabled sphinx.ext.autosectionlabel for easy internal links / removed duplicate labels
+
 v0.4.1 (31-10-2018)
 -------------------
 
