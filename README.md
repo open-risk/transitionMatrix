@@ -21,7 +21,6 @@ Key Information
 * Mathematical Documentation: [Open Risk Manual](https://www.openriskmanual.org/wiki/Transition_Matrix)
 * Development website: [Github](https://github.com/open-risk/transitionMatrix)
 * Production instance [OpenCPM](https://www.opencpm.com)
-* Gitter Room: [Open Risk Lobby](https://gitter.im/open-risk/Lobby)
 
 **NB: transitionMatrix is still in active development. If you encounter issues please raise them in our
 github repository**
