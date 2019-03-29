@@ -18,10 +18,9 @@
 from .model import *
 from .estimators import *
 from .utils import *
-from .thresholds import *
-from .portfolio_model_lib import *
 
-__version__ = '0.4.1'
+
+__version__ = '0.4.2'
 
 package_name = 'transitionMatrix'
 module_path = os.path.dirname(__file__)

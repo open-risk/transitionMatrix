@@ -3,6 +3,13 @@ ChangeLog
 
 PLEASE NOTE THAT THE API IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+
+v0.4.3 (29-03-2019)
+-------------------
+
+* Significant rearrangement of code (the threshold models package moved to portfolioAnalytics for more consistent structure of the code base / functionality)
+
+
 v0.4.2 (29-01-2019)
 -------------------
 

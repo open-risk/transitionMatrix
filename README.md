@@ -63,11 +63,11 @@ Visualization of a transition matrix
 
 Generating stochastic process transition thresholds
 
-![image](examples/Thresholds.png)
+![image](../portfolioAnalytics/examples/Thresholds.png)
 
 Stressing Transition Matrices
 
-![image](examples/stressed_density.png)
+![image](../portfolioAnalytics/examples/stressed_density.png)
 
 Computation and Visualization of Credit Curves
 

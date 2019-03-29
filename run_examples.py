@@ -20,11 +20,10 @@
 from transitionMatrix import source_path
 
 examples_path = source_path + "examples/python/"
-filelist = ['adjust_nr_state', 'calculate_thresholds', 'credit_curves',
+filelist = ['adjust_nr_state', 'credit_curves',
             'empirical_transition_matrix', 'fix_multiperiod_matrix', 'generate_synthetic_data',
             'generate_visuals', 'matrix_from_cohort_data', 'matrix_from_duration_data',
-            'matrix_lendingclub', 'matrix_set_lendingclub', 'matrix_operations',
-            'portfolio_model', 'validate_thresholds', 'visualize_thresholds']
+            'matrix_lendingclub', 'matrix_set_lendingclub', 'matrix_operations']
 
 if __name__ == '__main__':
 

@@ -26,6 +26,10 @@ from datasets import Generic
 # Generic is a Typical Credit Rating Transition Matrix with sever rating states and one absorbing (Default) state
 
 print("> Load the generic transition matrix")
+M = tm.TransitionMatrix(values=Generic)
+# Lets take a look at the values
+M.print()
+M.validate()
 
 # The size of the rating scale
 Ratings = M.dimension

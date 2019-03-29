@@ -11,7 +11,7 @@ Use cases include credit rating transitions, system state event logs and more.
 * Mathematical Documentation: `Open Risk Manual <https://www.openriskmanual.org/wiki/Transition_Matrix>`_
 * Training: `Open Risk Academy <https://www.openriskacademy.com/login/index.php>`_
 * Development Website: `Github <https://github.com/open-risk/transitionMatrix>`_
-* Discussion: `Gitter <https://gitter.im/open-risk/transitionMatrix>`_
+* Discussion: Open Risk Discord Server
 
 Functionality
 -------------
@@ -106,8 +106,6 @@ The distribution has the following structure:
 |    model.py              Main data structures
 |    estimators            Estimator methods
 |    utils                 Helper classes and methods
-|    thresholds            Algorithms for calibrating AR(n) process thresholds to input transition rates
-|    portfolio_model_lib   Collection of portfolio analytic solutions
 | examples                 Usage examples
 | datasets                 Contains a variety of datasets useful for getting started with transitionMatrix
 | tests                    Testing suite
