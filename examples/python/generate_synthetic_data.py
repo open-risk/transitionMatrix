@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2018 Open Risk, all rights reserved
+# (c) 2017-2019 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -26,7 +26,7 @@ The subsequent three examples product cohort type data using markov chain simula
 
 import pandas as pd
 import transitionMatrix as tm
-from datasets import Generic
+from transitionMatrix.predefined import Generic
 from transitionMatrix import source_path
 from transitionMatrix.utils import dataset_generators
 

@@ -1,5 +1,5 @@
-transitionMatrix
-=========================
+The transitionMatrix Library
+=============================
 
 transitionMatrix is a Python powered library for the statistical analysis and visualization of state transition phenomena.
 It can be used to analyze any dataset that captures timestamped transitions in a discrete state space.
@@ -23,6 +23,7 @@ You can use transitionMatrix to
 - Characterise transition matrices
 - Manipulate transition matrices (derive generators, perform comparisons, stress transition rates etc.)
 - Access standardized datasets for testing
+- Extract and work with default curves
 
 **NB: transitionMatrix is still in active development. If you encounter issues please raise them in our
 github repository**

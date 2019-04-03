@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2018 Open Risk, all rights reserved
+# (c) 2017-2019 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -20,7 +20,8 @@
 import matplotlib.pyplot as plt
 
 import transitionMatrix as tm
-from datasets import Generic
+from transitionMatrix.predefined import Generic
+
 
 # Initialize a single period transition matrix
 # Generic is a Typical Credit Rating Transition Matrix with sever rating states and one absorbing (Default) state
@@ -53,6 +54,10 @@ T.print_matrix()
 # For example for the best rating (least likely to default) we obtain
 print("> Compute the default curves")
 incremental_PD, cumulative_PD, hazard_Rate, survival_Rate = T.default_curves(0)
+
+# Construct a credit curve set
+credit_curves = T.default_curve_set()
+credit_curves.print(accuracy=5)
 
 # Now lets plot a collection of curves for all ratings
 print("> Plot the default curves")

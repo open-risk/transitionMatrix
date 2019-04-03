@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>transitionMatrix.estimators subpackage &mdash; transitionMatrix 0.4.0 documentation</title>
+  <title>transitionMatrix.estimators subpackage &mdash; transitionMatrix 0.4.2 documentation</title>
   
 
   
@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="transitionMatrix.thresholds subpackage" href="transitionMatrix.thresholds.html" />
+    <link rel="next" title="transitionMatrix.utils subpackage" href="transitionMatrix.utils.html" />
     <link rel="prev" title="transitionMatrix Package" href="transitionMatrix.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -89,9 +91,7 @@
 <li class="toctree-l3"><a class="reference internal" href="transitionMatrix.html#transitionmatrix-model-classes">transitionMatrix.model Classes</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="transitionMatrix.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">transitionMatrix.estimators subpackage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.thresholds.html">transitionMatrix.thresholds subpackage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html">transitionMatrix.portfolio_model_lib subpackage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.utils.html">transitionMatrix.utils Subpackage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.utils.html">transitionMatrix.utils subpackage</a></li>
 </ul>
 </li>
 </ul>
@@ -183,39 +183,35 @@
 <dl class="method">
 <dt id="transitionMatrix.estimators.aalen_johansen_estimator.AalenJohansenEstimator.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>data</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.aalen_johansen_estimator.AalenJohansenEstimator.fit" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<em>dataframe</em>) – The data to use for the estimation provided in a pandas data frame in long format,
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dataframe</em>) – The data to use for the estimation provided in a pandas data frame in long format,
 with one row per observed transition. The data frame must contain the following columns:
 – ID: A unique entity identification number
 – FROM: State from where a transition occurs
 – TO: State to which a transition occurs
-– TIME Time when a transition occurs</li>
-<li><strong>labels</strong> (<em>a dictionary for relabeling column names</em>) – </li>
-<li><strong>constraint possible transitions</strong><strong> (</strong><strong>absorbing states</strong><strong>)</strong> (<em>TODO</em>) – </li>
-<li><strong>censored data</strong> (<em>TODO</em>) – </li>
-<li><strong>partial dates</strong> (<em>TODO</em>) – </li>
-<li><strong>covariance calculation</strong> (<em>TODO</em>) – </li>
-<li><strong>confidence intervals</strong> (<em>TODO</em>) – </li>
+– TIME Time when a transition occurs</p></li>
+<li><p><strong>labels</strong> (<em>a dictionary for relabeling column names</em>) – </p></li>
+<li><p><strong>constraint possible transitions</strong><strong> (</strong><strong>absorbing states</strong><strong>)</strong> (<em>TODO</em>) – </p></li>
+<li><p><strong>censored data</strong> (<em>TODO</em>) – </p></li>
+<li><p><strong>partial dates</strong> (<em>TODO</em>) – </p></li>
+<li><p><strong>covariance calculation</strong> (<em>TODO</em>) – </p></li>
+<li><p><strong>confidence intervals</strong> (<em>TODO</em>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>etm.values</strong> (<em>estimated empirical transition matrix throughout the observed interval.</em>)</li>
-<li><em>This is a three dimensional array object (From State, To State, Timepoint)</em></li>
-<li><strong>observation_times</strong> (<em>a list of observation times</em>)</li>
-<li><em>etm.observation_times</em></li>
-<li><em>TODO Store counts as well as frequencies</em></li>
-<li><em>TODO Optional Binning of close observation times</em></li>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>etm.values</strong> (<em>estimated empirical transition matrix throughout the observed interval.</em>)</p></li>
+<li><p><em>This is a three dimensional array object (From State, To State, Timepoint)</em></p></li>
+<li><p><strong>observation_times</strong> (<em>a list of observation times</em>)</p></li>
+<li><p><em>etm.observation_times</em></p></li>
+<li><p><em>TODO Store counts as well as frequencies</em></p></li>
+<li><p><em>TODO Optional Binning of close observation times</em></p></li>
 </ul>
 </p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Notes</p>
 <p>The input data MUST be sorted in ascending time order</p>
 </dd></dl>
@@ -234,26 +230,22 @@ under the assumption of time homogeneity</p>
 <dl class="method">
 <dt id="transitionMatrix.estimators.cohort_estimator.CohortEstimator.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>data</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.cohort_estimator.CohortEstimator.fit" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<em>array-like</em>) – The data to use for the estimation</li>
-<li><strong>labels</strong> (<em>a dictionary for relabeling column names</em>) – </li>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em>) – The data to use for the estimation</p></li>
+<li><p><strong>labels</strong> (<em>a dictionary for relabeling column names</em>) – </p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>matrix</strong> (<em>estimated transition matrix</em>)</li>
-<li><strong>confint_lower</strong> (<em>lower confidence interval</em>)</li>
-<li><strong>confint_upper</strong> (<em>upper confidence interval</em>)</li>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>matrix</strong> (<em>estimated transition matrix</em>)</p></li>
+<li><p><strong>confint_lower</strong> (<em>lower confidence interval</em>)</p></li>
+<li><p><strong>confint_upper</strong> (<em>upper confidence interval</em>)</p></li>
 </ul>
 </p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Notes</p>
 </dd></dl>
 
@@ -279,21 +271,19 @@ under the assumption of time homogeneity</p>
 <dl class="method">
 <dt id="transitionMatrix.estimators.simple_estimator.SimpleEstimator.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.simple_estimator.SimpleEstimator.fit" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>array-like</em>) – The data to use for the estimation</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><strong>matrix</strong> (<em>estimated transition matrix</em>)</li>
-<li><strong>confint_lower</strong> (<em>lower confidence interval</em>)</li>
-<li><strong>confint_upper</strong> (<em>upper confidence interval</em>)</li>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>array-like</em>) – The data to use for the estimation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>matrix</strong> (<em>estimated transition matrix</em>)</p></li>
+<li><p><strong>confint_lower</strong> (<em>lower confidence interval</em>)</p></li>
+<li><p><strong>confint_upper</strong> (<em>upper confidence interval</em>)</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</p>
+</dd>
+</dl>
 <p class="rubric">Notes</p>
 </dd></dl>
 
@@ -356,10 +346,10 @@ Approximate numpy(i,j, k_index : largest k-value that is less than t(boundary))<
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="transitionMatrix.thresholds.html" class="btn btn-neutral float-right" title="transitionMatrix.thresholds subpackage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="transitionMatrix.utils.html" class="btn btn-neutral float-right" title="transitionMatrix.utils subpackage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="transitionMatrix.html" class="btn btn-neutral" title="transitionMatrix Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="transitionMatrix.html" class="btn btn-neutral float-left" title="transitionMatrix Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -385,35 +375,16 @@ Approximate numpy(i,j, k_index : largest k-value that is less than t(boundary))<
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'0.4.0',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>transitionMatrix.utils subpackage &mdash; transitionMatrix 0.4.0 documentation</title>
+  <title>transitionMatrix.utils subpackage &mdash; transitionMatrix 0.4.2 documentation</title>
   
 
   
@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ChangeLog" href="changelog.html" />
-    <link rel="prev" title="transitionMatrix.portfolio_model_lib subpackage" href="transitionMatrix.portfolio_model_lib.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+    <link rel="prev" title="transitionMatrix.estimators subpackage" href="transitionMatrix.estimators.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -89,8 +91,6 @@
 <li class="toctree-l3"><a class="reference internal" href="transitionMatrix.html#transitionmatrix-model-classes">transitionMatrix.model Classes</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="transitionMatrix.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="transitionMatrix.estimators.html">transitionMatrix.estimators subpackage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.thresholds.html">transitionMatrix.thresholds subpackage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html">transitionMatrix.portfolio_model_lib subpackage</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">transitionMatrix.utils subpackage</a></li>
 </ul>
 </li>
@@ -184,21 +184,20 @@ into any of the main modules of the library</p>
 <dt id="transitionMatrix.utils.converters.datetime_to_float">
 <code class="descclassname">transitionMatrix.utils.converters.</code><code class="descname">datetime_to_float</code><span class="sig-paren">(</span><em>dataframe</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.utils.converters.datetime_to_float" title="Permalink to this definition">¶</a></dt>
 <dd><p id="datetime-to-float">Converts dates from string format to the canonical float format</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dataframe</strong> – Pandas dataframe with dates in string format</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Pandas dataframe with dates in float format</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">object</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataframe</strong> – Pandas dataframe with dates in string format</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pandas dataframe with dates in float format</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The date string must be recognizable by the pandas to_datetime function.</p>
+<p class="admonition-title">Note</p>
+<p>The date string must be recognizable by the pandas to_datetime function.</p>
 </div>
 </dd></dl>
 
@@ -212,29 +211,25 @@ into any of the main modules of the library</p>
 for testing cohorting algorithms and duration based estimators.</p>
 <p>The data are sorted by entity ID, then by time of occurrence T. The first entry per entity indicates the state up
 to that timepoint. The format is a sequence of triples (ID, Time, State)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>statespace</strong> – The state space to use for the simulation</li>
-<li><strong>n</strong> (<em>int</em>) – The number of distinct entities to simulate</li>
-<li><strong>sample</strong> (<em>int</em>) – The number of events to simulate</li>
-<li><strong>rate</strong> (<em>float</em>) – The event rate</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>statespace</strong> – The state space to use for the simulation</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – The number of distinct entities to simulate</p></li>
+<li><p><strong>sample</strong> (<em>int</em>) – The number of events to simulate</p></li>
+<li><p><strong>rate</strong> (<em>float</em>) – The event rate</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">transition events</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas dataframe</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>transition events</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas dataframe</p>
+</dd>
+</dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">May generate successive events in the same state</p>
+<p class="admonition-title">Note</p>
+<p>May generate successive events in the same state</p>
 </div>
 </dd></dl>
 
@@ -243,24 +238,20 @@ to that timepoint. The format is a sequence of triples (ID, Time, State)</p>
 <code class="descclassname">transitionMatrix.utils.dataset_generators.</code><code class="descname">long_format</code><span class="sig-paren">(</span><em>statespace</em>, <em>transitionmatrix</em>, <em>n</em>, <em>timesteps</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.utils.dataset_generators.long_format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate continuous events from a markov chain matrix in Long data format
 Suitable for testing duration based estimators</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>n</strong> (<em>int</em>) – The number of distinct entities to simulate</li>
-<li><strong>timesteps</strong> (<em>int</em>) – The number of timesteps to simulate (including initial state)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The number of distinct entities to simulate</p></li>
+<li><p><strong>timesteps</strong> (<em>int</em>) – The number of timesteps to simulate (including initial state)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the message id</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas dataframe</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the message id</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas dataframe</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -268,24 +259,20 @@ Suitable for testing duration based estimators</p>
 <code class="descclassname">transitionMatrix.utils.dataset_generators.</code><code class="descname">markov_chain</code><span class="sig-paren">(</span><em>statespace</em>, <em>transitionmatrix</em>, <em>n</em>, <em>timesteps</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.utils.dataset_generators.markov_chain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate discrete events from a markov chain matrix in Compact data format
 Suitable for testing cohort based estimators</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>n</strong> (<em>int</em>) – The number of distinct entities to simulate</li>
-<li><strong>timesteps</strong> (<em>int</em>) – The number of timesteps to simulate (including initial state)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The number of distinct entities to simulate</p></li>
+<li><p><strong>timesteps</strong> (<em>int</em>) – The number of timesteps to simulate (including initial state)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the message id</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas dataframe</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the message id</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas dataframe</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -298,8 +285,8 @@ Suitable for testing cohort based estimators</p>
 <dd><p>Bin timestamped data in a dataframe so as to have ingoing and outgoing states per cohort interval</p>
 <p>The ‘Time’ column is used by default</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This is a lossy operation: Timestamps are discretised and intermediate state     transitions are lost</p>
+<p class="admonition-title">Note</p>
+<p>This is a lossy operation: Timestamps are discretised and intermediate state     transitions are lost</p>
 </div>
 </dd></dl>
 
@@ -307,16 +294,14 @@ Suitable for testing cohort based estimators</p>
 <dt id="transitionMatrix.utils.preprocessing.unique_timestamps">
 <code class="descclassname">transitionMatrix.utils.preprocessing.</code><code class="descname">unique_timestamps</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.utils.preprocessing.unique_timestamps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identify unique timestamps in a dataframe</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> – dataframe. The ‘Time’ column is used by default</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">returns a numpy array</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – dataframe. The ‘Time’ column is used by default</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returns a numpy array</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -334,7 +319,7 @@ Suitable for testing cohort based estimators</p>
         <a href="changelog.html" class="btn btn-neutral float-right" title="ChangeLog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="transitionMatrix.portfolio_model_lib.html" class="btn btn-neutral" title="transitionMatrix.portfolio_model_lib subpackage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="transitionMatrix.estimators.html" class="btn btn-neutral float-left" title="transitionMatrix.estimators subpackage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -360,35 +345,16 @@ Suitable for testing cohort based estimators</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'0.4.0',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

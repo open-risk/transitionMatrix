@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2018 Open Risk, all rights reserved
+# (c) 2017-2019 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -16,7 +16,7 @@
 import unittest
 
 import transitionMatrix as tm
-from datasets import Minimal
+from transitionMatrix.predefined import Minimal
 from transitionMatrix import source_path, dataset_path
 
 ACCURATE_DIGITS = 7

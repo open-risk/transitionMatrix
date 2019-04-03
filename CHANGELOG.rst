@@ -3,6 +3,14 @@ ChangeLog
 
 PLEASE NOTE THAT THE API IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+v0.4.4 (03-04-2019)
+-------------------
+
+* Documentation: Cleanup of docs following separation of threshold / portfolio models
+* Datasets: generic_multiperiod.json
+* Feature: CreditCurve class for holding credit curves
+
+
 
 v0.4.3 (29-03-2019)
 -------------------

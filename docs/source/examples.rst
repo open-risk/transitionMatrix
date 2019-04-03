@@ -116,31 +116,6 @@ Plot of estimated transition probabilities
 .. image:: ../../examples/transition_probabilities.png
 
 
-
-Rating Transition Thresholds
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* calculate_thresholds.py
-* validated_thresholds.py
-* visualize_thresholds.py
-
-Example of using transitionMatrix to compute multi-period transition thresholds
-compatible with a given transition matrix. Validate computed thresholds.
-
-The mathematical framework documented in
-`Multi-Period Transition Thresholds <https://www.openriskmanual.org/wiki/Multi-Period_Transition_Thresholds>`_
-
-.. image:: ../../examples/Thresholds.png
-
-Portfolio Model
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* portolio_model.py
-
-Using the portfolio model library to calculate default probabilities in finite
-portfolio with N credits
-
-
 Generate Visuals
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2018 Open Risk, all rights reserved
+# (c) 2017-2019 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -22,7 +22,7 @@ import numpy as np
 
 
 import transitionMatrix as tm
-from datasets import JLT
+from transitionMatrix.predefined import JLT
 from transitionMatrix import dataset_path
 
 myState = tm.SnP_SS

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ChangeLog &mdash; transitionMatrix 0.4.0 documentation</title>
+  <title>ChangeLog &mdash; transitionMatrix 0.4.2 documentation</title>
   
 
   
@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Roadmap" href="roadmap.html" />
-    <link rel="prev" title="transitionMatrix.utils Subpackage" href="transitionMatrix.utils.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+    <link rel="prev" title="transitionMatrix.utils subpackage" href="transitionMatrix.utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -86,7 +88,9 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ChangeLog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#v0-4-2-31-10-2019">v0.4.2 (31-10-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-4-4-03-04-2019">v0.4.4 (03-04-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-4-3-29-03-2019">v0.4.3 (29-03-2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-4-2-29-01-2019">v0.4.2 (29-01-2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-4-1-31-10-2018">v0.4.1 (31-10-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-4-0-23-10-2018">v0.4.0 (23-10-2018)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-3-1-21-09-2018">v0.3.1 (21-09-2018)</a></li>
@@ -166,80 +170,95 @@
   <div class="section" id="changelog">
 <h1>ChangeLog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
 <p>PLEASE NOTE THAT THE API IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY</p>
-<div class="section" id="v0-4-2-31-10-2019">
-<h2>v0.4.2 (31-10-2019)<a class="headerlink" href="#v0-4-2-31-10-2019" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="v0-4-4-03-04-2019">
+<h2>v0.4.4 (03-04-2019)<a class="headerlink" href="#v0-4-4-03-04-2019" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Feature:</li>
-<li>Training:</li>
-<li>Datasets:</li>
-<li>Testing:</li>
+<li><p>Documentation: Cleanup of docs following separation of threshold / portfolio models</p></li>
+<li><p>Datasets: generic_multiperiod.json</p></li>
+<li><p>Feature: CreditCurve class for holding credit curves</p></li>
+</ul>
+</div>
+<div class="section" id="v0-4-3-29-03-2019">
+<h2>v0.4.3 (29-03-2019)<a class="headerlink" href="#v0-4-3-29-03-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Significant rearrangement of code (the threshold models package moved to portfolioAnalytics for more consistent structure of the code base / functionality)</p></li>
+</ul>
+</div>
+<div class="section" id="v0-4-2-29-01-2019">
+<h2>v0.4.2 (29-01-2019)<a class="headerlink" href="#v0-4-2-29-01-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Feature: converter function in transitionMatrix.utils.converters to convert long form dataframes into canonical float form</p></li>
+<li><p>Datasets: synthetic_data9.csv (datetime in string format)</p></li>
+<li><p>Training: new data generator in examples/generate_synthetic_data.py to generate long format with string dates</p></li>
+<li><p>Training: Additional example (=3) in examples/empirical_transition_matrix.py to process long format with string dates</p></li>
+<li><p>Documentation: More detailed explanation of Long Data Formats with links to Open Risk Manual</p></li>
+<li><p>Documentation: Enabled sphinx.ext.autosectionlabel for easy internal links / removed duplicate labels</p></li>
 </ul>
 </div>
 <div class="section" id="v0-4-1-31-10-2018">
 <h2>v0.4.1 (31-10-2018)<a class="headerlink" href="#v0-4-1-31-10-2018" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Feature: Added functionality for conditioning multi-period transition matrices</li>
-<li>Training: Example calculation and visualization of conditional matrices</li>
-<li>Datasets: State space description and CGS mappings for top-6 credit rating agencies</li>
+<li><p>Feature: Added functionality for conditioning multi-period transition matrices</p></li>
+<li><p>Training: Example calculation and visualization of conditional matrices</p></li>
+<li><p>Datasets: State space description and CGS mappings for top-6 credit rating agencies</p></li>
 </ul>
 </div>
 <div class="section" id="v0-4-0-23-10-2018">
 <h2>v0.4.0 (23-10-2018)<a class="headerlink" href="#v0-4-0-23-10-2018" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Feature: Added Aalen-Johansen Duration Estimator</li>
-<li>Documentation: Major overhaul of documentation, now targeting ReadTheDocs distribution</li>
-<li>Training: Streamlining of all examples</li>
-<li>Installation: Pypi and wheel installation options</li>
-<li>Datasets: Synthetic Datasets in long format</li>
+<li><p>Feature: Added Aalen-Johansen Duration Estimator</p></li>
+<li><p>Documentation: Major overhaul of documentation, now targeting ReadTheDocs distribution</p></li>
+<li><p>Training: Streamlining of all examples</p></li>
+<li><p>Installation: Pypi and wheel installation options</p></li>
+<li><p>Datasets: Synthetic Datasets in long format</p></li>
 </ul>
 </div>
 <div class="section" id="v0-3-1-21-09-2018">
 <h2>v0.3.1 (21-09-2018)<a class="headerlink" href="#v0-3-1-21-09-2018" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Feature: Expanded functionality to compute and visualize credit curves</li>
+<li><p>Feature: Expanded functionality to compute and visualize credit curves</p></li>
 </ul>
 </div>
 <div class="section" id="v0-3-27-08-2018">
 <h2>v0.3 (27-08-2018)<a class="headerlink" href="#v0-3-27-08-2018" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Feature: Addition of portfolio models (formerly portfolio_analytics_library) for data generation and testing</li>
-<li>Training: Added examples in jupyter notebook format</li>
+<li><p>Feature: Addition of portfolio models (formerly portfolio_analytics_library) for data generation and testing</p></li>
+<li><p>Training: Added examples in jupyter notebook format</p></li>
 </ul>
 </div>
 <div class="section" id="v0-2-05-06-2018">
 <h2>v0.2 (05-06-2018)<a class="headerlink" href="#v0-2-05-06-2018" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Feature: Addition of threshold generation algorithms</li>
+<li><p>Feature: Addition of threshold generation algorithms</p></li>
 </ul>
 </div>
 <div class="section" id="v0-1-3-04-05-2018">
 <h2>v0.1.3 (04-05-2018)<a class="headerlink" href="#v0-1-3-04-05-2018" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Documentation: Sphinx based documentation</li>
-<li>Training: Additional visualization examples</li>
+<li><p>Documentation: Sphinx based documentation</p></li>
+<li><p>Training: Additional visualization examples</p></li>
 </ul>
 </div>
 <div class="section" id="v0-1-2-05-12-2017">
 <h2>v0.1.2 (05-12-2017)<a class="headerlink" href="#v0-1-2-05-12-2017" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Refactoring dataset paths</li>
-<li>Bugfix: Correcting requirement dependencies (missing matplotlib)</li>
-<li>Documentation: More detailed instructions</li>
+<li><p>Refactoring dataset paths</p></li>
+<li><p>Bugfix: Correcting requirement dependencies (missing matplotlib)</p></li>
+<li><p>Documentation: More detailed instructions</p></li>
 </ul>
 </div>
 <div class="section" id="v0-1-1-03-12-2017">
 <h2>v0.1.1 (03-12-2017)<a class="headerlink" href="#v0-1-1-03-12-2017" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Feature: TransitionMatrix model: new methods to merge States, fix problematic probability matrices, I/O API’s</li>
-<li>Feature: TransitionMatrixSet mode: json and csv readers, methods for set-wise manipulations</li>
-<li>Datasets: Additional multiperiod datasets (Standard and Poors historical corporate rating transition rates)</li>
-<li>Feature: Enhanced matrix comparison functionality</li>
-<li><dl class="first docutils">
-<dt>Training: Three additional example workflows</dt>
-<dd><ul class="first last">
-<li>fixing multiperiod matrices (completing State Space)</li>
-<li>adjusting matrices for withdrawn entries</li>
-<li>generating full  multi-period sets from limited observations</li>
+<li><p>Feature: TransitionMatrix model: new methods to merge States, fix problematic probability matrices, I/O API’s</p></li>
+<li><p>Feature: TransitionMatrixSet mode: json and csv readers, methods for set-wise manipulations</p></li>
+<li><p>Datasets: Additional multiperiod datasets (Standard and Poors historical corporate rating transition rates)</p></li>
+<li><p>Feature: Enhanced matrix comparison functionality</p></li>
+<li><dl class="simple">
+<dt>Training: Three additional example workflows</dt><dd><ul>
+<li><p>fixing multiperiod matrices (completing State Space)</p></li>
+<li><p>adjusting matrices for withdrawn entries</p></li>
+<li><p>generating full  multi-period sets from limited observations</p></li>
 </ul>
 </dd>
 </dl>
@@ -249,7 +268,7 @@
 <div class="section" id="v0-1-0-11-11-2017">
 <h2>v0.1.0 (11-11-2017)<a class="headerlink" href="#v0-1-0-11-11-2017" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>First public release of the package</li>
+<li><p>First public release of the package</p></li>
 </ul>
 </div>
 </div>
@@ -265,7 +284,7 @@
         <a href="roadmap.html" class="btn btn-neutral float-right" title="Roadmap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="transitionMatrix.utils.html" class="btn btn-neutral" title="transitionMatrix.utils Subpackage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="transitionMatrix.utils.html" class="btn btn-neutral float-left" title="transitionMatrix.utils subpackage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -291,35 +310,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'0.4.0',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

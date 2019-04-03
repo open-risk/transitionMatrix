@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API &mdash; transitionMatrix 0.4.0 documentation</title>
+  <title>API &mdash; transitionMatrix 0.4.2 documentation</title>
   
 
   
@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="transitionMatrix Package" href="transitionMatrix.html" />
     <link rel="prev" title="Data Formats" href="data_formats.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -160,6 +162,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="transitionMatrix.html">transitionMatrix Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="transitionMatrix.html#transitionmatrix-model-classes">transitionMatrix.model Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transitionMatrix.html#creditcurve">CreditCurve</a></li>
 <li class="toctree-l3"><a class="reference internal" href="transitionMatrix.html#transitionmatrix">TransitionMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="transitionMatrix.html#transitionmatrixset">TransitionMatrixSet</a></li>
 <li class="toctree-l3"><a class="reference internal" href="transitionMatrix.html#statespace">StateSpace</a></li>
@@ -176,20 +179,9 @@
 <li class="toctree-l4"><a class="reference internal" href="transitionMatrix.estimators.html#module-transitionMatrix.estimators">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="transitionMatrix.thresholds.html">transitionMatrix.thresholds subpackage</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.thresholds.html#module-transitionMatrix.thresholds.model">transitionMatrix.thresholds.model module</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html">transitionMatrix.portfolio_model_lib subpackage</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#portfolio-models-library">Portfolio Models Library</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#portfolio-model-examples">Portfolio Model Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#current-functions">Current Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.portfolio_model_lib.html#todo-list">Todo List</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="transitionMatrix.utils.html">transitionMatrix.utils Subpackage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transitionMatrix.utils.html">transitionMatrix.utils subpackage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.utils.html#module-transitionMatrix.utils">transitionMatrix.utils contents</a></li>
 <li class="toctree-l4"><a class="reference internal" href="transitionMatrix.utils.html#transitionmatrix-utils-submodules">transitionMatrix.utils Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.utils.html#module-transitionMatrix.utils">transitionMatrix.utils  contents</a></li>
 </ul>
 </li>
 </ul>
@@ -211,7 +203,7 @@
         <a href="transitionMatrix.html" class="btn btn-neutral float-right" title="transitionMatrix Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="data_formats.html" class="btn btn-neutral" title="Data Formats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="data_formats.html" class="btn btn-neutral float-left" title="Data Formats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -237,35 +229,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'0.4.0',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

@@ -7,6 +7,15 @@ transitionMatrix Package
 transitionMatrix.model Classes
 ------------------------------
 
+CreditCurve
+~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: transitionMatrix.model.CreditCurve
+   :members:
+
+   .. automethod:: __new__
+
+
 TransitionMatrix
 ~~~~~~~~~~~~~~~~~~~
 
@@ -50,6 +59,4 @@ Subpackages
 .. toctree::
 
     transitionMatrix.estimators
-    transitionMatrix.thresholds
-    transitionMatrix.portfolio_model_lib
     transitionMatrix.utils
