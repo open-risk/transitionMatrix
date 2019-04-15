@@ -22,6 +22,7 @@ import numpy as np
 
 
 import transitionMatrix as tm
+from transitionMatrix import SnP_Fitch2Moodys, Moodys2DBRS
 from transitionMatrix.predefined import JLT
 from transitionMatrix import dataset_path
 
@@ -29,4 +30,10 @@ myState = tm.SnP_SS
 print(myState.get_states())
 print(myState.get_state_labels())
 print(myState.definition)
+
+# Convert SnP rating to Moody's and DBRS
+# Escape R (regulatory default) and SD (selective default)
+for state in myState.get_state_labels():
+    if state not in ['R', 'SD/D']:
+        print(state, ' ----> (', SnP_Fitch2Moodys[state], Moodys2DBRS[SnP_Fitch2Moodys[state]],')')
 

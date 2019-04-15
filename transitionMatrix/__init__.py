@@ -19,7 +19,7 @@ from .model import *
 from .estimators import *
 from .utils import *
 
-__version__ = '0.4.2'
+__version__ = '0.4.5'
 
 package_name = 'transitionMatrix'
 module_path = os.path.dirname(__file__)
@@ -36,7 +36,6 @@ dataset_path = os.path.join(source_path, 'datasets/')
 
 # S&P Basic
 definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"), ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
-
 
 SnP_Simple_SS = StateSpace(definition=definition)
 
@@ -102,7 +101,6 @@ cqs_mapping = {'0': '1',
 
 Cerved_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
 
-
 # DBRS Ratings Limited
 originator = 'DBRS Ratings Limited'
 full_name = 'Long-term obligations rating scale'
@@ -150,7 +148,6 @@ cqs_mapping = {'0': '1',
 
 Fitch_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
 
-
 # Moody’s Investors Service
 originator = 'Moody’s Investors Service'
 full_name = 'Global long-term rating scale'
@@ -172,7 +169,6 @@ cqs_mapping = {'0': '1',
                }
 
 Moodys_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
-
 
 # Standard & Poor’s Ratings Services
 originator = 'Standard & Poor’s Ratings Services'
@@ -197,3 +193,52 @@ cqs_mapping = {'0': '1',
                }
 
 SnP_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
+
+SnP_Fitch2Moodys = {
+    'AAA': 'Aaa',
+    'AA+': 'Aa1',
+    'AA': 'Aa2',
+    'AA-': 'Aa3',
+    'A+': 'A1',
+    'A': 'A2',
+    'A-': 'A3',
+    'BBB+': 'Baa1',
+    'BBB': 'Baa2',
+    'BBB-': 'Baa3',
+    'BB+': 'Ba1',
+    'BB': 'Ba2',
+    'BB-': 'Ba3',
+    'B+': 'B1',
+    'B': 'B2',
+    'B-': 'B3',
+    'CCC+': 'Caa1',
+    'CCC': 'Caa2',
+    'CCC-': 'Caa3',
+    'CC': 'Ca',
+    'C': 'Ca',
+    'D': 'C'
+}
+
+Moodys2DBRS = {
+    'Aaa': 'AAA',
+    'Aa1': 'AA (high)',
+    'Aa2': 'AA',
+    'Aa3': 'AA (low)',
+    'A1': 'A (high)',
+    'A2': 'A',
+    'A3': 'A (low)',
+    'Baa1': 'BBB (high)',
+    'Baa2': 'BBB',
+    'Baa3': 'BBB (low)',
+    'Ba1': 'BB (high)',
+    'Ba2': 'BB',
+    'Ba3': 'BB (low)',
+    'B1': 'B (high)',
+    'B2': 'B',
+    'B3': 'B (low)',
+    'Caa1': 'CCC (high)',
+    'Caa2': 'CCC',
+    'Caa3': 'CCC (low)',
+    'Ca': 'CC',
+    'C': 'D'
+}
