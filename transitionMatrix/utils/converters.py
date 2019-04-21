@@ -33,5 +33,28 @@ def datetime_to_float(dataframe):
     start_date = dataframe['Time'].min()
     end_date = dataframe['Time'].max()
     total_days = (pd.to_datetime(end_date) - pd.to_datetime(start_date)).days
-    dataframe['Time'] = dataframe['Time'].apply(lambda x: (pd.to_datetime(x) - pd.to_datetime(start_date)).days / total_days)
+    dataframe['Time'] = dataframe['Time'].apply(
+        lambda x: (pd.to_datetime(x) - pd.to_datetime(start_date)).days / total_days)
     return [start_date, end_date, total_days], dataframe
+
+
+def print_matrix(A, format_type='Standard', accuracy=2):
+    """ Pretty print a matrix
+
+    :param format_type: formatting options (Standard, Percent)
+    :type format_type: str
+    :param accuracy: number of decimals to display
+    :type accuracy: int
+
+    """
+    for s_in in range(A.shape[0]):
+        for s_out in range(A.shape[1]):
+            if format_type is 'Standard':
+                format_string = "{0:." + str(accuracy) + "f}"
+                print(format_string.format(A[s_in, s_out]) + ' ', end='')
+            elif format_type is 'Percent':
+                print("{0:.2f}%".format(100 * A[s_in, s_out]) + ' ', end='')
+        print('')
+
+
+print('')

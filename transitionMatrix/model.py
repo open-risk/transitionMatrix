@@ -27,8 +27,21 @@ import numpy as np
 import os
 import pandas as pd
 import transitionMatrix as tm
-from scipy.linalg import logm
+from scipy.linalg import logm, expm
 
+
+def matrix_exponent(generator, t=1.0):
+    """ Compute the exponent of a transition matrix generator
+
+    :param t: the timescale parameter
+    :type t: float
+
+    :Example:
+
+    A = G.exponent()
+    """
+    exponent = tm.TransitionMatrix(expm(t * generator))
+    return exponent
 
 class CreditCurve(np.matrix):
     """ The _`CreditCurve` object implements a typical collection of `credit curves <https://www.openriskmanual.org/wiki/Credit_Curve>`_.
@@ -353,6 +366,22 @@ class TransitionMatrix(np.matrix):
         generator = logm(self) / t
         return generator
 
+    def power(self, n=1):
+        """ Raise a transition matrix to a desired power
+
+        :param n: the desired power
+        :type n: int
+
+        :Example:
+
+        B = A.power(10)
+        """
+        a = self
+        for i in range(n - 1):
+            a = a * self
+        result = tm.TransitionMatrix(a)
+        return result
+
     def characterize(self):
         """ Analyse or classify a transition matrix according to its properties
 
@@ -449,7 +478,7 @@ class TransitionMatrixSet(object):
 
         :param values: initialization values
         :param dimension: matrix dimensionality (default is 2)
-        :param method: matrix dimensionality (default is 2)
+        :param method: the method to use for generating the set (Copy, Power, As-Is)
         :param periods: List with the timesteps of matrix observations
         :param temporal_type: matrix dimensionality (default is 2)
 
@@ -465,7 +494,7 @@ class TransitionMatrixSet(object):
         :type json_file: str
         :type csv_file: str
 
-        :returns: returns a TranstionMatrix object
+        :returns: returns a TranstionMatrix Set object
         :rtype: object
 
         .. note:: The initialization in itself does not validate if the provided values form indeed a transition matrix set

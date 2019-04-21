@@ -3,6 +3,16 @@ ChangeLog
 
 PLEASE NOTE THAT THE API IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+v0.4.5 (04-21-2019)
+-------------------
+
+* Training: Monthly_from_Annual.ipynb (a Jupyter notebook illustrating how to obtain interpolate transition rates on monthly intervals)
+* Datasets: generic_monthly.json
+* Feature: print_matrix function for generic matrix pretty printing
+* Feature: matrix_exponent function for obtaining arbitrary integral matrices from a given generator
+
+
+
 v0.4.4 (03-04-2019)
 -------------------
 
