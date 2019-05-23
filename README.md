@@ -11,6 +11,7 @@ You can use transitionMatrix to
 - Manipulate transition matrices (generators, comparisons etc.)
 - Provide standardized data sets for testing
 - Model transitions using threshold processes
+- Map credit ratings using mapping tables between popularly used rating systems 
 
 Key Information
 ================
@@ -72,4 +73,8 @@ Stressing Transition Matrices
 Computation and Visualization of Credit Curves
 
 ![image](examples/credit_curves.png)
+
+Working with credit states
+
+![image](examples/scale_conversions.png)
 

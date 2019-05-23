@@ -3,6 +3,13 @@ ChangeLog
 
 PLEASE NOTE THAT THE API IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+v0.4.6 (05-22-2019)
+-------------------
+
+* Feature: Update of CQS Mappings, addition of new rating scales
+* Documentation: Documentation of rating scale structure and mappings
+* Training: Example of mapping portfolio data to CQS
+
 v0.4.5 (04-21-2019)
 -------------------
 
@@ -10,8 +17,6 @@ v0.4.5 (04-21-2019)
 * Datasets: generic_monthly.json
 * Feature: print_matrix function for generic matrix pretty printing
 * Feature: matrix_exponent function for obtaining arbitrary integral matrices from a given generator
-
-
 
 v0.4.4 (03-04-2019)
 -------------------
@@ -21,12 +26,10 @@ v0.4.4 (03-04-2019)
 * Feature: CreditCurve class for holding credit curves
 
 
-
 v0.4.3 (29-03-2019)
 -------------------
 
 * Significant rearrangement of code (the threshold models package moved to portfolioAnalytics for more consistent structure of the code base / functionality)
-
 
 v0.4.2 (29-01-2019)
 -------------------

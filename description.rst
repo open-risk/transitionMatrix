@@ -24,6 +24,7 @@ You can use transitionMatrix to
 - Manipulate transition matrices (derive generators, perform comparisons, stress transition rates etc.)
 - Access standardized datasets for testing
 - Extract and work with default curves
+- Map credit ratings using mapping tables
 
 **NB: transitionMatrix is still in active development. If you encounter issues please raise them in our
 github repository**

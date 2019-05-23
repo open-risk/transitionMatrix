@@ -43,6 +43,7 @@ def matrix_exponent(generator, t=1.0):
     exponent = tm.TransitionMatrix(expm(t * generator))
     return exponent
 
+
 class CreditCurve(np.matrix):
     """ The _`CreditCurve` object implements a typical collection of `credit curves <https://www.openriskmanual.org/wiki/Credit_Curve>`_.
     The class inherits from numpy matrices and implements additional properties specific to curves.
@@ -894,6 +895,20 @@ class StateSpace(object):
         """
         for state in self.definition:
             print("State Index/Label: ", state[0], " , ", state[1])
+
+    def cqs_map(self, label):
+        """
+        Produce a CQS for a given input label (the cqs_mapping dictionary must exist)
+
+        """
+        mapped = None
+        for x in self.definition:
+            if x[1] == label:
+                mapped = self.cqs_mapping[x[0]]
+        if mapped:
+            return mapped
+        else:
+            print("ERROR: Mapping failed")
 
 
 class EmpiricalTransitionMatrix(object):

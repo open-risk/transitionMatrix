@@ -6,8 +6,7 @@ The examples directory includes python scripts and jupyter notebooks to help you
 - Generating transition matrices from data
 - Manipulating transition matrices
 - Computing and visualizing credit curves corresponding to a set of transition matrices
-- Estimating thresholds given a multi-period transition matrix set
-- Generating loss distributions analytically
+- Mapping rating states between different rating systems
 
 Python Scripts
 -------------------------------------------
@@ -116,6 +115,15 @@ Plot of estimated transition probabilities
 .. image:: ../../examples/transition_probabilities.png
 
 
+Map credit ratings between systems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* state_space_operations.py
+
+Example workflows for converting data from one credit rating system to another using an established mapping
+table
+
+
 Generate Visuals
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -159,8 +167,11 @@ Visualize a transition matrix using Hinton-style visual
 
 .. image:: ../../examples/TransitionMatrix.png
 
+Example 7
+""""""""""""""""""""""""""""
+Convert labels between credit rating scales
 
-
+.. image:: ../../examples/scale_conversions.png
 
 
 Jupyter Notebooks
@@ -168,4 +179,4 @@ Jupyter Notebooks
 
 * Adjust_NotRated_State.ipynb
 * Matrix_Operations.ipynb
-* Portfolio_Examples.ipynb
+* Monthly_from_Annual.ipynb
