@@ -1,3 +1,5 @@
+[![Gitter](https://badges.gitter.im/open-risk/transitionMatrix.svg)](https://gitter.im/open-risk/transitionMatrix?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 Intro
 =========================
 transitionMatrix is a Python powered library for the statistical analysis and visualization of state transition 
