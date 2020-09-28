@@ -16,7 +16,7 @@ transitionMatrix Documentation
    changelog
    roadmap
 
-Indices and tables
+Indexes and tables
 ==================
 
 * :ref:`genindex`

@@ -20,6 +20,7 @@
 * StateSpace holds information about the stochastic system state space
 * EmpiricalTransitionMatrix implements the functionality of a continuously observed transition matrix
 
+.. moduleauthor: Open Risk
 """
 
 import json
@@ -42,6 +43,7 @@ def matrix_exponent(generator, t=1.0):
     """
     exponent = tm.TransitionMatrix(expm(t * generator))
     return exponent
+
 
 class CreditCurve(np.matrix):
     """ The _`CreditCurve` object implements a typical collection of `credit curves <https://www.openriskmanual.org/wiki/Credit_Curve>`_.
@@ -353,7 +355,7 @@ class TransitionMatrix(np.matrix):
             self.validated = False
             return validation_messages
 
-    def generator(self, t=1.0):
+    def generator(self, t=1.0, fix_negative = False):
         """ Compute the generator of a transition matrix
 
         :param t: the timescale parameter
@@ -364,7 +366,21 @@ class TransitionMatrix(np.matrix):
         G = A.generator()
         """
         generator = logm(self) / t
-        return generator
+        if fix_negative:
+            # for all rows of the generator
+            for i in range(generator.shape[0]):
+                # for all columns of the generator
+                for j in range(generator.shape[1]):
+                    # fix negative off-diagonal elements
+                    if j != i and generator[i,j] < 0:
+                        # flip the negative element into positive
+                        generator[i, j] = - generator[i,j]
+                        # subtract from the diagonal
+                        generator[i, i] = generator[i, i] - generator[i, j]
+
+            return generator
+        else:
+            return generator
 
     def power(self, n=1):
         """ Raise a transition matrix to a desired power
