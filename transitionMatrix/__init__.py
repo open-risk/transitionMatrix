@@ -13,13 +13,18 @@
 # limitations under the License.
 
 
-""" transitionMatrix - Python package for statistical analysis and visualization of state space transition events """
+""" transitionMatrix - Python package for statistical analysis and visualization of state space transition events
+
+
+
+
+"""
 
 from .model import *
 from .estimators import *
 from .utils import *
 
-__version__ = '0.4.5'
+__version__ = '0.4.6'
 
 package_name = 'transitionMatrix'
 module_path = os.path.dirname(__file__)
@@ -30,25 +35,17 @@ dataset_path = os.path.join(source_path, 'datasets/')
 # PREDEFINED STATE SPACES
 #
 
-#
-# Rating Agency State Spaces
-#
-
-# S&P Basic
-definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"), ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
-
-SnP_Simple_SS = StateSpace(definition=definition)
 
 # AM Best Europe-Rating Services Ltd.
 originator = 'AM Best Europe-Rating Services Ltd.'
-full_name = 'Long-term issuer credit ratings scale'
+full_name = 'Long-term issuer ratings scale'
 definition = [('0', "aaa"), ('1', "aa+"), ('2', "aa"), ('3', "aa-"),
               ('4', "a+"), ('5', "a"), ('6', "a-"),
               ('7', "bbb+"), ('8', "bbb"), ('9', "bbb-"),
               ('10', "bb+"), ('11', "bb"), ('12', "bb-"),
               ('13', "b+"), ('14', "b"), ('15', "b-"),
               ('16', "ccc+"), ('17', "ccc"), ('18', "ccc-"),
-              ('19', "cc"), ('20', "c"), ('21', "rs")]
+              ('19', "cc"), ('20', "c"), ('21', "d"), ('22', "s")]
 cqs_mapping = {'0': '1',
                '1': '1',
                '2': '1',
@@ -70,10 +67,34 @@ cqs_mapping = {'0': '1',
                '18': '6',
                '19': '6',
                '20': '6',
-               '21': '6'
+               '21': '6',
+               '22': '6'
                }
 
 AM_Best_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
+
+# ARC Ratings S.A.
+originator = 'Standard & Poor’s Ratings Services'
+full_name = 'Medium- and long-term issuer rating scale'
+definition = [('0', "AAA"), ('1', "AA"),
+              ('2', "A"),
+              ('3', "BBB"),
+              ('4', "BB"),
+              ('5', "B"),
+              ('6', "CCC"), ('7', "CC"), ('8', "C"), ('9', "D")]
+cqs_mapping = {'0': '1',
+               '1': '1',
+               '2': '2',
+               '3': '3',
+               '4': '4',
+               '5': '5',
+               '6': '6',
+               '7': '6',
+               '8': '6',
+               '9': '6'
+               }
+
+ARC_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
 
 # Cerved Rating Agency S.p.A.
 originator = 'AM Best Europe-Rating Services Ltd.'
@@ -95,11 +116,32 @@ cqs_mapping = {'0': '1',
                '8': '4',
                '9': '4',
                '10': '5',
-               '11': '4',
-               '12': '4'
+               '11': '6',
+               '12': '6'
                }
 
 Cerved_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
+
+# Creditreform Rating AG
+originator = 'Creditreform Rating AG'
+full_name = 'Long-term issuer rating scale'
+definition = [('0', "AAA"), ('1', "AA"),
+              ('2', "A"),
+              ('3', "BBB"),
+              ('4', "BB"),
+              ('5', "B"), ('6', "C"), ('7', "SD"), ('8', "D")]
+cqs_mapping = {'0': '1',
+               '1': '1',
+               '2': '2',
+               '3': '4',
+               '4': '5',
+               '5': '6',
+               '6': '6',
+               '7': '6',
+               '8': '6'
+               }
+
+CRR_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
 
 # DBRS Ratings Limited
 originator = 'DBRS Ratings Limited'
@@ -126,7 +168,7 @@ DBRS_SS = StateSpace(definition=definition, originator=originator, full_name=ful
 
 # Fitch Ratings
 originator = 'Fitch Ratings'
-full_name = 'Long-term issuer credit ratings scale'
+full_name = 'Long-term issuer default rating scale'
 definition = [('0', "AAA"), ('1', "AA"),
               ('2', "A"),
               ('3', "BBB"),
@@ -170,9 +212,32 @@ cqs_mapping = {'0': '1',
 
 Moodys_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
 
+# Scope Ratings AG
+originator = 'Scope Ratings AG'
+full_name = 'Long-term rating scale'
+definition = [('0', "AAA"), ('1', "AA"),
+              ('2', "A"),
+              ('3', "BBB"),
+              ('4', "BB"),
+              ('5', "B"),
+              ('6', "CCC"), ('7', "CC"), ('8', "C"), ('9', "D")]
+cqs_mapping = {'0': '1',
+               '1': '1',
+               '2': '2',
+               '3': '3',
+               '4': '4',
+               '5': '5',
+               '6': '6',
+               '7': '6',
+               '8': '6',
+               '9': '6'
+               }
+
+Scope_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
+
 # Standard & Poor’s Ratings Services
 originator = 'Standard & Poor’s Ratings Services'
-full_name = 'Long-term issuer credit ratings scale'
+full_name = 'Long-term issuer credit rating scale'
 definition = [('0', "AAA"), ('1', "AA"),
               ('2', "A"),
               ('3', "BBB"),
@@ -193,6 +258,15 @@ cqs_mapping = {'0': '1',
                }
 
 SnP_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=cqs_mapping)
+
+# S&P Coarse Scale
+definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"), ('4', "BB"), ('5', "B"), ('6', "CCC"), ('7', "D")]
+
+SnP_Simple_SS = StateSpace(definition=definition)
+
+#
+# Mappings between scales other than CQS
+#
 
 SnP_Fitch2Moodys = {
     'AAA': 'Aaa',

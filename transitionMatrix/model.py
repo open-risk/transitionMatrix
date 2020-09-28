@@ -911,6 +911,20 @@ class StateSpace(object):
         for state in self.definition:
             print("State Index/Label: ", state[0], " , ", state[1])
 
+    def cqs_map(self, label):
+        """
+        Produce a CQS for a given input label (the cqs_mapping dictionary must exist)
+
+        """
+        mapped = None
+        for x in self.definition:
+            if x[1] == label:
+                mapped = self.cqs_mapping[x[0]]
+        if mapped:
+            return mapped
+        else:
+            print("ERROR: Mapping failed")
+
 
 class EmpiricalTransitionMatrix(object):
     """  The EmpiricalTransitionMatrix object stores a continuously observed Transition Matrix. It stores matrices

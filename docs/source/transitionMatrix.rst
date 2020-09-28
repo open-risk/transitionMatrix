@@ -35,6 +35,8 @@ TransitionMatrixSet
    .. automethod:: __mul__
 
 
+.. _state_space_doc:
+
 StateSpace
 ~~~~~~~~~~~~~~~~~~~
 

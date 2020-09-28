@@ -9,3 +9,4 @@ getting started
 
    examples
    data_formats
+   predefined_rating_scales

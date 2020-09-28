@@ -136,3 +136,20 @@ def long_format(statespace, transitionmatrix, n, timesteps):
             data.append((i, 0, states[from_state], states[from_state]))
 
     return pd.DataFrame(data, columns=['ID', 'Time', 'From', 'To'])
+
+
+def portfolio_labels(statespace, n):
+    """
+    Generate a collection of credit rating states emulating a snapshot of portfolio data
+    Suitable for mappings and transformations of credit rating states
+
+    :type statespace: The state space to use for the simulation
+    :param int n: The number of distinct entities to generate
+    :return: the collection
+    :rtype: list
+
+
+    """
+    labels = [x[1] for x in statespace.definition]
+    collection = np.random.choice(labels, n)
+    return collection

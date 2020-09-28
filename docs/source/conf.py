@@ -17,12 +17,12 @@ import os
 
 sys.path.insert(0, os.path.abspath('../../'))
 
-__version__ = '0.4.2'
+__version__ = '0.4.6'
 
 # -- Project information -----------------------------------------------------
 
 project = 'transitionMatrix'
-copyright = '2018, Open Risk'
+copyright = '2017-2019, Open Risk'
 author = 'Open Risk'
 
 # The short X.Y version

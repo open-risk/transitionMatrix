@@ -1,3 +1,6 @@
+[![Gitter](https://badges.gitter.im/open-risk/transitionMatrix.svg)](https://gitter.im/open-risk/transitionMatrix?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Documentation Status](https://readthedocs.org/projects/transitionMatrix/badge/?version=latest)](https://transitionmatrix.readthedocs.io/en/latest/?badge=latest)
+
 Intro
 =========================
 transitionMatrix is a Python powered library for the statistical analysis and visualization of state transition 
@@ -11,6 +14,7 @@ You can use transitionMatrix to
 - Manipulate transition matrices (generators, comparisons etc.)
 - Provide standardized data sets for testing
 - Model transitions using threshold processes
+- Map credit ratings using mapping tables between popularly used rating systems 
 
 Key Information
 ================
@@ -20,6 +24,8 @@ Key Information
 * Code Documentation: [Read The Docs](https://transitionmatrix.readthedocs.io/en/latest/index.html)
 * Mathematical Documentation: [Open Risk Manual](https://www.openriskmanual.org/wiki/Transition_Matrix)
 * Development website: [Github](https://github.com/open-risk/transitionMatrix)
+* General Discussions: [Gitter Lobby](https://gitter.im/open-risk/Lobby)
+* Package Specific Chat: [Gitter Project](https://gitter.im/open-risk/transitionMatrix)
 
 **NB: transitionMatrix is still in active development. If you encounter issues please raise them in our
 github repository**
@@ -30,8 +36,6 @@ Support and Training
 * The Open Risk Academy has free courses demonstrating the use of the library. The current list is: 
     * [Analysis of Credit Migration using Python TransitionMatrix](https://www.openriskacademy.com/course/view.php?id=38)
 * Commercial Support for transitionMatrix is provided as part of OpenCPM
-
-</pre>
 
 
 Examples
@@ -72,4 +76,8 @@ Stressing Transition Matrices
 Computation and Visualization of Credit Curves
 
 ![image](examples/credit_curves.png)
+
+Working with credit states
+
+![image](examples/scale_conversions.png)
 
