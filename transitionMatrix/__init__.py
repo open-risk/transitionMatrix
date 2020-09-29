@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2019 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2020 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -24,7 +24,7 @@ from .model import *
 from .estimators import *
 from .utils import *
 
-__version__ = '0.4.6'
+__version__ = '0.4.7'
 
 package_name = 'transitionMatrix'
 module_path = os.path.dirname(__file__)
@@ -35,6 +35,14 @@ dataset_path = os.path.join(source_path, 'datasets/')
 # PREDEFINED STATE SPACES
 #
 
+# Generic state space for testing
+originator = 'Open Risk'
+full_name = 'Generic state space for testing'
+definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+              ('4', "BB"), ('5', "B"), ('6', "CCC"),
+              ('7', "D")]
+
+Generic_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=None)
 
 # AM Best Europe-Rating Services Ltd.
 originator = 'AM Best Europe-Rating Services Ltd.'

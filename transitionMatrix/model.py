@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2019 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2020 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -161,9 +161,12 @@ class CreditCurve(np.matrix):
             return validation_messages
 
     def hazard_curve(self):
-        """
+        """ Compute hazard rates
+
         .. Todo:: Compute hazard rates
-        :return:
+
+        :return: TODO
+
         """
         pass
 
@@ -173,6 +176,7 @@ class CreditCurve(np.matrix):
         * slope of hazard rate
 
         .. Todo:: Further characterization
+
         """
 
         pass
@@ -252,6 +256,18 @@ class TransitionMatrix(np.matrix):
         # temporary dimension assignment (must validated for squareness)
         obj.dimension = obj.shape[0]
         return obj
+
+    def row(self, i):
+        """
+        Return row values
+
+        :param i: row index
+        """
+        row = []
+        matrix_size = self.shape[0]
+        for j in range(matrix_size):
+            row.append(self[i, j])
+        return row
 
     def to_json(self, file):
         """
@@ -475,14 +491,12 @@ class TransitionMatrix(np.matrix):
 
 
 class TransitionMatrixSet(object):
-    """  The _`TransitionMatrixSet` object stores a family of TransitionMatrix_ objects as a time ordered list. Besides
-    storage it allows a variety of simultaneous operations on the collection of matrices
+    """  The _`TransitionMatrixSet` object stores a family of TransitionMatrix_ objects as a time ordered list. Besides storage it allows a variety of simultaneous operations on the collection of matrices
 
 
     """
 
-    def __init__(self, dimension=2, values=None, periods=1, temporal_type=None, method=None, json_file=None,
-                 csv_file=None):
+    def __init__(self, dimension=2, values=None, periods=1, temporal_type=None, method=None, json_file=None, csv_file=None):
         """ Create a new matrix set. Different options for initialization are:
 
         * providing values as a list of list
@@ -582,7 +596,7 @@ class TransitionMatrixSet(object):
             q = pd.read_csv(f, header=None, usecols=range(to_states))
             for k in range(periods):
                 raw = q.iloc[k * from_states:(k + 1) * from_states]
-                a = tm.TransitionMatrix(raw.as_matrix())
+                a = tm.TransitionMatrix(raw.to_numpy())
                 val_set.append(a)
             self.entries = val_set
             self.temporal_type = temporal_type

@@ -1,21 +1,17 @@
-Data Formats
-============
+Input Data Formats
+===================
 
-The transitionMatrix package supports a variety of input data formats for empirical (observation) data.
-Two key ones are described here in more detail. More detailed documentation about data formats provided at
-the Transition Matrix category at the `Open Risk Manual <https://www.openriskmanual.org/wiki/Category:Transition_Matrix>`_
+The transitionMatrix package supports a variety of input data formats for empirical (observation) data. Two key ones are described here in more detail. More detailed documentation about data formats at the `Open Risk Manual Risk Data Category <https://www.openriskmanual.org/wiki/Category:Risk_Data>`_
 
 Long Data Format
 -------------------------------------------
 
-The Long Data Format consists of Tuples (ID, Time, From State, To State) indicating the time T at which an entity ID
-migrated From -> To state.
+The Long Data Format consists of Tuples (Entity ID, Time, From State, To State) indicating the time T at which an entity ID migrated from the (From State) -> to the (To State).
 
 Canonical Form
 ~~~~~~~~~~~~~~~~
 
-The canonical form that is used as input to duration based estimators uses normalize timestamps (from 0 to T_max)
-and looks as follows:
+The *canonical form* used as input to duration based estimators uses normalized timestamps (from 0 to T_max, where T_max is the latest timepoint) and looks as follows:
 
     +----+------+----+----+
     | ID | Time | Fr | To |
@@ -38,7 +34,7 @@ and looks as follows:
 String Date Form
 ~~~~~~~~~~~~~~~~
 
-It is frequent that the transition data have timestamps in the form of a datatime string. For example:
+It is frequent that transition data have timestamps in the form of a *datatime string*. For example:
 
     +----+-------------+----+----+
     | ID | Date String | Fr | To |
@@ -48,16 +44,15 @@ It is frequent that the transition data have timestamps in the form of a datatim
     |  1 | 10-11-2010  | 1  | 2  |
     +----+-------------+----+----+
 
-In this case the Datetime_to_float function of _`transitionMatrix.utils subpackage` the can be used to convert data into the canonical form
+In this case the Datetime_to_float function of _`transitionMatrix.utils subpackage` can be used to convert data into the canonical form.
 
 Compact Long Format
 -------------------------------------------
 
-Triples (ID, Time, State) indicating the time T at which an entity ID LEFT its previous state S (the state it migrates to
-is encoded in the next observation of the same entity).
+Triples (ID, Time, State) indicating the time T at which an entity ID **Left** its previous state S (the state it migrates to is encoded in the next observation of the same entity).
 
 The compact format avoids the duplication of data but requires that the final state of all entities at the end
-of the observation window (Time F) is included as the last record
+of the observation window (Time F) is included as the last record.
 
     +----+-----+---+
     | ID | T   | S |
@@ -83,7 +78,7 @@ of the observation window (Time F) is included as the last record
 
 
 Wide Data Format
--------------------------------------------
+------------------
 
 Conversion from wide to long can be handled using the `pandas wide_to_long method
 <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.wide_to_long.html>`_.
@@ -93,5 +88,4 @@ Conversion from wide to long can be handled using the `pandas wide_to_long metho
 Other Formats
 -------------------------------------------
 
-Data ingestion is via a pandas dataframe so other formats can be handled with additional coding. Submit an issue
-with your desired format.
+Data ingestion is via a pandas dataframe so other formats can be handled with additional coding. Submit an issue with your desired format.

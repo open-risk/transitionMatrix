@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2019 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2020 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -17,7 +17,7 @@ from codecs import open
 
 from setuptools import setup
 
-__version__ = '0.4.6'
+__version__ = '0.4.7'
 
 ver = __version__
 

@@ -47,35 +47,39 @@ large number of examples, jupyter notebooks and more.
 
 Plotting individual transition trajectories
 
-![image](examples/single_entity.png)
+![single entity](examples/single_entity.png)
 
 Sampling transition data
 
-![image](examples/sampled_histories.png)
+![sampled histories](examples/sampled_histories.png)
 
 Estimation of transition matrices using cohort methods
 
-![image](examples/estimation.png)
+![estimation](examples/estimation.png)
 
 Estimation of transition matrices using duration methods
 
-![image](examples/transition_probabilities.png)
+![transition probabilities](examples/transition_probabilities.png)
 
 Visualization of a transition matrix
 
-![image](examples/TransitionMatrix.png)
+![transition matrix](examples/TransitionMatrix.png)
+
+Visualization using a Logarithmic Sankey diagram
+
+![logarithmic sankey](examples/sankey.png)
 
 Generating stochastic process transition thresholds
 
-![image](../portfolioAnalytics/examples/Thresholds.png)
+![thresholds](../portfolioAnalytics/examples/Thresholds.png)
 
 Stressing Transition Matrices
 
-![image](../portfolioAnalytics/examples/stressed_density.png)
+![stressing transition matrices](../portfolioAnalytics/examples/stressed_density.png)
 
 Computation and Visualization of Credit Curves
 
-![image](examples/credit_curves.png)
+![credit curves](examples/credit_curves.png)
 
 Working with credit states
 

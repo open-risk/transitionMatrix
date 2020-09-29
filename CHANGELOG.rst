@@ -1,16 +1,23 @@
 ChangeLog
 ===========================
 
-PLEASE NOTE THAT THE API IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
+PLEASE NOTE THAT THE API OF TRANSITION MATRIX IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
-v0.4.6 (05-22-2019)
+v0.4.7 (29-09-2020)
+-------------------
+
+* Documentation: Expanded and updated description of classes
+* Documentation: Including Open Risk Academy code examples
+* Feature: logarithmic sankey visualization
+
+v0.4.6 (22-05-2019)
 -------------------
 
 * Feature: Update of CQS Mappings, addition of new rating scales
 * Documentation: Documentation of rating scale structure and mappings
 * Training: Example of mapping portfolio data to CQS
 
-v0.4.5 (04-21-2019)
+v0.4.5 (21-04-2019)
 -------------------
 
 * Training: Monthly_from_Annual.ipynb (a Jupyter notebook illustrating how to obtain interpolate transition rates on monthly intervals)

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2019 Open Risk, all rights reserved
+# (c) 2017-2020 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -15,6 +15,7 @@
 import matplotlib as mpl
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
+from matplotlib.sankey import Sankey
 import numpy as np
 import pandas as pd
 
@@ -22,13 +23,14 @@ import transitionMatrix as tm
 from transitionMatrix import source_path
 from transitionMatrix.estimators import cohort_estimator as es
 
+
 """
 Example workflows using transitionMatrix to generate visualizations of migration phenomena
 
 """
 
 dataset_path = source_path + "datasets/"
-example = 6
+example = 7
 
 # TODO visualization when states are not sampled (infrequent)
 
@@ -81,7 +83,7 @@ elif example == 2:
         entity_data = data[data['ID'] == identity]
         entity_data = entity_data[['Timestep', 'State']]
         sorted_data = entity_data.sort_values(['Timestep'], ascending=[True])
-        raw_data = sorted_data.as_matrix()
+        raw_data = sorted_data.to_numpy()
         viz_data.append(raw_data)
 
     plt.close('all')
@@ -169,7 +171,7 @@ elif example == 4:
     for row in data.itertuples():
         x.append(row[2])
         y.append(row[1])
-        colors.append(row[3]/len(unique_states))
+        colors.append(row[3] / len(unique_states))
     my_colors = mymap(colors)
 
     fig = plt.figure()
@@ -201,7 +203,7 @@ elif example == 5:
     for row in data.itertuples():
         x.append(row[2])
         y.append(row[1])
-        colors.append(1.1-row[3]/7)
+        colors.append(1.1 - row[3] / 7)
     my_colors = mymap(colors)
     print(colors)
 
@@ -264,7 +266,45 @@ elif example == 6:
 
     cbax = fig.add_axes([0.85, 0.12, 0.05, 0.78])
     cb = mpl.colorbar.ColorbarBase(cbax, cmap=mymap, norm=normalize, orientation='vertical')
-    cb.set_label("Transition Prabability", rotation=270, labelpad=15)
+    cb.set_label("Transition Probability", rotation=270, labelpad=15)
 
     plt.show(block=True)
     plt.interactive(False)
+
+elif example == 7:
+
+    n = 4
+    filename = dataset_path + 'JLT.json'
+    A = tm.TransitionMatrix(json_file=filename)
+    label = tm.Generic_SS.get_state_labels()
+    source = [n+1]
+    target = list(range(8))
+    input_vals = A.row(n)
+    w_min = np.min(input_vals)
+    w = np.log(input_vals) - np.log(w_min) + 0.5
+    w_T = np.sum(w)
+    values = [w_T]
+    for i in range(len(w)):
+        values.append(- w[i])
+
+    labels = ['BB']
+    for i in range(len(label)):
+        labels.append(label[i])
+
+    Sankey(flows=values,
+           labels=labels,
+           offset=3,
+           margin=8,
+           gap=4,
+           shoulder=1,
+           head_angle=130,
+           unit=None,
+           trunklength=30.0,
+           facecolor='lightgreen',
+           edgecolor='lightgreen',
+           alpha=0.8,
+           orientations=[0, 1, 1, 1, 1, 0, -1, -1, -1]).finish()
+    plt.title("Logarithmic Sankey Diagram of Credit Migration Rates")
+    plt.savefig("sankey.png")
+    plt.show()
+
