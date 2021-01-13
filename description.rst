@@ -123,6 +123,7 @@ Testing
 ----------------------
 
 It is a good idea to run the test-suite. Before you get started:
+
 - Adjust the source directory path in transitionMatrix/__init__ and then issue the following in at the root of the distribution
 - Unzip the data files in the datasets directory
 
