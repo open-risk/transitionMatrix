@@ -1,5 +1,6 @@
 /.idea
 /docs/build/html/
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
