@@ -17,9 +17,9 @@
 
 """
 
-from transitionMatrix import source_path
+import os
 
-examples_path = source_path + "examples/python/"
+examples_path = os.path.join("examples", "python")
 filelist = ['adjust_nr_state', 'credit_curves',
             'empirical_transition_matrix', 'fix_multiperiod_matrix', 'generate_synthetic_data',
             'generate_visuals', 'matrix_from_cohort_data', 'matrix_from_duration_data',
@@ -31,8 +31,10 @@ if __name__ == '__main__':
         try:
             print('\nExecuting example file: ', example.upper())
             print('-----------------------' + '-' * len(example))
-            exec(open(examples_path + example + ".py").read())
+            path = os.path.join(examples_path, example + ".py")
+            exec(open(path).read())
         except:
             print('**********************' + '*' * len(example))
             print('ERROR in example file', example)
             print('**********************' + '*' * len(example))
+            pass
