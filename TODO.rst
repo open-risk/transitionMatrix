@@ -29,6 +29,7 @@ Utilities
 Implementation
 --------------
 
+-
 - Sphinx documentation (improve)
 - Introduce visualization objects / API
 

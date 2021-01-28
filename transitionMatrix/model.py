@@ -203,8 +203,11 @@ class CreditCurve(np.matrix):
 
 class TransitionMatrix(np.matrix):
     """ The _`TransitionMatrix` object implements a typical (one period) `transition matrix <https://www.openriskmanual.org/wiki/Transition_Matrix>`_.
-    The class inherits from numpy matrices and implements additional properties specific transition matrices. It forms the building block of the
-    TransitionMatrixSet_ which holds a collection of matrices in increasing temporal order
+
+    The class inherits from numpy matrices and implements additional properties specific to transition matrices. It forms the building block of the TransitionMatrixSet_ which holds a collection of matrices in increasing temporal order
+
+    .. note::
+        numpy.matrix will be `deprecated at some point <https://numpy.org/doc/stable/reference/generated/numpy.matrix.html>`_
 
     """
 

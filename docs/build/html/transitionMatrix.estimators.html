@@ -1,41 +1,42 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>transitionMatrix.estimators subpackage &mdash; transitionMatrix 0.4.2 documentation</title>
+  <title>transitionMatrix.estimators subpackage &mdash; transitionMatrix 0.4.7 documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="transitionMatrix.utils subpackage" href="transitionMatrix.utils.html" />
+    <link rel="next" title="utilities subpackage" href="transitionMatrix.utils.html" />
     <link rel="prev" title="transitionMatrix Package" href="transitionMatrix.html" /> 
 </head>
 
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> transitionMatrix
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> transitionMatrix
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -91,7 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="transitionMatrix.html#transitionmatrix-model-classes">transitionMatrix.model Classes</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="transitionMatrix.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">transitionMatrix.estimators subpackage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.utils.html">transitionMatrix.utils subpackage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="transitionMatrix.utils.html">utilities subpackage</a></li>
 </ul>
 </li>
 </ul>
@@ -105,6 +107,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -143,7 +146,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="modules.html">API</a> &raquo;</li>
         
@@ -175,14 +178,14 @@
 </div>
 <div class="section" id="module-transitionMatrix.estimators.aalen_johansen_estimator">
 <span id="transitionmatrix-estimators-aalen-johansen-estimator-module"></span><h2>transitionMatrix.estimators.aalen_johansen_estimator module<a class="headerlink" href="#module-transitionMatrix.estimators.aalen_johansen_estimator" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="transitionMatrix.estimators.aalen_johansen_estimator.AalenJohansenEstimator">
-<em class="property">class </em><code class="descclassname">transitionMatrix.estimators.aalen_johansen_estimator.</code><code class="descname">AalenJohansenEstimator</code><span class="sig-paren">(</span><em>cohort_intervals=None</em>, <em>states=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.aalen_johansen_estimator.AalenJohansenEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">transitionMatrix.estimators.aalen_johansen_estimator.</code><code class="sig-name descname">AalenJohansenEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cohort_intervals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">states</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.aalen_johansen_estimator.AalenJohansenEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transitionMatrix.estimators.DurationEstimator" title="transitionMatrix.estimators.DurationEstimator"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitionMatrix.estimators.DurationEstimator</span></code></a></p>
 <p>Class for implementing the Aalen-Johansen estimator for the transition matrix</p>
-<dl class="method">
+<dl class="py method">
 <dt id="transitionMatrix.estimators.aalen_johansen_estimator.AalenJohansenEstimator.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>data</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.aalen_johansen_estimator.AalenJohansenEstimator.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">labels</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.aalen_johansen_estimator.AalenJohansenEstimator.fit" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -221,15 +224,15 @@ with one row per observed transition. The data frame must contain the following 
 </div>
 <div class="section" id="module-transitionMatrix.estimators.cohort_estimator">
 <span id="transitionmatrix-estimators-cohort-estimator-module"></span><h2>transitionMatrix.estimators.cohort_estimator module<a class="headerlink" href="#module-transitionMatrix.estimators.cohort_estimator" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="transitionMatrix.estimators.cohort_estimator.CohortEstimator">
-<em class="property">class </em><code class="descclassname">transitionMatrix.estimators.cohort_estimator.</code><code class="descname">CohortEstimator</code><span class="sig-paren">(</span><em>cohort_intervals=None</em>, <em>states=None</em>, <em>ci=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.cohort_estimator.CohortEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">transitionMatrix.estimators.cohort_estimator.</code><code class="sig-name descname">CohortEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cohort_intervals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">states</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ci</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.cohort_estimator.CohortEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transitionMatrix.estimators.BaseEstimator" title="transitionMatrix.estimators.BaseEstimator"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitionMatrix.estimators.BaseEstimator</span></code></a></p>
 <p>Class for implementing a Cohort estimator for the transition matrix
 under the assumption of time homogeneity</p>
-<dl class="method">
+<dl class="py method">
 <dt id="transitionMatrix.estimators.cohort_estimator.CohortEstimator.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>data</em>, <em>labels=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.cohort_estimator.CohortEstimator.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">labels</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.cohort_estimator.CohortEstimator.fit" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -254,23 +257,23 @@ under the assumption of time homogeneity</p>
 </div>
 <div class="section" id="module-transitionMatrix.estimators.kaplan_meier_estimator">
 <span id="transitionmatrix-estimators-kaplan-meier-estimator-module"></span><h2>transitionMatrix.estimators.kaplan_meier_estimator module<a class="headerlink" href="#module-transitionMatrix.estimators.kaplan_meier_estimator" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="transitionMatrix.estimators.kaplan_meier_estimator.KaplanMeierEstimator">
-<em class="property">class </em><code class="descclassname">transitionMatrix.estimators.kaplan_meier_estimator.</code><code class="descname">KaplanMeierEstimator</code><span class="sig-paren">(</span><em>cohort_intervals=None</em>, <em>states=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.kaplan_meier_estimator.KaplanMeierEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">transitionMatrix.estimators.kaplan_meier_estimator.</code><code class="sig-name descname">KaplanMeierEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cohort_intervals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">states</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.kaplan_meier_estimator.KaplanMeierEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transitionMatrix.estimators.DurationEstimator" title="transitionMatrix.estimators.DurationEstimator"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitionMatrix.estimators.DurationEstimator</span></code></a></p>
 </dd></dl>
 
 </div>
 <div class="section" id="module-transitionMatrix.estimators.simple_estimator">
 <span id="transitionmatrix-estimators-simple-estimator-module"></span><h2>transitionMatrix.estimators.simple_estimator module<a class="headerlink" href="#module-transitionMatrix.estimators.simple_estimator" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="transitionMatrix.estimators.simple_estimator.SimpleEstimator">
-<em class="property">class </em><code class="descclassname">transitionMatrix.estimators.simple_estimator.</code><code class="descname">SimpleEstimator</code><span class="sig-paren">(</span><em>cohort_intervals=None</em>, <em>states=None</em>, <em>ci=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.simple_estimator.SimpleEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">transitionMatrix.estimators.simple_estimator.</code><code class="sig-name descname">SimpleEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cohort_intervals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">states</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ci</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.simple_estimator.SimpleEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transitionMatrix.estimators.BaseEstimator" title="transitionMatrix.estimators.BaseEstimator"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitionMatrix.estimators.BaseEstimator</span></code></a></p>
 <p>Class for implementing a simple estimator suitable for single period transitions</p>
-<dl class="method">
+<dl class="py method">
 <dt id="transitionMatrix.estimators.simple_estimator.SimpleEstimator.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.simple_estimator.SimpleEstimator.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.simple_estimator.SimpleEstimator.fit" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>data</strong> (<em>array-like</em>) – The data to use for the estimation</p>
@@ -292,35 +295,35 @@ under the assumption of time homogeneity</p>
 </div>
 <div class="section" id="module-transitionMatrix.estimators">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-transitionMatrix.estimators" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="transitionMatrix.estimators.BaseEstimator">
-<em class="property">class </em><code class="descclassname">transitionMatrix.estimators.</code><code class="descname">BaseEstimator</code><a class="headerlink" href="#transitionMatrix.estimators.BaseEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">transitionMatrix.estimators.</code><code class="sig-name descname">BaseEstimator</code><a class="headerlink" href="#transitionMatrix.estimators.BaseEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Base class for implementing any transition matrix estimator</p>
 <p>Offers basic methods common to all estimators</p>
-<dl class="method">
+<dl class="py method">
 <dt id="transitionMatrix.estimators.BaseEstimator.get_matrix_set">
-<code class="descname">get_matrix_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.BaseEstimator.get_matrix_set" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_matrix_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.BaseEstimator.get_matrix_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="transitionMatrix.estimators.BaseEstimator.print">
-<code class="descname">print</code><span class="sig-paren">(</span><em>select='Frequencies'</em>, <em>period=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.BaseEstimator.print" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">print</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">select</span><span class="o">=</span><span class="default_value">'Frequencies'</span></em>, <em class="sig-param"><span class="n">period</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.BaseEstimator.print" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pretty print the estimated matrices
 :return:</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="transitionMatrix.estimators.BaseEstimator.summary">
-<code class="descname">summary</code><span class="sig-paren">(</span><em>k=0</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.BaseEstimator.summary" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">summary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.BaseEstimator.summary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pretty-print a summary of estimation results (values and confidence intervals)</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="transitionMatrix.estimators.DurationEstimator">
-<em class="property">class </em><code class="descclassname">transitionMatrix.estimators.</code><code class="descname">DurationEstimator</code><span class="sig-paren">(</span><em>cohort_intervals=None</em>, <em>states=None</em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.DurationEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">transitionMatrix.estimators.</code><code class="sig-name descname">DurationEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cohort_intervals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">states</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#transitionMatrix.estimators.DurationEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transitionMatrix.estimators.BaseEstimator" title="transitionMatrix.estimators.BaseEstimator"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitionMatrix.estimators.BaseEstimator</span></code></a></p>
 <p>Base class for implementing any duration based transition matrix estimator</p>
 <p>Offers methods common to all duration based estimators
@@ -346,7 +349,7 @@ Approximate numpy(i,j, k_index : largest k-value that is less than t(boundary))<
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="transitionMatrix.utils.html" class="btn btn-neutral float-right" title="transitionMatrix.utils subpackage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="transitionMatrix.utils.html" class="btn btn-neutral float-right" title="utilities subpackage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="transitionMatrix.html" class="btn btn-neutral float-left" title="transitionMatrix Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -358,11 +361,19 @@ Approximate numpy(i,j, k_index : largest k-value that is less than t(boundary))<
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Open Risk
+        
+        &copy; Copyright 2017-2020, Open Risk
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -373,7 +384,6 @@ Approximate numpy(i,j, k_index : largest k-value that is less than t(boundary))<
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

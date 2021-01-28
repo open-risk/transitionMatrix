@@ -1,4 +1,4 @@
-transitionMatrix.utils subpackage
+utilities subpackage
 =================================
 
 transitionMatrix.utils contents

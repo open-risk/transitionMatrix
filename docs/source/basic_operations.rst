@@ -8,7 +8,7 @@ The core TransitionMatrix object implements a typical (one period) transition ma
 - Compute generators, powers etc.
 - Output to json/csv formats
 
-Note: All standard numerical matrix operations are available as per numpy API.
+.. note:: All standard numerical matrix operations are available as per the numpy API.
 
 Single Matrix Operation Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

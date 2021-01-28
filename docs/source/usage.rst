@@ -1,7 +1,7 @@
 Usage
 ==============================
 
-The transitionMatrix packages offers a lot of functionality. Here we break down *some* of the main tools and workflows for those getting started (we'll keep expanding the documentation)
+The transitionMatrix package offers a lot of functionality. Here we break down *some* of the main tools and workflows for those getting started (we'll keep expanding the documentation)
 
 .. toctree::
    :maxdepth: 4

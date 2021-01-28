@@ -24,18 +24,16 @@ Key Information
 * Code Documentation: [Read The Docs](https://transitionmatrix.readthedocs.io/en/latest/index.html)
 * Mathematical Documentation: [Open Risk Manual](https://www.openriskmanual.org/wiki/Transition_Matrix)
 * Development website: [Github](https://github.com/open-risk/transitionMatrix)
-* General Discussions: [Gitter Lobby](https://gitter.im/open-risk/Lobby)
-* Package Specific Chat: [Gitter Project](https://gitter.im/open-risk/transitionMatrix)
+* Project Chat: [Gitter Project](https://gitter.im/open-risk/transitionMatrix)
 
-**NB: transitionMatrix is still in active development. If you encounter issues please raise them in our
-github repository**
+**NB: transitionMatrix is still in active development. If you encounter issues or have suggestions please raise them in our github repository**
 
 Support and Training
 =========================
 
 * The Open Risk Academy has free courses demonstrating the use of the library. The current list is: 
     * [Analysis of Credit Migration using Python TransitionMatrix](https://www.openriskacademy.com/course/view.php?id=38)
-* Commercial Support for transitionMatrix is provided as part of OpenCPM
+* Commercial Support for transitionMatrix and other open source libraries developed by [Open Risk](https://www.openriskmanagement.com) is available upon request
 
 
 Examples
