@@ -6,7 +6,7 @@ cycler==0.10.0
 docutils==0.16
 idna==2.10
 imagesize==1.2.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
 matplotlib==3.3.2
