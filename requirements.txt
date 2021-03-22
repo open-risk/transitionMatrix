@@ -6,7 +6,7 @@ cycler==0.10.0
 docutils==0.16
 idna==2.10
 imagesize==1.2.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
 matplotlib==3.3.2
@@ -14,7 +14,7 @@ numpy==1.19.2
 packaging==20.4
 pandas==1.1.2
 patsy==0.5.1
-Pillow==7.2.0
+Pillow==8.1.1
 Pygments==2.7.1
 pyparsing==2.4.7
 python-dateutil==2.8.1
