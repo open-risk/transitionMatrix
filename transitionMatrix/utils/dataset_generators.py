@@ -23,11 +23,9 @@ from scipy import stats as stats
 
 def exponential_transitions(statespace, n, sample, rate, data_format='Compact'):
     """
-    Generate continuous time events from exponential distribution and uniform sampling from state space. Suitable
-    for testing cohorting algorithms and duration based estimators.
+    Generate continuous time events from exponential distribution and uniform sampling from state space. Suitable for testing cohorting algorithms and duration based estimators.
 
-    The data are sorted by entity ID, then by time of occurrence T. The first entry per entity indicates the state up
-    to that timepoint. The format is a sequence of triples (ID, Time, State)
+    The data are sorted by entity ID, then by time of occurrence T. The first entry per entity indicates the state up to that timepoint. The format is a sequence of triples (ID, Time, State)
 
     :param statespace: The state space to use for the simulation
     :param int n: The number of distinct entities to simulate
@@ -140,8 +138,7 @@ def long_format(statespace, transitionmatrix, n, timesteps):
 
 def portfolio_labels(statespace, n):
     """
-    Generate a collection of credit rating states emulating a snapshot of portfolio data
-    Suitable for mappings and transformations of credit rating states
+    Generate a collection of credit rating states emulating a snapshot of portfolio data. Suitable for mappings and transformations of credit rating states
 
     :type statespace: The state space to use for the simulation
     :param int n: The number of distinct entities to generate

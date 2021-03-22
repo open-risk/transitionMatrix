@@ -1,8 +1,7 @@
 Roadmap
 =========================
 
-transitionMatrix aims to become the most intuitive and versatile tool to analyse discrete transition data.
-This roadmap lays out upcoming steps in this journey.
+transitionMatrix aims to become the most intuitive and versatile tool to analyse discrete transition data. This roadmap lays out upcoming steps in this journey.
 
 0.4.X
 --------------------------

@@ -13,6 +13,7 @@ transitionMatrix Documentation
    modules
    changelog
    roadmap
+   todo
 
 Indexes and tables
 ==================

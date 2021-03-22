@@ -21,7 +21,7 @@ __version__ = '0.4.7'
 
 ver = __version__
 
-long_descr = open('description.rst', 'r', encoding='utf8').read()
+long_descr = open('docs/source/description.rst', 'r', encoding='utf8').read()
 
 setup(name='transitionMatrix',
       version=ver,

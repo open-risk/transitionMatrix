@@ -767,9 +767,11 @@ class TransitionMatrixSet(object):
         """ Calculate the incremental probability of crossing the absorbing barrier,
         and the corresponding cumulative probabilities, hazard rates and survival rates
 
+        .. Todo:: Make absorbing state an attribute of Matrix and MatrixSet
+
         """
 
-        # TODO Make absorbing state an attribute of Matrix and MatrixSet
+
         # Default state hardwired to be highest matrix element
         Default = self.dimension - 1
         Periods = len(self.periods)

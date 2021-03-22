@@ -7,15 +7,6 @@ transitionMatrix Package
 transitionMatrix.model Classes
 ------------------------------
 
-CreditCurve
-~~~~~~~~~~~~~~~~~~~
-
-.. autoclass:: transitionMatrix.model.CreditCurve
-   :members:
-
-   .. automethod:: __new__
-
-
 TransitionMatrix
 ~~~~~~~~~~~~~~~~~~~
 
@@ -34,8 +25,17 @@ TransitionMatrixSet
 
    .. automethod:: __mul__
 
+CreditCurve
+~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: transitionMatrix.model.CreditCurve
+   :members:
+
+   .. automethod:: __new__
+
 
 .. _state_space_doc:
+
 
 StateSpace
 ~~~~~~~~~~~~~~~~~~~

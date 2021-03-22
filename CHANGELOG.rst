@@ -3,6 +3,13 @@ ChangeLog
 
 PLEASE NOTE THAT THE API OF TRANSITION MATRIX IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+v0.4.8 (07-02-2021)
+-------------------
+
+* Documentation: Pulled all rst files in docs
+* Refactoring: credit rating data moved into separate module
+
+
 v0.4.7 (29-09-2020)
 -------------------
 
@@ -36,7 +43,7 @@ v0.4.4 (03-04-2019)
 v0.4.3 (29-03-2019)
 -------------------
 
-* Significant rearrangement of code (the threshold models package moved to portfolioAnalytics for more consistent structure of the code base / functionality)
+* Refactoring: Significant rearrangement of code (the threshold models package moved to portfolioAnalytics for more consistent structure of the code base / functionality)
 
 v0.4.2 (29-01-2019)
 -------------------
@@ -59,10 +66,10 @@ v0.4.1 (31-10-2018)
 v0.4.0 (23-10-2018)
 -------------------
 
+* Installation: First PyPI and wheel installation options
 * Feature: Added Aalen-Johansen Duration Estimator
 * Documentation: Major overhaul of documentation, now targeting ReadTheDocs distribution
 * Training: Streamlining of all examples
-* Installation: Pypi and wheel installation options
 * Datasets: Synthetic Datasets in long format
 
 v0.3.1 (21-09-2018)
@@ -90,7 +97,7 @@ v0.1.3 (04-05-2018)
 v0.1.2 (05-12-2017)
 -------------------
 
-* Refactoring dataset paths
+* Refactoring: Dataset paths
 * Bugfix: Correcting requirement dependencies (missing matplotlib)
 * Documentation: More detailed instructions
 

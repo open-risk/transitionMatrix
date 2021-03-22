@@ -13,6 +13,5 @@ Example: Map credit ratings between systems
 
 * Script: state_space_operations.py
 
-Example workflows for converting data from one credit rating system to another using an established mapping
-table
+Example workflows for converting data from one credit rating system to another using an established mapping table
 
