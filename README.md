@@ -10,8 +10,8 @@ Use cases include credit rating transitions, system state event logs etc.
 You can use transitionMatrix to
 
 - Estimate transition matrices from historical event data using a variety of estimators
-- Visualize event data and transition matrices
 - Manipulate transition matrices (generators, comparisons etc.)
+- Visualize event data and transition matrices
 - Provide standardized data sets for testing
 - Model transitions using threshold processes
 - Map credit ratings using mapping tables between popularly used rating systems 
@@ -33,14 +33,13 @@ Support and Training
 
 * The Open Risk Academy has free courses demonstrating the use of the library. The current list is: 
     * [Analysis of Credit Migration using Python TransitionMatrix](https://www.openriskacademy.com/course/view.php?id=38)
-* Commercial Support for transitionMatrix and other open source libraries developed by [Open Risk](https://www.openriskmanagement.com) is available upon request
+* Support for transitionMatrix and other open source libraries developed by [Open Risk](https://www.openriskmanagement.com) is available upon request
 
 
 Examples
 ========
 
-The [code documentation](https://transitionmatrix.readthedocs.io/en/latest/index.html) includes a 
-large number of examples, jupyter notebooks and more. 
+The [code documentation](https://transitionmatrix.readthedocs.io/en/latest/index.html) includes a large number of examples, jupyter notebooks and more. 
 
 
 Plotting individual transition trajectories

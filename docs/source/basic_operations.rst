@@ -37,8 +37,7 @@ Estimate Matrix from Cohort Data
 
 * Script: matrix_from_cohort_data.py
 
-Example workflows using transitionMatrix to estimate a transition matrix from data that are
-already grouped in cohorts
+Example workflows using transitionMatrix to estimate a transition matrix from data that are already grouped in cohorts
 
 
 Matrix from Duration Data
@@ -46,7 +45,6 @@ Matrix from Duration Data
 
 * Script: matrix_from_duration_data.py
 
-Example workflows using transitionMatrix to estimate a transition matrix from data that are
-in duration format. The datasets are first grouped in period cohorts
+Example workflows using transitionMatrix to estimate a transition matrix from data that are in duration format. The datasets are first grouped in period cohorts
 
 

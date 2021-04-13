@@ -1,5 +1,4 @@
-.. transitionMatrix documentation master file, created by
-   sphinx-quickstart on Thu May  3 17:51:16 2018.
+.. transitionMatrix documentation master file, created by sphinx-quickstart on Thu May  3 17:51:16 2018.
 
 transitionMatrix Documentation
 ==============================
