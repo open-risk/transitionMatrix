@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -13,8 +13,7 @@
 # limitations under the License.
 
 
-""" Example of using transitionMatrix to detect and solve various pathologies that might be affecting transition
-matrix data
+""" Example of using transitionMatrix to detect and solve various pathologies that might be affecting transition matrix data
 
 """
 
@@ -28,7 +27,7 @@ print("> Validate")
 print(SnP_Set0.validate())
 print(
     "> We detect dimensionality problems. The matrices are not square (missing the trivial Default and NR transitions)")
-print("> We must fix that to proceed. Augment matrices in set by fixing Default and NR transitions")
+print("> We must fix that to proceed. Augment the matrices in the set by fixing Default and NR transitions")
 C_Vals = []
 for matrix in SnP_Set0.entries:
     C = tm.TransitionMatrix(values=np.resize(matrix, (9, 9)))
@@ -55,3 +54,11 @@ print(SnP_Set2.validate())
 print("> Hurrah, we have a probability matrix set. Lets save it")
 
 SnP_Set2.to_json(dataset_path + 'sp_1981-2016.json', accuracy=5)
+
+
+def main():
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()

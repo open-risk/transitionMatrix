@@ -1,17 +1,7 @@
-utilities subpackage
+Utilities SubPackage
 =================================
 
-transitionMatrix.utils contents
----------------------------------------------
-
-.. automodule:: transitionMatrix.utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-transitionMatrix.utils Submodules
-----------------------------------------
+This subpackage collects various utilities
 
 transitionMatrix.utils.converters module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -21,14 +11,6 @@ transitionMatrix.utils.converters module
     :undoc-members:
     :show-inheritance:
 
-
-transitionMatrix.utils.dataset\_generators module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: transitionMatrix.utils.dataset_generators
-    :members:
-    :undoc-members:
-    :show-inheritance:
 
 transitionMatrix.utils.preprocessing module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

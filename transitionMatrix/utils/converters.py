@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2021 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -15,14 +15,33 @@
 """ Converter utilities to help switch between various formats """
 
 import pandas as pd
+import numpy as np
 
 
-def datetime_to_float(dataframe):
+def frame_to_array(dataframe):
     """
-    .. _Datetime_to_float:
+    Convert pandas to numpy array
+    :param dataframe:
+    :return:
+    """
+    event_count = dataframe.shape[0]
+    entity_id = np.empty(event_count, int)
+    entity_state = np.empty(event_count, int)
+    event_time = np.empty(event_count, float)
 
-    Converts dates from string format to the canonical float format
+    i = 0
+    for row in dataframe.itertuples(index=False):
+        entity_id[i] = row.ID
+        event_time[i] = row.Time
+        entity_state[i] = row.State
+        i += 1
+    return entity_id, event_time, entity_state
 
+
+def datetime_to_float(dataframe, time_column='Time'):
+    """datetime_to_float() converts dates from string format to the canonical float format
+
+    :param time_column: the column label of the observation times
     :param dataframe: Pandas dataframe with dates in string format
     :return: Pandas dataframe with dates in float format
     :rtype: object
@@ -30,31 +49,78 @@ def datetime_to_float(dataframe):
     .. note:: The date string must be recognizable by the pandas to_datetime function.
 
     """
-    start_date = dataframe['Time'].min()
-    end_date = dataframe['Time'].max()
+
+    dataframe[time_column] = dataframe[time_column].apply(
+        lambda x: (pd.to_datetime(x)))
+
+    # Find the start and end dates of the sample
+    start_date = dataframe[time_column].min()
+    end_date = dataframe[time_column].max()
+    # Find the total days in the sample
     total_days = (pd.to_datetime(end_date) - pd.to_datetime(start_date)).days
-    dataframe['Time'] = dataframe['Time'].apply(
-        lambda x: (pd.to_datetime(x) - pd.to_datetime(start_date)).days / total_days)
+
+    # Apply the transformation
+    # If total_days == 0 simply set to zero
+    if total_days > 0:
+        dataframe[time_column] = dataframe[time_column].apply(
+            lambda x: (pd.to_datetime(x) - pd.to_datetime(start_date)).days / total_days)
+    else:
+        dataframe[time_column] = dataframe[time_column].apply(
+            lambda x: 0.0
+        )
+
     return [start_date, end_date, total_days], dataframe
 
 
-def print_matrix(A, format_type='Standard', accuracy=2):
-    """ Pretty print a matrix
+def to_canonical(dataframe):
+    """to_canonical() converts a dataframe that is in compact form into a canonical form
 
-    :param format_type: formatting options (Standard, Percent)
-    :type format_type: str
-    :param accuracy: number of decimals to display
-    :type accuracy: int
+    :param dataframe:
+    :return: dataframe
 
     """
-    for s_in in range(A.shape[0]):
-        for s_out in range(A.shape[1]):
-            if format_type is 'Standard':
-                format_string = "{0:." + str(accuracy) + "f}"
-                print(format_string.format(A[s_in, s_out]) + ' ', end='')
-            elif format_type is 'Percent':
-                print("{0:.2f}%".format(100 * A[s_in, s_out]) + ' ', end='')
-        print('')
+
+    event_count = dataframe.shape[0]
+    entity_id = np.empty(event_count, int)
+    state = np.empty(event_count, int)
+    event_from_state = np.empty(event_count, int)
+    event_to_state = np.empty(event_count, int)
+    event_time = np.empty(event_count, float)
+
+    i = 0
+    for row in dataframe.itertuples(index=False):
+        entity_id[i] = row.ID
+        event_time[i] = row.Time
+        state[i] = row.State
+        i += 1
+
+    rows = []
+    # boostrap first event
+    i = 0
+    event_from_state[i] = state[i]
+    event_to_state[i] = state[i]
+    rows.append((entity_id[i], event_time[i], event_from_state[i], event_to_state[i]))
+    for i in range(1, event_count):
+        if entity_id[i - 1] == entity_id[i]:  # same entity transition
+            event_from_state[i] = event_to_state[i - 1]
+            event_to_state[i] = state[i]
+        else:  # new entity
+            event_from_state[i] = state[i]
+            event_to_state[i] = state[i]
+
+        rows.append((entity_id[i], event_time[i], event_from_state[i], event_to_state[i]))
+    return pd.DataFrame(rows, columns=['ID', 'Time', 'From', 'To'])
 
 
-print('')
+def to_compact(dataframe):
+    """to_compact() converts a dataframe that is in canonical form into a compact form
+
+    :param dataframe:
+    :return: dataframe
+
+    """
+
+    data = dataframe.drop(['From'], axis=1)
+    data.rename(columns={'To': 'State'}, inplace=True)
+
+    return data

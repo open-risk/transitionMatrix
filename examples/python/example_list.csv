@@ -1,0 +1,35 @@
+Script Name,Flag,Input Data,Description
+adjust_nr_state.py,1,,Adjust the NR (not-rated) statistics.
+adjust_nr_state.py,2,,Adjust the NR (not-rated) statistics.
+credit_curves.py,,,Compute and Visualize credit curves
+characterize_datasets.py,,,Load the available datasets and compute various statistics
+compare_estimators.py,,synthetic_data4.csv,Compare the cohort and aalen-johansen estimators on a discrete timestep sample
+data_cleaning_example.py,,rating_data_raw.csv,Prepare transition data sets (data cleansing) using some provided methods
+deterministic_paths.py,,,Create a transition dataset by replicating give trajectories through a graph
+empirical_transition_matrix.py,1,synthetic_data7.csv,Credit Rating Migration example
+empirical_transition_matrix.py,2,synthetic_data8.csv,Simple 2x2 Matrix for testing
+empirical_transition_matrix.py,3,synthetic_data9.csv,Credit Rating Migration example with timestamps in raw date format
+estimate_matrix.py,,rating_data.csv,An end-to-end example of estimating a credit rating matrix from historical data
+fix_multiperiod_matrix.py,,sp_1981-2016.csv,Detect and solve various pathologies that might be affecting transition matrix data
+generate_full_multiperiod_set.py,,sp_NR_adjusted.json,Use infinitesimal generator methods to generate a full multi-period matrix set.
+generate_synthetic_data.py,1,, Generate synthetic data. The first set of examples produces duration type data.
+generate_synthetic_data.py,2,,The second set of examples produces cohort type data using markov chain simulation
+generate_synthetic_data.py,3,,The second set of examples produces cohort type data using markov chain simulation
+generate_visuals.py,6,JLT.json,Plot Transition Probabilities
+generate_visuals.py,7,JLT.json,Logarithmic Sankey Diagram of Credit Migration Rates
+generate_visuals.py,5,scenario_data.csv,Plot Entity Transitions Plot
+generate_visuals.py,1,synthetic_data1.csv,Step Plot of a single observation
+generate_visuals.py,4,synthetic_data3.csv,Entity Transitions Plot
+generate_visuals.py,2,synthetic_data4.csv,Step Plot of individual observations
+generate_visuals.py,3,synthetic_data5.csv,Histogram Plots of transition frequencies
+matrix_from_cohort_data.py,3,synthetic_data4.csv,S&P Style Credit Rating Migration Matrix
+matrix_from_cohort_data.py,2,synthetic_data5.csv,IFRS 9 Style Migration Matrix (Large sample for testing)
+matrix_from_cohort_data.py,1,synthetic_data6.csv,Simplest Absorbing Case for validation
+matrix_from_duration_data.py,1,synthetic_data1.csv,Duration example with limited data (dataset contains only one entity)
+matrix_from_duration_data.py,2,synthetic_data2.csv,"Duration example n entities with ~10 observations each, [0,1] state, 50%/50% transition matrix"
+matrix_from_duration_data.py,3,synthetic_data3.csv,
+matrix_lendingclub.py,,,Estimate a matrix from LendingClub data. Input data are in a special cohort format as the published datasets have some limitations
+matrix_operations.py,,,Perform various transition matrix operations illustrating the matrix algebra
+matrix_set_lendingclub.py,,,Estimate a matrix from LendingClub data. Input data are in a special cohort format as the published datasets have some limitations
+matrix_set_operations.py,,,Perform operations with multi-period transition matrix sequences
+state_space_operations.py,,,Examples working with state spaces (mappings)

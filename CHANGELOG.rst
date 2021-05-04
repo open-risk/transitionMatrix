@@ -3,6 +3,28 @@ ChangeLog
 
 PLEASE NOTE THAT THE API OF TRANSITION MATRIX IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+v0.4.9 (04-05-2021)
+-------------------
+
+* Refactoring: All non-core functionality moved to separate directories/sub-packages
+    * credit curve stuff moved to creditratings modules
+    * data generators moved to generators modules
+    * etc.
+* Documentation: Major expansion (Still incomplete)
+    * Expanded Data Formats
+    * Rating Scales, CQS etc
+    * Listing all datasets and examples
+* Testing / Training: An interesting use case raised as issue #20
+    * Added an end-to-end example of estimating a credit rating matrix from raw data
+    * Includes various data preprocessing examples
+* Datasets:
+    * rating_data.csv (cleaned up credit data)
+    * synthetic_data10.csv Credit Rating Migrations in Long Format / Compact Form (for testing)
+    * deterministic generator (replicate given trajectories)
+* Tests:
+    * test_roundtrip.py testing via roundtriping methods
+
+
 v0.4.8 (07-02-2021)
 -------------------
 

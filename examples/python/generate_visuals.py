@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -22,6 +22,7 @@ import pandas as pd
 import transitionMatrix as tm
 from transitionMatrix import source_path
 from transitionMatrix.estimators import cohort_estimator as es
+from transitionMatrix.creditratings.creditsystems import Generic_SS
 
 
 """
@@ -30,7 +31,7 @@ Example workflows using transitionMatrix to generate visualizations of migration
 """
 
 dataset_path = source_path + "datasets/"
-example = 7
+example = 5
 
 # TODO visualization when states are not sampled (infrequent)
 
@@ -81,8 +82,8 @@ elif example == 2:
     for identity in sample_ids:
         summary += str(identity) + ' '
         entity_data = data[data['ID'] == identity]
-        entity_data = entity_data[['Timestep', 'State']]
-        sorted_data = entity_data.sort_values(['Timestep'], ascending=[True])
+        entity_data = entity_data[['Time', 'State']]
+        sorted_data = entity_data.sort_values(['Time'], ascending=[True])
         raw_data = sorted_data.to_numpy()
         viz_data.append(raw_data)
 
@@ -110,7 +111,7 @@ elif example == 3:
     #  Histogram Plots of transition frequencies
     #
     data = pd.read_csv(dataset_path + 'synthetic_data5.csv', dtype={'State': str})
-    sorted_data = data.sort_values(['ID', 'Timestep'], ascending=[True, True])
+    sorted_data = data.sort_values(['ID', 'Time'], ascending=[True, True])
     definition = [('0', "Stage 1"), ('1', "Stage 2"), ('2', "Stage 3")]
     myState = tm.StateSpace(definition)
     myState.describe()
@@ -276,7 +277,7 @@ elif example == 7:
     n = 4
     filename = dataset_path + 'JLT.json'
     A = tm.TransitionMatrix(json_file=filename)
-    label = tm.Generic_SS.get_state_labels()
+    label = Generic_SS.get_state_labels()
     source = [n+1]
     target = list(range(8))
     input_vals = A.row(n)
@@ -308,3 +309,10 @@ elif example == 7:
     plt.savefig("sankey.png")
     plt.show()
 
+
+def main():
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -13,9 +13,10 @@
 # limitations under the License.
 
 
-""" Example of using the transitionMatrix generator methods to generate a full multi-period matrix set
+""" Example of using the transitionMatrix data generator methods to generate a full multi-period matrix set
 The input data are processed Standard and Poor's matrices for a selection of cumulative observation points
-NB: This example requires a substantial amount of custom code!
+
+.. note:: This example requires a substantial amount of custom code!
 
 """
 
@@ -89,3 +90,11 @@ SnP.print_matrix(accuracy=4)
 # TODO Handle strictly zero transition probabilities
 # TODO Handle non-monotonic transition probabilities
 SnP.to_json(dataset_path + "sp_multiperiod.json", accuracy=8)
+
+
+def main():
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()

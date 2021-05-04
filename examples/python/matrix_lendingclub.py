@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -79,3 +79,11 @@ myMatrix[9, 9] = 1.0
 print(myMatrix.validate())
 print(myMatrix.characterize())
 myMatrix.print()
+
+
+def main():
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()

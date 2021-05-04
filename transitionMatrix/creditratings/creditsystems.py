@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2021 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -13,36 +13,47 @@
 # limitations under the License.
 
 
-""" transitionMatrix - Python package for statistical analysis and visualization of state space transition events
+""" A collection of state space descriptions from recognized public credit rating scales. The list includes the following: Predefined state spaces (include CQS mappings)
 
+    - AM Best Europe-Rating Services Ltd.
+    - ARC Ratings S.A.
+    - Cerved Rating Agency S.p.A.
+    - Creditreform Rating AG
+    - DBRS Ratings Limited
+    - Fitch Ratings
+    - Moody’s Investors Service
+    - Scope Ratings AG
+    - Standard & Poor’s Ratings Services
 
+  There are also mappings between major rating scales (e.g.SnP_Fitch2Moodys)
 
+  .. warning:: The mappings are nominal (as defined by regulation or convention) and do not necessarily indicate conceptual or statistical alignement!
 
 """
 
-from transitionMatrix.model import *
-from transitionMatrix.estimators import *
-from transitionMatrix.utils import *
-
-__version__ = '0.4.7'
-
-package_name = 'transitionMatrix'
-module_path = os.path.dirname(__file__)
-source_path = module_path[:-len(package_name)]
-dataset_path = os.path.join(source_path, 'datasets/')
+from transitionMatrix.statespaces.statespace import StateSpace
 
 #
 # PREDEFINED STATE SPACES
 #
 
-# Generic state space for testing
-originator = 'Open Risk'
+# A generic state space for testing
+originator = 'N/A'
 full_name = 'Generic state space for testing'
 definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
               ('4', "BB"), ('5', "B"), ('6', "CCC"),
               ('7', "D")]
 
 Generic_SS = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=None)
+
+# A generic state space for testing - includes NR
+originator = 'N/A'
+full_name = 'Generic state space for testing - includes NR state'
+definition = [('0', "AAA"), ('1', "AA"), ('2', "A"), ('3', "BBB"),
+              ('4', "BB"), ('5', "B"), ('6', "CCC"),
+              ('7', "D"), ('8', "NR")]
+
+Generic_NR = StateSpace(definition=definition, originator=originator, full_name=full_name, cqs_mapping=None)
 
 # AM Best Europe-Rating Services Ltd.
 originator = 'AM Best Europe-Rating Services Ltd.'
@@ -83,7 +94,7 @@ AM_Best_SS = StateSpace(definition=definition, originator=originator, full_name=
 
 # ARC Ratings S.A.
 originator = 'Standard & Poor’s Ratings Services'
-full_name = 'Medium- and long-term issuer rating scale'
+full_name = 'Medium and long-term issuer rating scale'
 definition = [('0', "AAA"), ('1', "AA"),
               ('2', "A"),
               ('3', "BBB"),

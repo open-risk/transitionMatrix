@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -14,8 +14,7 @@
 
 
 """
-Example workflows using transitionMatrix to estimate an empirical transition matrix from duration type data
-The datasets are produced in examples/generate_synthetic_data.py
+Example workflows using transitionMatrix to estimate an empirical transition matrix from duration type data. The datasets are produced in examples/generate_synthetic_data.py
 
 """
 import matplotlib.pyplot as plt
@@ -33,7 +32,7 @@ dataset_path = source_path + "datasets/"
 # Example 2: Simple 2x2 Matrix for testing
 # Example 3: Credit Rating Migration example with timestamps in raw date format
 
-example = 1
+example = 3
 
 # Step 1
 # Load the data set into a pandas frame
@@ -76,7 +75,8 @@ print(myState.validate_dataset(dataset=sorted_data, labels=labels))
 # Estimate matrices using the Aalen-Johansen estimator
 print("> Step 3: Estimate matrices using the Aalen-Johansen estimator")
 myEstimator = aj.AalenJohansenEstimator(states=myState)
-labels = {'Timestamp': 'Time', 'From_State': 'From', 'To_State': 'To', 'ID': 'ID'}
+# labels = {'Timestamp': 'Time', 'From_State': 'From', 'To_State': 'To', 'ID': 'ID'}
+labels = {'Time': 'Time', 'From': 'From', 'To': 'To', 'ID': 'ID'}
 etm, times = myEstimator.fit(sorted_data, labels=labels)
 
 # Step 4
@@ -123,3 +123,11 @@ if example == 1 or example == 3:
     # plt.title("Multi-period Transition Probabilities")
     plt.savefig("transition_probabilities.png")
     plt.show()
+
+
+def main():
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()

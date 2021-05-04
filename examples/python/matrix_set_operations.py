@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -13,12 +13,12 @@
 # limitations under the License.
 
 
-""" Examples using transitionMatrix to perform operations with transition matrix sequences
+""" Examples using transitionMatrix to perform operations with transition matrix sets sequences
 
 """
 
 import transitionMatrix as tm
-from transitionMatrix.predefined import Generic as T1
+from transitionMatrix.creditratings.predefined import Generic as T1
 
 print("-- Lets seed the set with a 3x3 matrix")
 A = tm.TransitionMatrix(values=[[0.6, 0.2, 0.2], [0.2, 0.6, 0.2], [0.2, 0.2, 0.6]])
@@ -56,3 +56,10 @@ print("-- Create a multiperiod matrix set and save to json file")
 T_Set = tm.TransitionMatrixSet(values=T1, periods=10, method='Power', temporal_type='Cumulative')
 T_Set.to_json('Tn.json')
 
+
+def main():
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()

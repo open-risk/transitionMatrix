@@ -1,10 +1,12 @@
 transitionMatrix Package
 ============================
 
+The core module
+
 .. automodule:: transitionMatrix.model
     :noindex:
 
-transitionMatrix.model Classes
+transitionMatrix Classes
 ------------------------------
 
 TransitionMatrix
@@ -25,29 +27,11 @@ TransitionMatrixSet
 
    .. automethod:: __mul__
 
-CreditCurve
-~~~~~~~~~~~~~~~~~~~
-
-.. autoclass:: transitionMatrix.model.CreditCurve
-   :members:
-
-   .. automethod:: __new__
-
-
-.. _state_space_doc:
-
-
-StateSpace
-~~~~~~~~~~~~~~~~~~~
-
-.. autoclass:: transitionMatrix.model.StateSpace
-   :members:
-
-   .. automethod:: __init__
-
 
 EmpiricalTransitionMatrix
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo:: This is future functionality
 
 .. autoclass:: transitionMatrix.model.EmpiricalTransitionMatrix
    :members:
@@ -55,10 +39,14 @@ EmpiricalTransitionMatrix
    .. automethod:: __init__
 
 
-Subpackages
------------
+transitionMatrix Subpackages
+=============================
 
 .. toctree::
 
     transitionMatrix.estimators
+    transitionMatrix.statespaces
+    transitionMatrix.creditratings
+    transitionMatrix.generators
+    transitionMatrix.visualization
     transitionMatrix.utils

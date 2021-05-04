@@ -1,9 +1,10 @@
-Example scripts
+Example Scripts
 ===============
 
 - <adjust_nr_state.py>
 - <credit_curves.py>
 - <empirical_transition_matrix.py>
+- <estimate_matrix.py>  
 - <fix_multiperiod_matrix.py>
 - <generate_full_multiperiod_set.py>
 - <generate_synthetic_data.py>

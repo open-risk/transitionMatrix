@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -24,6 +24,7 @@ import pandas as pd
 import transitionMatrix as tm
 from transitionMatrix import source_path
 from transitionMatrix.estimators import cohort_estimator as es
+from transitionMatrix.utils.converters import datetime_to_float
 
 dataset_path = source_path + "datasets/"
 
@@ -32,7 +33,7 @@ dataset_path = source_path + "datasets/"
 # 2-> A full example with a 2x2 matrix
 # 3-> A full example with a 8x8 matrix
 
-example = 3
+example = 4
 
 if example == 1:
 
@@ -44,14 +45,20 @@ if example == 1:
     print(myState.validate_dataset(dataset=sorted_data))
     # Bin the data into 5 intervals
     cohort_data, cohort_intervals = tm.utils.bin_timestamps(data, cohorts=5)
+    print("> Cohort intervals: ", cohort_intervals)
+    print(80 * '=')
+    print("> Cohort data")
+    print(cohort_data)
     myEstimator = es.CohortEstimator(states=myState, ci={'method': 'goodman', 'alpha': 0.05})
-    labels = {'Timestamp': 'Cohort', 'State': 'State', 'ID': 'ID'}
+    labels = {'Time': 'Cohort', 'State': 'State', 'ID': 'ID'}
+    print(80 * '=')
     result = myEstimator.fit(cohort_data, labels=labels)
-    # Check significance of some estimates
-    # First period
-    myEstimator.summary(k=0)
-    # Last period
-    myEstimator.summary(k=4)
+    print(80 * '=')
+    print("> Display results")
+    myMatrixSet = tm.TransitionMatrixSet(values=result, temporal_type='Incremental')
+    print(myMatrixSet.temporal_type)
+    myMatrixSet.print_matrix()
+
 
 elif example == 2:
 
@@ -101,7 +108,31 @@ elif example == 3:
     print(myState.validate_dataset(dataset=sorted_data))
     cohort_data, cohort_intervals = tm.utils.bin_timestamps(data, cohorts=5)
     myEstimator = es.CohortEstimator(states=myState, ci={'method': 'goodman', 'alpha': 0.05})
-    labels = {'Timestamp': 'Cohort', 'State': 'State', 'ID': 'ID'}
+    labels = {'Time': 'Cohort', 'State': 'State', 'ID': 'ID'}
     result = myEstimator.fit(cohort_data, labels=labels)
     myMatrixSet = tm.TransitionMatrixSet(values=result, temporal_type='Incremental')
     myMatrixSet.print_matrix()
+
+elif example == 4:
+
+    data = pd.read_csv(dataset_path + 'synthetic_data10.csv', dtype={'State': str})
+    sorted_data = data.sort_values(['ID', 'Time'], ascending=[True, True])
+    myState = tm.StateSpace(transition_data=sorted_data)
+    myState.describe()
+    print(myState.validate_dataset(dataset=sorted_data))
+    [start_date, end_date, total_days], data = datetime_to_float(sorted_data)
+    print(data.head())
+    cohort_data, cohort_intervals = tm.utils.bin_timestamps(data, cohorts=6)
+    myEstimator = es.CohortEstimator(states=myState, ci={'method': 'goodman', 'alpha': 0.05})
+    print(cohort_data.head())
+    result = myEstimator.fit(cohort_data, labels={'Time': 'Cohort', 'State': 'State', 'ID': 'ID'})
+    myMatrix = tm.TransitionMatrix(myEstimator.average_matrix)
+    myMatrix.print(accuracy=3)
+
+
+def main():
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()

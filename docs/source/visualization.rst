@@ -1,11 +1,17 @@
 Visualization
 ===============
 
-transitionMatrix aims to support native (Python based) visualization of various transition related datasets using matplotlib. For now the visualization functionality is implemented separately as a demo script.
+transitionMatrix aims to support native (Python based) visualization of various transition related datasets using matplotlib and other native python visualization libraries.
 
-* Script: examples/python/generate_visuals.py
+.. note:: The visualization functionality is not yet refactored into a reusable API. For now the visualization functionality is implemented separately as a demo script.
+
+
+Visualization Examples
+----------------------
 
 Example workflows using transitionMatrix to generate visualizations of migration phenomena
+
+* Script: examples/python/generate_visuals.py
 
 Example 1
 """"""""""""""""""""""""""""

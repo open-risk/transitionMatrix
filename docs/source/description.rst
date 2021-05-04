@@ -1,45 +1,42 @@
 The transitionMatrix Library
 =============================
 
-transitionMatrix is a Python powered library for the statistical analysis and visualization of state transition phenomena. It can be used to analyze any dataset that captures timestamped transitions in a discrete state space. Use cases include credit rating transitions, system state event logs and more.
+.. image:: ../../examples/overview.png
+
+transitionMatrix is a pure Python powered library for the statistical analysis and visualization of state transition phenomena. It can be used to analyze any dataset that captures *timestamped transitions in a discrete state space.*
+
 
 * Author: `Open Risk <http://www.openriskmanagement.com>`_
 * License: Apache 2.0
+* Development Website: `Github <https://github.com/open-risk/transitionMatrix>`_
 * Code Documentation: `Read The Docs <https://transitionmatrix.readthedocs.io/en/latest/>`_
 * Mathematical Documentation: `Open Risk Manual <https://www.openriskmanual.org/wiki/Category:Transition_Matrix>`_
+* Chat: `Gitter <https://gitter.im/open-risk/transitionMatrix>`_
 * Training: `Open Risk Academy <https://www.openriskacademy.com/login/index.php>`_
-* Development Website: `Github <https://github.com/open-risk/transitionMatrix>`_
 * Showcase: `Blog Posts <https://www.openriskmanagement.com/tags/transition-matrix/>`_
 
 Functionality
 -------------
 
-You can use transitionMatrix to
+You can use transitionMatrix to:
 
-- Estimate transition matrices from historical event data using a variety of estimators
-- Visualize event data and transition matrices
-- Characterise transition matrices
-- Manipulate transition matrices (derive generators, perform comparisons, stress transition rates etc.)
-- Access standardized datasets for testing
-- Extract and work with default curves
+- **Estimate** transition matrices from historical event data using a variety of estimators
+- **Characterise** transition matrices (identify their key properties)
+- **Visualize** event data and transition matrices
+- **Manipulate** transition matrices (derive generators, perform comparisons, stress transition rates etc.)
+- Access standardized :ref:`Datasets` for testing
+- Extract and work with credit default curves (absorbing states)
 - Map credit ratings using mapping tables
-
-**NB: transitionMatrix is still in active development. If you encounter issues please raise them in our
-github repository**
+- More (still to be documented :-)
 
 Architecture
 ------------
 
-* transitionMatrix supports file input/output in json and csv formats
-* it has a powerful API for handling event data (based on pandas)
-* provides intuitive objects for handling transition matrices individually and as sets (based on numpy)
+* transitionMatrix provides intuitive objects for handling transition matrices individually and as sets (based on numpy arrays)
+* supports file input/output in json and csv formats
+* it has a powerful API for handling event data (based on pandas and numpy)
 * supports visualization using matplotlib
 
-Links to other open source software
------------------------------------
-
-- Duration based estimators are similar to etm, an R package for estimating empirical transition matrices
-- There is some overlap with lower dimensionality (survival) models like lifelines
 
 Installation
 =======================
@@ -58,12 +55,10 @@ Dependencies
 From PyPI
 -------------
 
-.. Todo:: PyPI might not have the latest and best release
+.. Todo:: PyPI might not have the latest code
 
 .. code:: bash
 
-    pip3 install pandas
-    pip3 install matplotlib, plotly
     pip3 install transitionMatrix
 
 From sources
@@ -90,8 +85,6 @@ If you do not have pandas already installed make sure you install it first (this
 
 .. code:: bash
 
-    pip3 install pandas
-    pip3 install matplotlib
     pip3 install -r requirements.txt
 
 Finally issue the install command and you are ready to go!
@@ -109,31 +102,22 @@ The distribution has the following structure:
     | transitionMatrix/     Directory with the library source code
     | -- model.py           File with main data structures
     | -- estimators/        Directory with the estimator methods
+    | -- statespaces/       Directory with state space objects and methods
+    | -- creditratings/     Directory with predefined credit rating structures
+    | -- generators/        Directory with data generator methods
     | -- utils/             Directory with helper classes and methods
     | -- examples/          Directory with usage examples
     | ---- python/          Examples as standalone python scripts
     | ---- notebooks/       Examples as jupyter notebooks
-    | ---- academy/         Example scripts from the Open Risk Academy course PYT26038
     | -- datasets/          Directory with a variety of datasets useful for getting started
     | -- tests/             Directory with the testing suite
 
-Testing
-----------------------
 
-It is a good idea to run the test-suite. Before you get started:
+Other similar open source software
+-----------------------------------
 
-- Adjust the source directory path in transitionMatrix/__init__ and then issue the following in at the root of the distribution
-- Unzip the data files in the datasets directory
-
-.. code:: bash
-
-    python3 test.py
-
-Getting Started
-===============
-
-- Check the **Usage** pages in this documentation.
-- Look at the **Examples** directory for a variety of typical workflows.
-- For a more in depth study, the Open Risk Academy has courses elaborating on the use of the library:
-    - `Analysis of Credit Migration using Python TransitionMatrix <https://www.openriskacademy.com/course/view.php?id=38>`_
-
+- etm, an R package for estimating empirical transition matrices
+- msSurv, an R Package for Nonparametric Estimation of Multistate Models
+- msm, Multi-state modelling with R
+- mstate, competing risks and multistate models in R
+- lifelines, python survival package

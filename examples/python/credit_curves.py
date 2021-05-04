@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -20,11 +20,10 @@
 import matplotlib.pyplot as plt
 
 import transitionMatrix as tm
-from transitionMatrix.predefined import Generic
-
+from transitionMatrix.creditratings.predefined import Generic
 
 # Initialize a single period transition matrix
-# Generic is a Typical Credit Rating Transition Matrix with sever rating states and one absorbing (Default) state
+# Generic is a Typical Credit Rating Transition Matrix with seven rating states and one absorbing (Default) state
 
 print("> Load the generic transition matrix")
 M = tm.TransitionMatrix(values=Generic)
@@ -57,7 +56,7 @@ incremental_PD, cumulative_PD, hazard_Rate, survival_Rate = T.default_curves(0)
 
 # Construct a credit curve set
 credit_curves = T.default_curve_set()
-credit_curves.print(accuracy=5)
+credit_curves.print_curve(accuracy=5)
 
 # Now lets plot a collection of curves for all ratings
 print("> Plot the default curves")
@@ -88,3 +87,11 @@ leg = plt.legend(loc='best', ncol=2, mode="expand", shadow=True, fancybox=True)
 leg.get_frame().set_alpha(0.5)
 
 plt.savefig("credit_curves.png")
+
+
+def main():
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,16 @@
+File,Format,Events,Entities,States,Generator,Description
+rating_data_raw.csv,Compact,4000,1829,9,Extract,A typical credit rating dataset
+rating_data.csv,Compact,3780,1642,9,Data cleaning script,A typical credit rating dataset
+scenario_data.csv,Compact,550,50,5,,
+synthetic_data.csv,Compact,100,10,2,,
+synthetic_data1.csv,Compact,100,1,4,Generator(=1),DURATION TYPE DATASETS (Compact format)
+synthetic_data2.csv,Compact,10000,1000,2,Generator(=2),DURATION TYPE DATASETS (Compact format)
+synthetic_data3.csv,Compact,2000,100,7,Generator(=3),DURATION TYPE DATASETS (Compact format)
+synthetic_data4.csv,Compact,10000,1000,8,Generator(=4),Cohort type dataset (Generic Rating Matrix). Offers a semi-realistic example
+synthetic_data5.csv,Compact,50000,10000,3,Generator(=5),Large cohort type dataset useful for testing convergence
+synthetic_data6.csv,Compact,20000,1000,2,Generator(=6),COHORT TYPE DATASETS
+synthetic_data7.csv,Canonical,1295,1000,8,Generator(=7),Duration type datasets in Long Format
+synthetic_data8.csv,Canonical,10000,10000,2,Generator(=8),Duration type datasets in Long Format
+synthetic_data9.csv,Canonical,1338,1000,8,Generator(=9),Duration type datasets in Long Format
+synthetic_data10.csv,Canonical,12000,2000,9,Generator(=10),Credit Rating Migrations in Long Format / Compact Form
+test.csv,Compact,14,7,3,,

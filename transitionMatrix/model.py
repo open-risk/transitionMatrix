@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2021 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -12,15 +12,12 @@
 # either express or implied. See the License for the specific language governing permissions and
 # limitations under the License.
 
-""" This module provides the key transition matrix objects
+""" This module provides the core transition matrix objects
 
-* CreditCurve_ implements the functionality of a collection of credit (default curves)
-* TransitionMatrix_ implements the functionality of single period transition matrix
-* TransitionMatrixSet_ provides a container for a multiperiod transition matrix collection
-* StateSpace holds information about the stochastic system state space
-* EmpiricalTransitionMatrix implements the functionality of a continuously observed transition matrix
+* TransitionMatrix_ implements the functionality of a single-period transition matrix
+* TransitionMatrixSet_ provides a container for a multi-period transition matrix collection
+* TODO: EmpiricalTransitionMatrix implementing a continuously observed transition matrix
 
-.. moduleauthor: Open Risk
 """
 
 import json
@@ -28,6 +25,8 @@ import numpy as np
 import os
 import pandas as pd
 import transitionMatrix as tm
+from transitionMatrix.creditratings.creditcurve import CreditCurve
+from transitionMatrix.statespaces.statespace import StateSpace
 from scipy.linalg import logm, expm
 
 
@@ -45,162 +44,6 @@ def matrix_exponent(generator, t=1.0):
     return exponent
 
 
-class CreditCurve(np.matrix):
-    """ The _`CreditCurve` object implements a typical collection of `credit curves <https://www.openriskmanual.org/wiki/Credit_Curve>`_.
-    The class inherits from numpy matrices and implements additional properties specific to curves.
-
-    """
-
-    def __new__(cls, values=None, json_file=None, csv_file=None):
-        """ Create a new credit curve set. Different options for initialization are:
-
-        * providing values as a list of list
-        * providing values as a numpy array  (The rows are the different curves, the columns are different periods)
-        * loading from a csv file
-        * loading from a json file
-
-        Without data, a default identity matrix is generated with user specified dimension
-
-        :param values: initialization values
-        :param json_file: a json file containing transition matrix data
-        :param csv_file: a csv file containing transition matrix data
-        :type values: list of lists or numpy array
-        :returns: returns a CreditCurve object
-        :rtype: object
-
-        .. note:: The initialization in itself does not validate if the provided values form indeed a credit curve
-
-        :Example:
-
-        .. code-block:: python
-
-            A = tm.CreditCurve(values=[[0.1, 0.2, 0.3], [0.2, 0.6, 0.8], [0.01, 0.02, 0.06]])
-
-        """
-        obj = None
-        if values is not None:
-            # Initialize with given values
-            obj = np.asarray(values).view(cls)
-        elif json_file is not None:
-            # Initialize from file in json format
-            q = pd.read_json(json_file)
-            obj = np.asarray(q.values).view(cls)
-        elif csv_file is not None:
-            # Initialize from file in csv format
-            q = pd.read_csv(csv_file, index_col=None)
-            obj = np.asarray(q.values).view(cls)
-        # validation flag is set to False at initialization
-        obj.validated = False
-        # temporary dimension assignment (must validated for squareness)
-        obj.dimension = obj.shape[0]
-        return obj
-
-    def to_json(self, file):
-        """
-        Write credit curves to file in json format
-
-        :param file: json filename
-        """
-
-        q = pd.DataFrame(self)
-        q.to_json(file, orient='values')
-
-    def to_csv(self, file):
-        """
-        Write credit curves to file in csv format
-
-        :param file: csv filename
-        """
-
-        q = pd.DataFrame(self)
-        q.to_csv(file, index=None)
-
-    def to_html(self, file=None):
-        html_table = pd.DataFrame(self).to_html()
-        if file is not None:
-            file = open(file, 'w')
-            file.write(html_table)
-            file.close()
-        return html_table
-
-    def validate(self, accuracy=1e-3):
-        """ Validate required properties of a credit curve set. The following are checked
-
-        1. check that all values are probabilities (between 0 and 1)
-        2. check that values are non-decreasing
-
-        :param accuracy: accuracy level to use for validation
-        :type accuracy: float
-
-        :returns: List of tuples with validation messages
-        """
-        validation_messages = []
-
-        curve_set = self
-        curve_set_size = curve_set.shape[0]
-        curve_set_periods = curve_set.shape[1]
-
-        # checking that values of curve_set are within allowed range
-        for i in range(curve_set_size):
-            for j in range(curve_set_periods):
-                if curve_set[i, j] < 0:
-                    validation_messages.append(("Negative Probabilities: ", (i, j, curve_set[i, j])))
-                if curve_set[i, j] > 1:
-                    validation_messages.append(("Probabilities Larger than 1: ", (i, j, curve_set[i, j])))
-        # checking monotonicity
-        for i in range(curve_set_size):
-            for j in range(1, curve_set_periods):
-                if curve_set[i, j] < curve_set[i, j - 1]:
-                    validation_messages.append(("Curve not monotonic: ", (i, j)))
-
-        if len(validation_messages) == 0:
-            self.validated = True
-            return self.validated
-        else:
-            self.validated = False
-            return validation_messages
-
-    def hazard_curve(self):
-        """ Compute hazard rates
-
-        .. Todo:: Compute hazard rates
-
-        :return: TODO
-
-        """
-        pass
-
-    def characterize(self):
-        """ Analyse or classify a credit curve according to its properties
-
-        * slope of hazard rate
-
-        .. Todo:: Further characterization
-
-        """
-
-        pass
-
-    def print(self, format_type='Standard', accuracy=2):
-        """ Pretty print a set of credit curves
-
-        :param format_type: formatting options (Standard, Percent)
-        :type format_type: str
-        :param accuracy: number of decimals to display
-        :type accuracy: int
-
-        """
-        for s_in in range(self.shape[0]):
-            for s_out in range(self.shape[1]):
-                if format_type is 'Standard':
-                    format_string = "{0:." + str(accuracy) + "f}"
-                    print(format_string.format(self[s_in, s_out]) + ' ', end='')
-                elif format_type is 'Percent':
-                    print("{0:.2f}%".format(100 * self[s_in, s_out]) + ' ', end='')
-            print('')
-        print('')
-
-
 class TransitionMatrix(np.matrix):
     """ The _`TransitionMatrix` object implements a typical (one period) `transition matrix <https://www.openriskmanual.org/wiki/Transition_Matrix>`_.
 
@@ -211,13 +54,13 @@ class TransitionMatrix(np.matrix):
 
     """
 
-    def __new__(cls, values=None, dimension=2, json_file=None, csv_file=None):
+    def __new__(cls, values=None, dimension=2, json_file=None, csv_file=None, states=None):
         """ Create a new transition matrix. Different options for initialization are:
 
         * providing values as a list of list
         * providing values as a numpy array
-        * loading from a csv file
-        * loading from a json file
+        * loading from a csv file # TODO change the API to file + format
+        * loading from a json file # TODO change the API to file + format
 
         Without data, a default identity matrix is generated with user specified dimension
 
@@ -225,12 +68,17 @@ class TransitionMatrix(np.matrix):
         :param dimension: matrix dimensionality (default is 2)
         :param json_file: a json file containing transition matrix data
         :param csv_file: a csv file containing transition matrix data
+        :param states: an optional state space  object
+
         :type values: list of lists or numpy array
         :type dimension: int
+        :type csv_file: str
+        :type json_file: str
+
         :returns: returns a TransitionMatrix object
         :rtype: object
 
-        .. note:: The initialization in itself does not validate if the provided values form indeed a transition matrix
+        .. note:: The initialization in itself does not validate that the provided values form indeed a transition matrix
 
         :Example:
 
@@ -258,13 +106,18 @@ class TransitionMatrix(np.matrix):
         obj.validated = False
         # temporary dimension assignment (must validated for squareness)
         obj.dimension = obj.shape[0]
+        obj.states = states
         return obj
 
     def row(self, i):
         """
-        Return row values
+        Return a row of matrix values
 
         :param i: row index
+        :type i: int
+
+        :return list
+
         """
         row = []
         matrix_size = self.shape[0]
@@ -290,7 +143,7 @@ class TransitionMatrix(np.matrix):
         """
 
         q = pd.DataFrame(self)
-        q.to_csv(file, index=None)
+        q.to_csv(file, index=False)
 
     def to_html(self, file=None):
         html_table = pd.DataFrame(self).to_html()
@@ -374,7 +227,7 @@ class TransitionMatrix(np.matrix):
             self.validated = False
             return validation_messages
 
-    def generator(self, t=1.0, fix_negative = False):
+    def generator(self, t=1.0, fix_negative=False):
         """ Compute the generator of a transition matrix
 
         :param t: the timescale parameter
@@ -391,9 +244,9 @@ class TransitionMatrix(np.matrix):
                 # for all columns of the generator
                 for j in range(generator.shape[1]):
                     # fix negative off-diagonal elements
-                    if j != i and generator[i,j] < 0:
+                    if j != i and generator[i, j] < 0:
                         # flip the negative element into positive
-                        generator[i, j] = - generator[i,j]
+                        generator[i, j] = - generator[i, j]
                         # subtract from the diagonal
                         generator[i, i] = generator[i, i] - generator[i, j]
 
@@ -448,33 +301,44 @@ class TransitionMatrix(np.matrix):
         """
         pass
 
-    def print(self, format_type='Standard', accuracy=2):
+    def print_matrix(self, format_type='Standard', accuracy=2, labels=False):
         """ Pretty print a transition matrix
 
         :param format_type: formatting options (Standard, Percent)
         :type format_type: str
         :param accuracy: number of decimals to display
         :type accuracy: int
+        :param labels: use state space labels to annotate matrix printout
+        :type labels: bool
 
         """
-        for s_in in range(self.shape[0]):
-            for s_out in range(self.shape[1]):
-                if format_type is 'Standard':
-                    format_string = "{0:." + str(accuracy) + "f}"
-                    print(format_string.format(self[s_in, s_out]) + ' ', end='')
-                elif format_type is 'Percent':
-                    print("{0:.2f}%".format(100 * self[s_in, s_out]) + ' ', end='')
+
+        if labels:
+            for state in self.states.get_state_labels():
+                if state not in ['R', 'SD/D']:
+                    print(state)
+        else:
+            for s_in in range(self.shape[0]):
+                for s_out in range(self.shape[1]):
+                    if format_type is 'Standard':
+                        format_string = "{0:." + str(accuracy) + "f}"
+                        print(format_string.format(self[s_in, s_out]) + ' ', end='')
+                    elif format_type is 'Percent':
+                        print("{0:.1f}%".format(100 * self[s_in, s_out]) + ' ', end='')
+                print('')
             print('')
-        print('')
 
     def remove(self, state, method):
-        """ Remove a transition matrix state and distribute its probability to other states according
-        to prescribed method
+        """ Remove a transition matrix state and distribute its probability mass to other states according to a prescribed method
 
         :param state: the state to remove
+        :param method: the method to use
         :type state: int
+        :type method: str
 
         :returns: a transition matrix
+
+        .. todo:: Implement additional methods, for example a conservative approach where each NR is actually a default
 
         """
         new_matrix = tm.TransitionMatrix(dimension=self.shape[0] - 1)
@@ -482,7 +346,7 @@ class TransitionMatrix(np.matrix):
         del states[state]
         # process all rows of the matrix except the state we remove
         for i in states:
-            # probability to distribute
+            # probability mass to distribute
             xp = self[i, state]
             if 0.0 < xp < 1.0:
                 # process all columns of the matrix except the state we remove
@@ -499,7 +363,8 @@ class TransitionMatrixSet(object):
 
     """
 
-    def __init__(self, dimension=2, values=None, periods=1, temporal_type=None, method=None, json_file=None, csv_file=None):
+    def __init__(self, dimension=2, values=None, periods=1, temporal_type=None, method=None, json_file=None,
+                 csv_file=None):
         """ Create a new matrix set. Different options for initialization are:
 
         * providing values as a list of list
@@ -691,8 +556,7 @@ class TransitionMatrixSet(object):
         return
 
     def remove(self, state, method):
-        """ remove a transition matrix state and distribute its probability to other states according
-        to prescribed method
+        """ remove a transition matrix state and distribute its probability to other states according to a prescribed method. The method calls the remove method for each individual matrix of the set
 
         """
         updated = self
@@ -726,15 +590,28 @@ class TransitionMatrixSet(object):
             self.temporal_type = 'Incremental'
         return
 
-    def print_matrix(self, format_type='Standard', accuracy=2):
-        """ Pretty Print a Transition Matrix Set
+    def print_matrix(self, format_type='Standard', accuracy=2, period=None):
+        """ Pretty print the entire Transition Matrix Set
+
+        :param format_type is the print format
+        :param accuracy number of significant digits
+        :param period which to print (default is all)
+
+        :type format_type str
+        :type accuracy int
+        :type period int
 
         """
-        k = 0
-        for entry in self.entries:
-            print("Entry: ", k)
-            entry.print(format_type=format_type, accuracy=accuracy)
-            k += 1
+        if period:
+            entry = self.entries[period]
+            print('Period ', period, ' matrix')
+            entry.print_matrix(format_type=format_type, accuracy=accuracy)
+        else:
+            k = 0
+            for entry in self.entries:
+                print("Entry: ", k)
+                entry.print_matrix(format_type=format_type, accuracy=accuracy)
+                k += 1
 
     def to_json(self, file=None, accuracy=5):
         hold = []
@@ -763,14 +640,22 @@ class TransitionMatrixSet(object):
             file.close()
         return table_set
 
+    def to_xlsx(self, file=None):
+        """
+        .. todo:: Store the matrix set in an xlsx sheet
+
+        :param file:
+        :return:
+        """
+        pass
+
     def default_curves(self, rating):
-        """ Calculate the incremental probability of crossing the absorbing barrier,
+        """ Calculate the incremental probability of entering an absorbing state,
         and the corresponding cumulative probabilities, hazard rates and survival rates
 
         .. Todo:: Make absorbing state an attribute of Matrix and MatrixSet
 
         """
-
 
         # Default state hardwired to be highest matrix element
         Default = self.dimension - 1
@@ -809,151 +694,14 @@ class TransitionMatrixSet(object):
         return credit_curves
 
 
-class StateSpace(object):
-    """  The StateSpace object stores a state space structure as a List of tuples
-    The first two elements of each tuple contain the index (base-0) and label of the
-    state space respectively.
-
-    Additional fields reserved for further characterisation
-
-    [(index 1, label 1, optional, optional, ...),
-     (index 2, label 2, optional, optional, ...)]
-
-    .. Todo:: Implement Absorbing States
-
-    .. Todo:: Implement in estimators
-
-    """
-
-    def __init__(self, definition=[], sticky=False, absorbing=None, originator=None, full_name=None, cqs_mapping=None):
-        """
-
-        :param definition: List of tuples describing the state space
-        :param sticky: Sticky = True, measurement data contain unchanged states. The default is False, only state changes are recorded
-        :param absorbing: List of states that are absorbing
-        :param originator: Name of entity defining the State Space (e.g. A Credit Rating Agency)
-        :param full_name: Full (formal) name for the State Space (e.g. Concrete Credit Rating Scale)
-        :param cqs_mapping: For credit ratings that have a mapping to the simplified EU CQS Scale
-
-        """
-        # Description:
-        self.definition = definition
-        # The cardinality (size, number of states) of the state space
-        self.cardinality = len(definition)
-
-        self.sticky = sticky
-        self.absorbing = absorbing
-
-        self.originator = originator
-        self.full_name = full_name
-        self.cqs_mapping = cqs_mapping
-
-    def get_states(self):
-        """ Return a list with the set of states
-
-        """
-        states = []
-        for s in self.definition:
-            states.append(s[0])
-        return states
-
-    def get_state_labels(self):
-        """ Return a list of state descriptions
-
-        """
-        states = []
-        for state in self.definition:
-            states.append(state[1])
-        return states
-
-    def generic(self, n=2):
-        """ Create a generic state space of size n
-
-        """
-        self.cardinality = n
-        description = []
-        for s in range(n):
-            description.append((str(s), str(s)))
-        self.definition = description
-
-    def validate_dataset(self, dataset, labels=None):
-        """  Check that a dataset column is consistent with a given state space. The following tests are implemented
-
-        1: all the states in dataset exist in state space description (error otherwise)
-        2: all the states in state space exist in dataset (warning otherwise)
-        3: successive states for the same entity are different, unless the Sticky flag is True
-
-        :param dataset: the dataset to test
-        :param labels: the labels of the state space
-
-        :returns: a list of validation messages
-
-        """
-
-        # Select the appropriate State label
-        # This covers for case of relabeling or multiple columns with state data
-        if labels is not None:
-            state_label = labels['State']
-        else:
-            state_label = 'State'
-
-        # The unique states in the data set
-        dataset_states = dataset[state_label].unique()
-        state_list = dataset_states.tolist()
-        state_list_stringified = [str(s) for s in state_list]
-        print(state_list_stringified)
-        ds = set(state_list_stringified)
-        # The expected states according to the state space
-        expected_states = []
-        for state in self.definition:
-            expected_states.append(state[0])
-        es = set(expected_states)
-        if ds.difference(es):
-            validation_outcome = ds.difference(es)
-            print('Found ', ds)
-            print('Expected', es)
-            validation_message = "Dataset contains more states than expected. Check the following: "
-        elif es.difference(ds):
-            validation_outcome = es.difference(ds)
-            validation_message = "Dataset contains fewer states than expected. Check the following: "
-        else:
-            validation_outcome = ''
-            validation_message = "Dataset contains the expected states."
-
-        return validation_message, validation_outcome
-
-    def describe(self):
-        """
-        Print the State Space description
-
-        """
-        for state in self.definition:
-            print("State Index/Label: ", state[0], " , ", state[1])
-
-    def cqs_map(self, label):
-        """
-        Produce a CQS for a given input label (the cqs_mapping dictionary must exist)
-
-        """
-        mapped = None
-        for x in self.definition:
-            if x[1] == label:
-                mapped = self.cqs_mapping[x[0]]
-        if mapped:
-            return mapped
-        else:
-            print("ERROR: Mapping failed")
-
-
 class EmpiricalTransitionMatrix(object):
-    """  The EmpiricalTransitionMatrix object stores a continuously observed Transition Matrix. It stores matrices
-    estimated using duration methods
+    """The EmpiricalTransitionMatrix object stores a full continuously observed Transition Matrix. Its main utility is to store matrices estimated using duration methods
 
-    The EmpiricalTransitionMatrix object is different from the TransitionMatrixSet in that it stores detailed event time
-    of observations and the transition densities in addition to the transition probabilities
+    .. warning:: not implemented / used yet
 
-    An EmpiricalTransitionMatrix can be converted into a TransitionMatrixSet by sampling on a temporal grid (but not
-    vice-versa)
+    .. note::  The EmpiricalTransitionMatrix object is different from the TransitionMatrixSet in that it stores detailed event time of observations and the transition densities in addition to the transition probabilities
+
+    .. note:: An EmpiricalTransitionMatrix can be converted into a TransitionMatrixSet by sampling on a temporal grid (but not vice-versa)
 
 
     """

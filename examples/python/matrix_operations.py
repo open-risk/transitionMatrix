@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -22,12 +22,14 @@ import numpy as np
 from scipy.linalg import expm
 
 import transitionMatrix as tm
-from transitionMatrix.predefined import JLT
+from transitionMatrix.creditratings.predefined import JLT, SP02NR
 from transitionMatrix import dataset_path
 
 print("> Initialize a 3x3 matrix with values")
 A = tm.TransitionMatrix(values=[[0.6, 0.2, 0.2], [0.2, 0.6, 0.2], [0.2, 0.2, 0.6]])
 print(A)
+A.print_matrix(format_type='Standard', accuracy=2)
+A.print_matrix(format_type='Percent', accuracy=1)
 
 print("> Initialize a generic matrix of dimension n")
 B = tm.TransitionMatrix(dimension=4)
@@ -52,7 +54,7 @@ print(C.validate())
 print(D.validate())
 print(F.validate())
 
-print("> All numpy.matrix / ndarray functionality is available")
+print("> All the numpy.matrix / ndarray functionality is available")
 E = tm.TransitionMatrix(values=[[0.75, 0.25], [0.0, 1.0]])
 print(E.validate())
 # ATTRIBUTES
@@ -69,6 +71,14 @@ print(E.sum(0))
 # - along rows
 print(E.sum(1))
 
+print("> Multiplying all elements of a matrix by a scalar")
+print(0.01 * A)
+
+print("> Transition Matrix algebra is very intuitive")
+print(A * A)
+print(A ** 2)
+print(A ** 10)
+
 print("> Lets fix the invalid matrix C")
 # numpy operations that return numpy arrays can be used as follows:
 C = tm.TransitionMatrix(values=np.resize(C, (2, 2)))
@@ -81,11 +91,6 @@ print("> Computing the generator of a transition matrix")
 # Generator of A
 G = A.generator()
 print(A, expm(G))
-
-print("> Transition Matrix algebra is very intuitive")
-print(A * A)
-print(A ** 2)
-print(A ** 10)
 
 print("> Transition matrices properties can be analyzed")
 print(A.characterize())
@@ -113,3 +118,11 @@ print(np.linalg.norm(Error, 1))
 print("> Use pandas style API for saving to files")
 E.to_csv("JLT.csv")
 E.to_json("JLT.json")
+
+
+def main():
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2020 Open Risk, all rights reserved
+# (c) 2017-2021 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -25,14 +25,14 @@ class AalenJohansenEstimator(DurationEstimator):
     """
     Class for implementing the Aalen-Johansen estimator for the transition matrix
 
+    Documentation: `Aalen-Johansen Estimator <https://www.openriskmanual.org/wiki/Aalen-Johansen_Estimator>`_
 
     """
 
-    def __init__(self, cohort_intervals=None, states=None):
+    def __init__(self, states=None):
         DurationEstimator.__init__(self)
         # if not (0 < alpha <= 1.):
         #     raise ValueError('alpha parameter must be between 0 and 1.')
-        self.cohort_intervals = cohort_intervals
         if states is not None:
             self.states = states
         self.etm = None
@@ -42,38 +42,49 @@ class AalenJohansenEstimator(DurationEstimator):
         """
         Parameters
         ----------
-        data : dataframe
-            The data to use for the estimation provided in a pandas data frame in long format,
-            with one row per observed transition. The data frame must contain the following columns:
-            – ID: A unique entity identification number
-            – FROM: State from where a transition occurs
-            – TO: State to which a transition occurs
-            – TIME Time when a transition occurs
+        data : dataframe - The data to use for the estimation provided in a pandas data frame in long format,with one row per observed transition. The data frame must contain the following columns (or pass a label object that will assign accordingly:
 
-        labels: a dictionary for relabeling column names
+            * ID: A unique entity identification number
+            * TIME Time when a transition occurs
+            * FROM: State from where a transition occurs
+            * TO: State to which a transition occurs
 
-        TODO constraint possible transitions (absorbing states)
-        TODO censored data
-        TODO partial dates
-        TODO covariance calculation
-        TODO confidence intervals
+        labels: an optional dictionary for relabeling column names if those deviate from the convention
+
+            * TODO constraint possible transitions (absorbing states)
+            * TODO censored data
+            * TODO partial dates
+            * TODO covariance calculation
+            * TODO confidence intervals
 
         Returns
         -------
-        etm.values : estimated empirical transition matrix throughout the observed interval.
-        This is a three dimensional array object (From State, To State, Timepoint)
-        observation_times: a list of observation times
-        etm.observation_times
+        etm.values : estimated empirical transition matrix throughout the observed interval. This is a three dimensional array object (From State, To State, Timepoint)
+        observation_times: a list of observation times etm.observation_times
 
-        TODO Store counts as well as frequencies
-        TODO Optional Binning of close observation times
 
-        Notes
-        ------
+        * TODO Store counts as well as frequencies
+        * TODO Optional Binning of close observation times
 
-        The input data MUST be sorted in ascending time order
+
+        .. note::
+            The input data MUST be pre-sorted in ascending time order. This is easily done using pandas functionality.
+
+        References
+        ----------
 
         """
+
+        if labels is not None:
+            from_label = labels['From']
+            to_label = labels['To']
+            timestep_label = labels['Time']
+            id_label = labels['ID']
+        else:
+            from_label = 'From'
+            to_lable = 'To'
+            id_label = 'ID'
+            timestep_label = 'Time'
 
         # The dimension of the transition matrix
         state_dim = self.states.cardinality
@@ -82,7 +93,7 @@ class AalenJohansenEstimator(DurationEstimator):
         observation_times = tm.utils.unique_timestamps(data)
 
         # Store event data in 1d arrays for faster processing
-        event_count = data['ID'].count()
+        event_count = data[id_label].count()
         event_id = np.empty(event_count, int)
         event_from_state = np.empty(event_count, int)
         event_to_state = np.empty(event_count, int)
@@ -95,6 +106,9 @@ class AalenJohansenEstimator(DurationEstimator):
         nan_count = 0
         i = 0  # count of events
         t = 0  # count of distinct timepoints
+
+        # TODO remove row hardwiring
+
         for row in data.itertuples():
             try:
                 event_id[i] = row[1]
@@ -103,7 +117,7 @@ class AalenJohansenEstimator(DurationEstimator):
                 event_to_state[i] = int(row[4])
                 # Identify migrations
                 if event_to_state[i] != event_from_state[i]:
-                    event_exists[i] = True
+                    event_exists[i] = True # indicates valid (complete) data row
                 # Identify timepoint index
                 if i == 0:
                     event_timepoint[i] = 0
@@ -121,11 +135,13 @@ class AalenJohansenEstimator(DurationEstimator):
         self.counts = event_count
         self.timepoint_count = t
 
-        print('Events ', self.counts)
-        print('NaNs ', self.nans)
+        Debug = False
+        if Debug:
+            print('Events ', self.counts)
+            print('NaNs ', self.nans)
 
         # Find the initial states of all entities
-        unique_ids = list(data['ID'].unique())
+        unique_ids = list(data[id_label].unique())
         y_initial_count = np.zeros((state_dim,), dtype=int)
         for i in range(0, event_count - 1):
             if event_id[i] in unique_ids:
