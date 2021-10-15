@@ -22,9 +22,9 @@ Key Information
 * Code Documentation: [Read The Docs](https://transitionmatrix.readthedocs.io/en/latest/index.html)
 * Mathematical Documentation: [Open Risk Manual](https://www.openriskmanual.org/wiki/Transition_Matrix)
 * Development website: [Github](https://github.com/open-risk/transitionMatrix)
-* Project Chat: [Gitter Project](https://gitter.im/open-risk/transitionMatrix)
+* Project Chat: [Discourse](https://www.openriskcommons.org/c/open-source/transitionmatrix/15)
 
-**NB: transitionMatrix is still in active development. If you encounter issues or have suggestions please raise them in our github repository**
+**NB: transitionMatrix is still in active development. If you encounter issues or have suggestions please raise them in our github repository or come discuss at our discourse server**
 
 Support and Training
 =========================
