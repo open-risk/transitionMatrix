@@ -141,7 +141,7 @@ elif example == 1:
     myEstimator.print(select='Counts')
     print(80 * '-')
     print('Sample Estimated Matrix (Frequency Format, Period 3):')
-    myEstimator.print(select='Frequencies', period=3)
+    myEstimator.print_matrix(select='Frequencies', period=3)
 
 
 def main():
