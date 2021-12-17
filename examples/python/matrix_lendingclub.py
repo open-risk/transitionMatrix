@@ -69,7 +69,7 @@ myEstimator.summary()
 # Review numerical results
 print("Step 4")
 myMatrix = tm.TransitionMatrix(result)
-myMatrix.print()
+myMatrix.print_matrix()
 
 # In the LendingClub example we need to fix some matrix rows
 # because there are no state_IN observations besides initial grade assignment
@@ -78,7 +78,7 @@ myMatrix[8, 9] = 1.0
 myMatrix[9, 9] = 1.0
 print(myMatrix.validate())
 print(myMatrix.characterize())
-myMatrix.print()
+myMatrix.print_matrix()
 
 
 def main():
