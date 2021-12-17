@@ -127,7 +127,7 @@ elif example == 4:
     print(cohort_data.head())
     result = myEstimator.fit(cohort_data, labels={'Time': 'Cohort', 'State': 'State', 'ID': 'ID'})
     myMatrix = tm.TransitionMatrix(myEstimator.average_matrix)
-    myMatrix.print(accuracy=3)
+    myMatrix.print_matrix(accuracy=3)
 
 
 def main():
