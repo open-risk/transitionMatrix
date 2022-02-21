@@ -10,7 +10,7 @@ The transitionMatrix package includes several components (organized in sub-packa
 
 The library is structured in a modular way: users may mix and match the various components to meet their own needs. The main workflow can be captured in the standard pre-processing, modelling and post-processing stages:
 
-- :ref:`pre-processing` stage
+- :ref:`preprocessing` stage
 - :ref:`estimation` stage
 - :ref:`post-processing` stage
 

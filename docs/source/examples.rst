@@ -30,3 +30,5 @@ Jupyter Notebooks
 
 Open Risk Academy Scripts
 -------------------------------------------
+
+Additional examples are available in the Open Risk Academy course `Analysis of Credit Migration using Python TransitionMatrix <https://www.openriskacademy.com/course/management.php?categoryid=26&courseid=38>`_. The scripts developed in the course are `available here <https://github.com/open-risk/Academy-Course-PYT26038>`_

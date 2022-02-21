@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2021 Open Risk, all rights reserved
+# (c) 2017-2022 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -25,7 +25,7 @@ import transitionMatrix as tm
 from transitionMatrix import source_path
 from transitionMatrix.estimators import cohort_estimator as es
 from transitionMatrix.creditratings.creditsystems import Generic_SS
-from transitionMatrix.utils.preprocessing import transitions_summary
+from transitionMatrix.utils.preprocessing import transitions_summary, unique_timestamps
 
 dataset_path = source_path + "datasets/"
 
@@ -34,7 +34,7 @@ dataset_path = source_path + "datasets/"
 # 2-> An IFRS 9 Style 3x3 Migration Matrix
 # 3-> The Simplest Absorbing Case (for validation)
 
-example = 2
+example = 3
 
 if example == 3:
     # Example 3: S&P Style Credit Rating Migration Matrix
@@ -69,7 +69,8 @@ if example == 3:
     # compute confidence interval using goodman method at 95% confidence level
     print("> Cohort Estimator")
     print(80*'-')
-    myEstimator = es.CohortEstimator(states=myState, ci={'method': 'goodman', 'alpha': 0.05})
+    cohort_bounds = unique_timestamps(sorted_data)
+    myEstimator = es.CohortEstimator(states=myState, cohort_bounds=cohort_bounds, ci={'method': 'goodman', 'alpha': 0.05})
     result = myEstimator.fit(sorted_data)
 
     # Print confidence intervals
@@ -109,7 +110,8 @@ elif example == 2:
     # Estimate matrices using method of choice
     # compute confidence interval using goodman method at 95% confidence level
     print(">>> Step 3: Estimation")
-    myEstimator = es.CohortEstimator(states=myState, ci={'method': 'goodman', 'alpha': 0.05})
+    cohort_bounds = unique_timestamps(sorted_data)
+    myEstimator = es.CohortEstimator(states=myState, cohort_bounds=cohort_bounds, ci={'method': 'goodman', 'alpha': 0.05})
     # myMatrix = matrix.CohortEstimator(states=myState)
     result = myEstimator.fit(sorted_data)
     myEstimator.summary()
@@ -133,7 +135,8 @@ elif example == 1:
     print(80 * '-')
     print('State Space Validation:')
     print(myState.validate_dataset(dataset=sorted_data))
-    myEstimator = es.CohortEstimator(states=myState, ci={'method': 'goodman', 'alpha': 0.05})
+    cohort_bounds = unique_timestamps(sorted_data)
+    myEstimator = es.CohortEstimator(states=myState, cohort_bounds=cohort_bounds, ci={'method': 'goodman', 'alpha': 0.05})
     result = myEstimator.fit(sorted_data)
     myMatrixSet = tm.TransitionMatrixSet(values=result, temporal_type='Incremental')
     print(80 * '-')
@@ -141,7 +144,7 @@ elif example == 1:
     myEstimator.print(select='Counts')
     print(80 * '-')
     print('Sample Estimated Matrix (Frequency Format, Period 3):')
-    myEstimator.print_matrix(select='Frequencies', period=3)
+    myEstimator.print(select='Frequencies', period=3)
 
 
 def main():

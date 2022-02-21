@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2021 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2022 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -17,7 +17,7 @@ from codecs import open
 
 from setuptools import setup
 
-__version__ = '0.4.7'
+__version__ = '0.5.0'
 
 ver = __version__
 
@@ -27,15 +27,10 @@ setup(name='transitionMatrix',
       version=ver,
       description='A Python powered library for statistical analysis and visualization of state transition phenomena',
       long_description=long_descr,
+      long_description_content_type='text/x-rst',
       author='Open Risk',
       author_email='info@openrisk.eu',
-      packages=['transitionMatrix', 'transitionMatrix.estimators', 'transitionMatrix.utils', 
-                #'tests',
-                #'transitionMatrix.thresholds', 
-                #'transitionMatrix.portfolio_model_lib', 
-                #'datasets', 
-                #'examples.python'
-                ],
+      packages=['transitionMatrix', 'transitionMatrix.estimators', 'transitionMatrix.utils', 'datasets', 'examples.python'],
       include_package_data=True,
       url='https://github.com/open-risk/transitionMatrix',
       install_requires=[
@@ -56,9 +51,7 @@ setup(name='transitionMatrix',
           'License :: OSI Approved :: Apache Software License',
           'Operating System :: OS Independent',
           'Programming Language :: Python :: 3 :: Only',
-          'Programming Language :: Python :: 3.3',
-          'Programming Language :: Python :: 3.4',
-          'Programming Language :: Python :: 3.5',
+          'Programming Language :: Python :: 3.7',
           'Topic :: Scientific/Engineering',
           'Topic :: Scientific/Engineering :: Information Analysis'
       ]

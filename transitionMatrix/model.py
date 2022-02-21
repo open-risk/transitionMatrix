@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2021 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2022 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -21,13 +21,14 @@
 """
 
 import json
-import numpy as np
 import os
+
+import numpy as np
 import pandas as pd
+from scipy.linalg import logm, expm
+
 import transitionMatrix as tm
 from transitionMatrix.creditratings.creditcurve import CreditCurve
-from transitionMatrix.statespaces.statespace import StateSpace
-from scipy.linalg import logm, expm
 
 
 def matrix_exponent(generator, t=1.0):

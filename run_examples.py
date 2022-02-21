@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# (c) 2017-2021 Open Risk, all rights reserved
+# (c) 2017-2022 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-""" Run all examples for a high-level test that everything is working with the current version
+""" Run all examples for a high-level test that everything is working with the current version of the library
 
 """
 
@@ -22,8 +22,10 @@ import os
 examples_path = os.path.join("examples", "python")
 filelist = ['adjust_nr_state', 'credit_curves',
             'empirical_transition_matrix', 'fix_multiperiod_matrix', 'generate_synthetic_data',
-            'generate_visuals', 'matrix_from_cohort_data', 'matrix_from_duration_data',
-            'matrix_lendingclub', 'matrix_set_lendingclub', 'matrix_operations', 'matrix_set_operations']
+            'generate_visuals', 'matrix_from_cohort_data', 'matrix_operations', 'matrix_set_operations']
+
+# TODO additional examples
+# 'matrix_from_duration_data', 'matrix_lendingclub', 'matrix_set_lendingclub',
 
 if __name__ == '__main__':
 

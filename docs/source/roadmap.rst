@@ -5,6 +5,8 @@ transitionMatrix is an ongoing project. Several significant extensions are alrea
 
 You are welcome to contribute to the development of transitionMatrix by creating Issues or Pull Requests on the github repository. Feature requests, bug reports and any other issues are welcome to log at the `Github Repository <https://github.com/open-risk/transitionMatrix/issues>`_
 
+Discussing general usage of the library is `happening here <https://www.openriskcommons.org/t/analysis-of-credit-migration-using-python-transitionmatrix/74>`_
+
 
 0.5
 --------------------------
@@ -23,35 +25,35 @@ Todo List
 A list of todo items, no triaging / prioritisation implied
 
 Core Architecture and API
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Introduce exceptions / error handling throughout
 - Solve numpy.matrix deprecation (implement equivalent API in terms of ndarray)
 - Complete testing framework
 
 Input Data Preprocessing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Handing of markov chain transition formats (single entity)
 - Native handling of Wide Data Formats (concrete data sets missing)
 - Generalize cohorting algorithm to user specified function
 
 Reference Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Additional credit rating scales (e.g short term ratings)
 - Integration with credit rating ontology
 
 
 Transition Matrix Analysis Functionality
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Further validation and characterisation of transition matrices (mobility indexes)
 - Generate random matrix subject to constraints
 - Fixing common problems encountered by empirically estimated transition matrices
 
 Statistical Analysis Functionality
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Aalen Johansen Estimator
     - Covariance calculation
@@ -66,13 +68,13 @@ Statistical Analysis Functionality
 
 
 State Space package
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Multiple absorbing states (competing risks)
 - Automated coarsening of states (merging of similar)
 
 Credit Rating Related
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 - Import data defined according to CRO ontology
 - Absorbing State Identification, Competing Risks
 - Compute hazard rates
@@ -80,29 +82,29 @@ Credit Rating Related
 
 
 Utilities
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Continuous time data generation from arbitrary chain
 
 Further Refactoring of packages
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Introduce visualization objects / API
 
 
 Performance / Big data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Handling very large data sets, moving away from in-memory processing
 
 
 Documentation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 - Sphinx documentation (complete)
 - Expand the jupyter notebook collection to (at least) match the standalone scripts
 
 Releases / Distribution
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
 - Adopt regular github/PyPI release schedule
 - Conda distribution

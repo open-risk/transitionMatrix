@@ -11,7 +11,7 @@ transitionMatrix is a pure Python powered library for the statistical analysis a
 * Development Website: `Github <https://github.com/open-risk/transitionMatrix>`_
 * Code Documentation: `Read The Docs <https://transitionmatrix.readthedocs.io/en/latest/>`_
 * Mathematical Documentation: `Open Risk Manual <https://www.openriskmanual.org/wiki/Category:Transition_Matrix>`_
-* Chat: `Gitter <https://gitter.im/open-risk/transitionMatrix>`_
+* Chat: `Open Risk Commons <https://www.openriskcommons.org/c/open-source/transitionmatrix/15>`_
 * Training: `Open Risk Academy <https://www.openriskacademy.com/login/index.php>`_
 * Showcase: `Blog Posts <https://www.openriskmanagement.com/tags/transition-matrix/>`_
 
@@ -24,7 +24,7 @@ You can use transitionMatrix to:
 - **Characterise** transition matrices (identify their key properties)
 - **Visualize** event data and transition matrices
 - **Manipulate** transition matrices (derive generators, perform comparisons, stress transition rates etc.)
-- Access standardized :ref:`Datasets` for testing
+- Access standardized Datasets for testing
 - Extract and work with credit default curves (absorbing states)
 - Map credit ratings using mapping tables
 - More (still to be documented :-)
@@ -54,8 +54,6 @@ Dependencies
 
 From PyPI
 -------------
-
-.. Todo:: PyPI might not have the latest code
 
 .. code:: bash
 

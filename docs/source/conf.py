@@ -17,13 +17,12 @@ import os
 
 sys.path.insert(0, os.path.abspath('../../'))
 
-
 __version__ = '0.4.9'
 
 # -- Project information -----------------------------------------------------
 
 project = 'transitionMatrix'
-copyright = '2017-2021, Open Risk'
+copyright = '2017-2022, Open Risk'
 author = 'Open Risk'
 
 # The short X.Y version
@@ -45,6 +44,7 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.coverage',
     'sphinx.ext.imgmath',
+    'sphinx.ext.viewcode',
     'sphinx.ext.autosectionlabel',
     'sphinx.ext.githubpages',
     'sphinx.ext.todo',
@@ -91,7 +91,6 @@ html_theme = "sphinx_rtd_theme"
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
 # html_theme_options = {
 #     'canonical_url': '',
 #     'analytics_id': '',
@@ -104,18 +103,18 @@ html_theme = "sphinx_rtd_theme"
 #     'sticky_navigation': True,
 #     'navigation_depth': 4,
 #     'includehidden': True,
+#     'vcs_pageview_mode': '',
+#     'style_nav_header_background': 'white',
+#     'analytics_anonymize_ip': True,
 #     'titles_only': False
 # }
 
 html_theme_options = {
     'analytics_id': '',
-    # 'analytics_anonymize_ip': True,
     'logo_only': True,
     'display_version': True,
     'prev_next_buttons_location': 'bottom',
     'style_external_links': True,
-    # 'vcs_pageview_mode': '',
-    # 'style_nav_header_background': 'white',
     # Toc options
     'collapse_navigation': True,
     'sticky_navigation': True,
@@ -123,6 +122,7 @@ html_theme_options = {
     'includehidden': True,
     'titles_only': False
 }
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".

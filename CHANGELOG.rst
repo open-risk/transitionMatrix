@@ -3,6 +3,12 @@ ChangeLog
 
 PLEASE NOTE THAT THE API OF TRANSITION MATRIX IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+v0.5.0 (21-02-2022)
+-------------------
+* Installation:
+    * Bump python dependency to 3.7
+    * PyPI release update
+
 v0.4.9 (04-05-2021)
 -------------------
 

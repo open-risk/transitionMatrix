@@ -1,7 +1,7 @@
-.. transitionMatrix documentation master file, created by sphinx-quickstart on Thu May 3 17:51:16 2018.
+.. transitionMatrix documentation master file
 
-About transitionMatrix
-======================
+transitionMatrix Documentation
+===============================
 
 .. image:: ../../examples/overview.png
 
@@ -9,8 +9,7 @@ transitionMatrix is a pure Python powered library for the statistical analysis a
 
 Use cases include applications in finance (for example credit rating transitions), IT (system state event logs) and more.
 
-**NB: transitionMatrix is still in alpha release / active development. If you encounter issues please raise them in our
-github repository**
+**NB: transitionMatrix is still in alpha release / active development. If you encounter issues please raise them in our github repository**
 
 .. toctree::
    :maxdepth: 2

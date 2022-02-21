@@ -1,4 +1,4 @@
-Pre-processing
+Preprocessing
 ===================
 
 The preprocessing stage includes preparatory steps leading up to the matrix :ref:`Estimation` to produce a transition matrix (or matrix set).

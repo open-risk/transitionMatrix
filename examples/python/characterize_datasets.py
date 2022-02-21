@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2021 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2022 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -17,12 +17,11 @@
 
 """
 
-import pandas as pd
 import pprint as pp
-import transitionMatrix as tm
+
+import pandas as pd
+
 from transitionMatrix import source_path
-from transitionMatrix.creditratings.predefined import SP02, SP02NR
-from transitionMatrix.utils import print_matrix
 from transitionMatrix.utils import transitions_summary
 
 dataset_path = source_path + "datasets/"

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2021 Open Risk, all rights reserved
+# (c) 2017-2022 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -28,7 +28,7 @@ from transitionMatrix.creditratings.predefined import Generic
 print("> Load the generic transition matrix")
 M = tm.TransitionMatrix(values=Generic)
 # Lets take a look at the values
-M.print()
+M.print_matrix()
 M.validate()
 
 # The size of the rating scale

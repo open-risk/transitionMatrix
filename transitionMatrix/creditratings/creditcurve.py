@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2021 Open Risk (https://www.openriskmanagement.com)
+# (c) 2017-2022 Open Risk (https://www.openriskmanagement.com)
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -90,7 +90,7 @@ class CreditCurve(np.matrix):
         """
 
         q = pd.DataFrame(self)
-        q.to_csv(file, index=None)
+        q.to_csv(file, index=False)
 
     def to_html(self, file=None):
         html_table = pd.DataFrame(self).to_html()
