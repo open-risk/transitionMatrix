@@ -8,7 +8,7 @@ Jinja2==2.11.3
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
 matplotlib==3.3.2
-numpy==1.21.0
+numpy==1.22.0
 packaging==20.4
 pandas==1.3.5
 patsy==0.5.1
