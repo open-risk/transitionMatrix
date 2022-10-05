@@ -1,4 +1,3 @@
-[![Gitter](https://badges.gitter.im/open-risk/transitionMatrix.svg)](https://gitter.im/open-risk/transitionMatrix?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Documentation Status](https://readthedocs.org/projects/transitionmatrix/badge/?version=latest)](https://transitionmatrix.readthedocs.io/en/latest/?badge=latest)
 
 Intro
