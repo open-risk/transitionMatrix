@@ -15,5 +15,4 @@ Example of using transitionMatrix to calculate and visualize multi-period
 
 * Script: examples/python/credit_curves.py
 
-
 .. image:: ../../examples/credit_curves.png

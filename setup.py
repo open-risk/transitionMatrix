@@ -17,7 +17,7 @@ from codecs import open
 
 from setuptools import setup
 
-__version__ = '0.5.0'
+__version__ = '0.5.1'
 
 ver = __version__
 
@@ -30,7 +30,7 @@ setup(name='transitionMatrix',
       long_description_content_type='text/x-rst',
       author='Open Risk',
       author_email='info@openrisk.eu',
-      packages=['transitionMatrix', 'transitionMatrix.estimators', 'transitionMatrix.utils', 'datasets', 'examples.python'],
+      packages=['transitionMatrix', 'transitionMatrix.estimators', 'transitionMatrix.creditratings', 'transitionMatrix.estimators', 'transitionMatrix.generators', 'transitionMatrix.statespaces', 'transitionMatrix.utils', 'datasets', 'examples.python'],
       include_package_data=True,
       url='https://github.com/open-risk/transitionMatrix',
       install_requires=[

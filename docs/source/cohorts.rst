@@ -21,9 +21,6 @@ Intermediate Cohort Data Formats
 
 The cohort data format is a tabular representation of time series data that records the states (measurements) of multiple entities. Its defining characteristic is that each table row contains data pertaining to one entity at one point in time.
 
-
-
-
 The *canonical form* used as input to duration based estimators uses normalized timestamps (from 0 to T_max, where T_max is the last timepoint) and looks as follows:
 
     +----+------+------+----+

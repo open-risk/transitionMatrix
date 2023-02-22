@@ -11,7 +11,6 @@ Example workflows using transitionMatrix to estimate a transition matrix from da
 
 * Script: examples/python/matrix_from_cohort_data.py
 * Example ID: 3
-*
 
 
 .. code::

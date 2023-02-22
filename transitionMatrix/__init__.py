@@ -25,7 +25,7 @@ from .estimators import *
 from .utils import *
 from transitionMatrix.statespaces.statespace import StateSpace
 
-__version__ = '0.4.7'
+__version__ = '0.5.1'
 
 package_name = 'transitionMatrix'
 module_path = os.path.dirname(__file__)
