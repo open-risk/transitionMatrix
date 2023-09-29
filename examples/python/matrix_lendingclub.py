@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2022 Open Risk, all rights reserved
+# (c) 2017-2023 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -44,9 +44,9 @@ print(data.describe())
 # Describe and validate the State Space against the data
 print("Step 2")
 definition = [('A', "Grade A"), ('B', "Grade B"), ('C', "Grade C"),
-               ('D', "Grade D"), ('E', "Grade E"), ('F', "Grade F"),
-               ('G', "Grade G"), ('H', "Delinquent"), ('I', "Charged Off"),
-               ('J', "Repaid")]
+              ('D', "Grade D"), ('E', "Grade E"), ('F', "Grade F"),
+              ('G', "Grade G"), ('H', "Delinquent"), ('I', "Charged Off"),
+              ('J', "Repaid")]
 myState = tm.StateSpace(definition)
 myState.describe()
 labels = {'State': 'State_IN'}

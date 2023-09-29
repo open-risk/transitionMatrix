@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2022 Open Risk, all rights reserved
+# (c) 2017-2023 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -23,7 +23,7 @@ from transitionMatrix.generators import dataset_generators as dg
 
 print("Some Basics")
 print(80 * "=")
-# Lets load a credit rating scale
+# Let us load a credit rating scale
 myState = SnP_SS
 # Print the states
 print("The States of our starting scale: ", myState.get_states())

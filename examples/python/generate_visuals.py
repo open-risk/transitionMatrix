@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2022 Open Risk, all rights reserved
+# (c) 2017-2023 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -23,7 +23,6 @@ import transitionMatrix as tm
 from transitionMatrix import source_path
 from transitionMatrix.estimators import cohort_estimator as es
 from transitionMatrix.creditratings.creditsystems import Generic_SS
-
 
 """
 Example workflows using transitionMatrix to generate visualizations of migration phenomena
@@ -278,7 +277,7 @@ elif example == 7:
     filename = dataset_path + 'JLT.json'
     A = tm.TransitionMatrix(json_file=filename)
     label = Generic_SS.get_state_labels()
-    source = [n+1]
+    source = [n + 1]
     target = list(range(8))
     input_vals = A.row(n)
     w_min = np.min(input_vals)

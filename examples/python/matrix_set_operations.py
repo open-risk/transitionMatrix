@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2022 Open Risk, all rights reserved
+# (c) 2017-2023 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -33,7 +33,7 @@ B_Set = tm.TransitionMatrixSet(values=A, periods=3, method='Power', temporal_typ
 print(B_Set.entries)
 
 print("-- Lets instantiate the set directly using a list of matrices")
-C_Vals = [[[0.75, 0.25], [0.0, 1.0]],  [[0.75, 0.25], [0.0, 1.0]]]
+C_Vals = [[[0.75, 0.25], [0.0, 1.0]], [[0.75, 0.25], [0.0, 1.0]]]
 C_Set = tm.TransitionMatrixSet(values=C_Vals, temporal_type='Incremental')
 print(C_Set.entries)
 

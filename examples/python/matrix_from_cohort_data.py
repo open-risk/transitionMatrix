@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2022 Open Risk, all rights reserved
+# (c) 2017-2023 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -18,13 +18,14 @@ Example workflows using transitionMatrix to estimate a transition matrix from da
 
 """
 
-import pandas as pd
 import pprint as pp
+
+import pandas as pd
 
 import transitionMatrix as tm
 from transitionMatrix import source_path
-from transitionMatrix.estimators import cohort_estimator as es
 from transitionMatrix.creditratings.creditsystems import Generic_SS
+from transitionMatrix.estimators import cohort_estimator as es
 from transitionMatrix.utils.preprocessing import transitions_summary, unique_timestamps
 
 dataset_path = source_path + "datasets/"
@@ -48,29 +49,30 @@ if example == 3:
     print("> Describe state space")
     myState.describe()
     print("> List of states")
-    print(80*'-')
+    print(80 * '-')
     print(myState.get_states())
     print("> List of state labels")
-    print(80*'-')
+    print(80 * '-')
     print(myState.get_state_labels())
 
     print("> Load Dataset")
     data = pd.read_csv(dataset_path + 'synthetic_data4.csv', dtype={'State': str})
 
     print("> Transitions Summary")
-    print(80*'-')
+    print(80 * '-')
     pp.pprint(transitions_summary(data))
 
     print("> Sort and Validate dataset")
-    print(80*'-')
+    print(80 * '-')
     sorted_data = data.sort_values(['ID', 'Time'], ascending=[True, True])
     print(myState.validate_dataset(dataset=sorted_data))
 
     # compute confidence interval using goodman method at 95% confidence level
     print("> Cohort Estimator")
-    print(80*'-')
+    print(80 * '-')
     cohort_bounds = unique_timestamps(sorted_data)
-    myEstimator = es.CohortEstimator(states=myState, cohort_bounds=cohort_bounds, ci={'method': 'goodman', 'alpha': 0.05})
+    myEstimator = es.CohortEstimator(states=myState, cohort_bounds=cohort_bounds,
+                                     ci={'method': 'goodman', 'alpha': 0.05})
     result = myEstimator.fit(sorted_data)
 
     # Print confidence intervals
@@ -85,7 +87,7 @@ if example == 3:
 
 elif example == 2:
     # Example 2: IFRS 9 Style Migration Matrix
-        # Format: discrete time grid (already arranged in cohorts)
+    # Format: discrete time grid (already arranged in cohorts)
 
     # Step 1
     # Load the data set into a pandas frame
@@ -111,7 +113,8 @@ elif example == 2:
     # compute confidence interval using goodman method at 95% confidence level
     print(">>> Step 3: Estimation")
     cohort_bounds = unique_timestamps(sorted_data)
-    myEstimator = es.CohortEstimator(states=myState, cohort_bounds=cohort_bounds, ci={'method': 'goodman', 'alpha': 0.05})
+    myEstimator = es.CohortEstimator(states=myState, cohort_bounds=cohort_bounds,
+                                     ci={'method': 'goodman', 'alpha': 0.05})
     # myMatrix = matrix.CohortEstimator(states=myState)
     result = myEstimator.fit(sorted_data)
     myEstimator.summary()
@@ -136,7 +139,8 @@ elif example == 1:
     print('State Space Validation:')
     print(myState.validate_dataset(dataset=sorted_data))
     cohort_bounds = unique_timestamps(sorted_data)
-    myEstimator = es.CohortEstimator(states=myState, cohort_bounds=cohort_bounds, ci={'method': 'goodman', 'alpha': 0.05})
+    myEstimator = es.CohortEstimator(states=myState, cohort_bounds=cohort_bounds,
+                                     ci={'method': 'goodman', 'alpha': 0.05})
     result = myEstimator.fit(sorted_data)
     myMatrixSet = tm.TransitionMatrixSet(values=result, temporal_type='Incremental')
     print(80 * '-')

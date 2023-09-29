@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2022 Open Risk, all rights reserved
+# (c) 2017-2023 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -22,8 +22,8 @@ import numpy as np
 from scipy.linalg import expm
 
 import transitionMatrix as tm
-from transitionMatrix.creditratings.predefined import JLT, SP02NR
 from transitionMatrix import dataset_path
+from transitionMatrix.creditratings.predefined import JLT
 
 print("> Initialize a 3x3 matrix with values")
 A = tm.TransitionMatrix(values=[[0.6, 0.2, 0.2], [0.2, 0.6, 0.2], [0.2, 0.2, 0.6]])

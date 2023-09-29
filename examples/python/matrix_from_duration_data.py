@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-# (c) 2017-2022 Open Risk, all rights reserved
+# (c) 2017-2023 Open Risk, all rights reserved
 #
 # TransitionMatrix is licensed under the Apache 2.0 license a copy of which is included
 # in the source distribution of TransitionMatrix. This is notwithstanding any licenses of
@@ -25,7 +25,6 @@ import transitionMatrix as tm
 from transitionMatrix import source_path
 from transitionMatrix.estimators import cohort_estimator as es
 from transitionMatrix.utils.converters import datetime_to_float
-from transitionMatrix.utils.preprocessing import unique_timestamps
 
 dataset_path = source_path + "datasets/"
 
