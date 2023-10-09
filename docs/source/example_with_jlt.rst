@@ -1,5 +1,6 @@
 Working with an actual matrix
 ==============================
+
 The core capability of transitionMatrix is to produce estimated matrices but getting a realistic example requires quite some work. In this section we assume we have estimated one.
 
 Lets look at a realistic example from the JLT paper

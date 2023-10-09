@@ -1,6 +1,9 @@
 Cohorts
 ===================
-Organizing data in `cohorts <https://www.openriskmanual.org/wiki/Cohort>`_ can be an important step in understating transition data or towards applying a :ref:`cohort estimator`. Cohorts in this context are understood as the grouping of entities within a temporal interval. For example in a credit rating analysis context cohorts could be groups of annual observations. The implication of cohorting data is that the more granular information embedded in a more precise timestamp is not relevant. It is also possible that input data are only available in cohort form (when the precise timestamp information is not recorded at the source)
+
+Organizing data in `cohorts <https://www.openriskmanual.org/wiki/Cohort>`_ can be an important step in understating transition data or towards applying a :ref:`cohort estimator`. Cohorts in this context are understood as the grouping of entities within a temporal interval.
+
+For example, in a credit rating analysis context, cohorts could be groups of annual observations. The implication of cohorting data is that the more granular information embedded in a more precise timestamp is not relevant. It is also possible that input data are only available in cohort form (when the precise timestamp information is not recorded at the source)
 
 
 .. note:: Cohorting can bias the estimation in various subtle ways, so it is important that any procedure is well documented.

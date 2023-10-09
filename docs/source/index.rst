@@ -32,7 +32,6 @@ Use cases include applications in finance (for example credit rating transitions
    changelog
 
 
-
 Indexes and tables
 ==================
 

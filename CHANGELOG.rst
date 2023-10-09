@@ -3,6 +3,11 @@ ChangeLog
 
 PLEASE NOTE THAT THE API OF TRANSITION MATRIX IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
+v0.5.1 (29-09-2023)
+--------------------
+* Installation:
+    * Bump python dependency to 3.10
+
 v0.5.0 (21-02-2022)
 -------------------
 * Installation:
@@ -13,7 +18,7 @@ v0.4.9 (04-05-2021)
 -------------------
 
 * Refactoring: All non-core functionality moved to separate directories/sub-packages
-    * credit curve stuff moved to creditratings modules
+    * credit curve stuff moved to credit ratings modules
     * data generators moved to generators modules
     * etc.
 * Documentation: Major expansion (Still incomplete)

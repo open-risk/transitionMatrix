@@ -1,7 +1,7 @@
 Visualization
 ===============
 
-transitionMatrix aims to support native (Python based) visualization of various transition related datasets using matplotlib and other native python visualization libraries.
+transitionMatrix aims to support native (Python-based) visualization of various transition related datasets using matplotlib and other native python visualization libraries.
 
 .. note:: The visualization functionality is not yet refactored into a reusable API. For now the visualization functionality is implemented separately as a demo script.
 

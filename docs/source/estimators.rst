@@ -1,5 +1,6 @@
 Estimation
 ========================
+
 The estimation of a transition matrix is one of the core functionalities of transitionMatrix. Several methods and variations are available in the literature depending on aspects such as:
 
 * The nature of the observations / data (e.g., whether temporal homogeneity is a valid assumption)
@@ -12,8 +13,6 @@ Estimator Types
 ----------------
 * **Cohort Based Methods** that group observations in cohorts
 * **Duration** (also Hazard Rate or Intensity) Based Methods that utilize the actual duration of each state
-
-
 
 The main estimators currently implemented are as follows:
 

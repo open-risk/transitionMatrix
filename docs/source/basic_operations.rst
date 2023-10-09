@@ -1,5 +1,6 @@
 Basic Operations
 ========================
+
 The core TransitionMatrix object implements a typical (one period) transition matrix. It supports a variety of operations (more details are documented in the API section)
 
 - Initialize a matrix (from data, predefined matrices etc)

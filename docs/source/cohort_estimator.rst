@@ -1,7 +1,7 @@
 Cohort Estimator
 ========================
-A cohort estimator (more accurately discrete time estimator) is class of estimators of multi-state transitions that is a simpler alternative to Duration type estimators
 
+A cohort estimator (more accurately a discrete-time estimator) is class of estimators of multi-state transitions that is a simpler alternative to Duration type estimators
 
 
 Estimate a Transition Matrix from Cohort Data

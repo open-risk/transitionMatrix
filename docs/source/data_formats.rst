@@ -72,8 +72,6 @@ The compact long format avoids the duplication of data of the canonical approach
 The format also requires that the final state of all entities at the end of the observation window (Time F) is included as the last record (otherwise we have no indication about when the measurements stopped). Alternatively such information is provided separately (or implicitly, e.g. if measurements are understood to span a number of full annual periods).
 
 
-
-
     +----+--------+-------+
     | ID | Time   | State |
     +----+--------+-------+

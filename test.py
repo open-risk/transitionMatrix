@@ -18,9 +18,11 @@ run the transitionMatrix test suite
 
 """
 
-import unittest
 import sys
+import unittest
+
 from transitionMatrix import source_path
+
 sys.path.append(source_path)
 
 loader = unittest.TestLoader()
