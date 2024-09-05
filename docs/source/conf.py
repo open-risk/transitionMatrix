@@ -22,7 +22,7 @@ __version__ = '0.5.0'
 # -- Project information -----------------------------------------------------
 
 project = 'transitionMatrix'
-copyright = '2017-2023, Open Risk'
+copyright = '2017-2024, Open Risk'
 author = 'Open Risk'
 
 # The short X.Y version
