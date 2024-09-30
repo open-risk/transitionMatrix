@@ -321,10 +321,10 @@ class TransitionMatrix(np.matrix):
         else:
             for s_in in range(self.shape[0]):
                 for s_out in range(self.shape[1]):
-                    if format_type is 'Standard':
+                    if format_type == 'Standard':
                         format_string = "{0:." + str(accuracy) + "f}"
                         print(format_string.format(self[s_in, s_out]) + ' ', end='')
-                    elif format_type is 'Percent':
+                    elif format_type == 'Percent':
                         print("{0:.1f}%".format(100 * self[s_in, s_out]) + ' ', end='')
                 print('')
             print('')
@@ -413,7 +413,7 @@ class TransitionMatrixSet(object):
         self.dimension = dimension
         if values is not None:
             # Copy a single matrix to all periods
-            if method is 'Copy':
+            if method == 'Copy':
                 val_set = []
                 for k in range(periods):
                     a = tm.TransitionMatrix(values)
@@ -423,7 +423,7 @@ class TransitionMatrixSet(object):
                 self.periods = list(range(periods))
                 self.dimension = val_set[0].shape[0]
             # Create a multi-period matrix assuming a Markov Chain
-            elif method is 'Power':
+            elif method == 'Power':
                 val_set = []
                 a = tm.TransitionMatrix(values)
                 val_set.append(a)
@@ -539,7 +539,7 @@ class TransitionMatrixSet(object):
         """ Cumulate a transition matrix set from an incremental set
 
         """
-        if self.temporal_type is 'Cumulative':
+        if self.temporal_type == 'Cumulative':
             print("Transition Matrix Set is already cumulated")
             return
         else:
@@ -572,7 +572,7 @@ class TransitionMatrixSet(object):
         """ Create an incremental transition matrix set from a cumulative set
 
         """
-        if self.temporal_type is 'Incremental':
+        if self.temporal_type == 'Incremental':
             print("Transition Matrix Set is already incremental")
             return
         else:
@@ -666,7 +666,7 @@ class TransitionMatrixSet(object):
         cPD = np.zeros(Periods)
         hR = np.zeros(Periods)
         sR = np.zeros(Periods)
-        if self.temporal_type is 'Cumulative':
+        if self.temporal_type == 'Cumulative':
             for k in range(0, Periods):
                 cPD[k] = self.entries[k][rating, Default]
                 sR[k] = 1.0 - cPD[k]
@@ -675,7 +675,7 @@ class TransitionMatrixSet(object):
             for k in range(1, Periods):
                 iPD[k] = cPD[k] - cPD[k - 1]
                 hR[k] = iPD[k] / (1.0 - cPD[k - 1])
-        elif self.temporal_type is 'Incremental':
+        elif self.temporal_type == 'Incremental':
             pass
         return iPD, cPD, hR, sR
 

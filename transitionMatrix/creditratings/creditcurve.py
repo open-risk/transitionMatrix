@@ -169,10 +169,10 @@ class CreditCurve(np.matrix):
         """
         for s_in in range(self.shape[0]):
             for s_out in range(self.shape[1]):
-                if format_type is 'Standard':
+                if format_type == 'Standard':
                     format_string = "{0:." + str(accuracy) + "f}"
                     print(format_string.format(self[s_in, s_out]) + ' ', end='')
-                elif format_type is 'Percent':
+                elif format_type == 'Percent':
                     print("{0:.2f}%".format(100 * self[s_in, s_out]) + ' ', end='')
             print('')
         print('')

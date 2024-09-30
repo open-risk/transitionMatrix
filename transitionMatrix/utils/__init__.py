@@ -34,10 +34,10 @@ def print_matrix(A, format_type='Standard', accuracy=2):
     """
     for s_in in range(A.shape[0]):
         for s_out in range(A.shape[1]):
-            if format_type is 'Standard':
+            if format_type == 'Standard':
                 format_string = "{0:." + str(accuracy) + "f}"
                 print(format_string.format(A[s_in, s_out]) + ' ', end='')
-            elif format_type is 'Percent':
+            elif format_type == 'Percent':
                 print("{0:.2f}%".format(100 * A[s_in, s_out]) + ' ', end='')
         print('')
     print('')
