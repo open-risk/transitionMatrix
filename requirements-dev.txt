@@ -1,3 +1,11 @@
+Jinja2
+matplotlib
+numpy
+pandas
+Pillow
+requests
+scipy
+statsmodels
 Sphinx
 sphinx-rtd-theme
 sphinxcontrib-applehelp
