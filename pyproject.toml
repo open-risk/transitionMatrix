@@ -1,0 +1,16 @@
+[project]
+name = "transitionMatrix"
+version = "0.5.1"
+description = "A Python powered library for statistical analysis and visualization of state transition phenomena"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "jinja2>=3.1.6",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.2",
+    "pandas>=3.0.1",
+    "pillow>=12.1.1",
+    "requests>=2.32.5",
+    "scipy>=1.17.1",
+    "statsmodels>=0.14.6",
+]
