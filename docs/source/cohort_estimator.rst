@@ -12,7 +12,6 @@ Example workflows using transitionMatrix to estimate a transition matrix from da
 * Script: examples/python/matrix_from_cohort_data.py
 * Example ID: 3
 
-
 .. code::
 
     data = pd.read_csv(dataset_path + 'synthetic_data6.csv', dtype={'State': str})

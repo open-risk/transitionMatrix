@@ -36,12 +36,10 @@ Support and Training
     * [Analysis of Credit Migration using Python TransitionMatrix](https://www.openriskacademy.com/course/view.php?id=38)
 * Support for transitionMatrix and other open source libraries developed by [Open Risk](https://www.openriskmanagement.com) is available upon request
 
-
 Examples
 ========
 
 The [code documentation](https://transitionmatrix.readthedocs.io/en/latest/index.html) includes a large number of examples, jupyter notebooks and more. 
-
 
 Plotting individual transition trajectories
 

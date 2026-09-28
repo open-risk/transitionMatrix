@@ -3,7 +3,7 @@ ChangeLog
 
 PLEASE NOTE THAT THE API OF TRANSITION MATRIX IS STILL UNSTABLE AS MORE USE CASES / FEATURES ARE ADDED REGULARLY
 
-v0.5.2 (XX-12-2024)
+v0.5.2 (01-12-2024)
 --------------------
 * Documentation: Streamlining visualization workflows (issue #12)
 
